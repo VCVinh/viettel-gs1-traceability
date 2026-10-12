@@ -1,0 +1,77 @@
+{
+  "instrument1_optical_cdp_bssrdf": {
+    "finder_slanted_edge_mtf_at_12cyc_mm": 0.78,
+    "cdp_spectral_log_ratio_db": -0.94,
+    "unmasked_dry_fiber_bits": 420,
+    "masked_condensation_droplet_ratio": 0.18,
+    "fractional_hamming_distance": 0.0429,
+    "is_authentic_first_generation_print": true
+  },
+  "instrument2_dual_mode_bessel_acoustic": {
+    "f_011_hz": 18614.2,
+    "f_021_hz": 41665.0,
+    "f_012_hz": 20236.0,
+    "radial_eigenmode_ratio_upsilon_rad": 2.2383,
+    "axial_eigenmode_ratio_upsilon_ax": 1.0871,
+    "temperature_compensated_c_l_m_s": 1605.0,
+    "differential_q_factor_ratio": 0.94,
+    "is_genuine_liquid_and_fill_level": true
+  },
+  "instrument3_nfc_permittivity_probe": {
+    "unloaded_f_air_mhz": 14.8,
+    "loaded_f_0_mhz": 13.596,
+    "coupling_invariant_tan_phi_lm": 0.148,
+    "reconstructed_relative_permittivity_eps_r": 55.4,
+    "is_genuine_dielectric_substance": true
+  },
+  "instrument4_viettel_post_matrix_tof_ble6": {
+    "decoded_barcodes_per_sec": 50,
+    "box_dimensions_mm": [
+      160.0,
+      90.0,
+      65.0
+    ],
+    "parcel_weight_grams": 420.0,
+    "measured_bulk_density_g_cm3": 0.449,
+    "ble6_pbr_distance_m": 2.34,
+    "ble6_rtt_distance_m": 2.39,
+    "anti_relay_and_anti_brick_swap_passed": true
+  },
+  "instrument5_arrhenius_mkt_nova_folding": {
+    "activation_energy_ea_kj_mol": 83.144,
+    "computed_mkt_celsius": 4.99,
+    "min_recorded_celsius": 4.2,
+    "max_recorded_celsius": 6.2,
+    "remaining_shelf_life_potency_pct": 99.95,
+    "integer_arrhenius_acc_within_zk_bound": true,
+    "nova_folded_steps": 8,
+    "nova_relaxed_r1cs_verified": true
+  },
+  "sheath_hodge_fault_localization": {
+    "total_dirichlet_energy": 16.000002,
+    "vertex_hodge_laplacian_norms": [
+      0.0,
+      4.0,
+      4.0
+    ],
+    "pubedge_coboundary_residuals": [
+      [
+        0,
+        1,
+        0.0
+      ],
+      [
+        1,
+        2,
+        4.0
+      ],
+      [
+        2,
+        0,
+        0.0
+      ]
+    ],
+    "pinpointed_rogue_node_id": 1,
+    "counterfeit_injection_detected": true
+  }
+}

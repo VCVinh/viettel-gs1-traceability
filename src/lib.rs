@@ -11,6 +11,7 @@
 //! `seo-employee`, `social-media-employee`, `ad-manager-employee`, `customer-satisfaction-employee`) to execute
 //! Phase 0 (Viettel Cloud/IDC), Phase 1 (3-5 Enterprise Pilots), Phase 2 (SME Self-Service & 4G Loyalty), and Phase 3 (Viettel Post & Gov Heatmap).
 
+pub mod frontier_instruments_and_theorems;
 pub mod support_types;
 use crate::support_types::{
     AutonomousVideoSpec, HitlApprovalGate, OutboundChannel, PaidArticleBountyEngine,

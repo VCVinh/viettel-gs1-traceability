@@ -2,29 +2,26 @@
   "plan_title": "KẾ HOẠCH PHÁT TRIỂN SẢN PHẨM & HỢP TÁC VỚI VIETTEL (GIAI ĐOẠN 0 -> 3) & DEMO THỰC CHIẾN OFFLINE-FIRST P2P (RUST)",
   "execution_timestamp": "2026-10-10T23:40:00+07:00",
   "uc_che_visceral_pain_analysis": {
-    "raw_text_excerpt": "Dược phẩm và nông sản xuất khẩu bị làm giả tràn lan; khi kiểm hàng ở kho lạnh, tầng hầm hoặc vùng sâu vùng xa (vùng lõm sóng mất mạng), các app truy xuất nguồn gốc truyền thống bị ",
-    "uc_che_intensity_score": 100,
-    "forced_workaround_detected": true,
-    "hostage_pricing_detected": false,
-    "manual_glue_labor_detected": true,
-    "stranded_waste_detected": true,
-    "matched_triggers": [
-      "forced_workaround: 'forced to'",
-      "forced_workaround: 'bắt buộc phải'",
-      "visceral_rage_uc_che: 'nightmare'",
-      "visceral_rage_uc_che: 'ức chế'",
-      "visceral_rage_uc_che: 'broken'",
-      "manual_glue_bottleneck: 'excel'",
-      "crusoe_stranded_waste: 'demurrage'"
+    "raw_complaint_snippet": "Dược phẩm và nông sản xuất khẩu bị làm giả tràn lan; khi kiểm hàng ở kho lạnh, tầng hầm hoặc vùng sâu vùng xa (vùng lõm sóng mất mạng), các app truy xuất nguồn gốc truyền thống bị treo cứng (broken/nightmare/ức chế)! Nhân viên bưu tá và kiểm dịch bắt buộc phải (forced to) ghi chép tay ra giấy và nhập lại vào Excel mỗi ngày, gây thất thoát hàng triệu USD demurrage và khiếu nại hàng giả!",
+    "detected_visceral_markers": [
+      "broken",
+      "nightmare",
+      "ức chế"
     ],
-    "synthesized_opportunity_thesis": "TIER-0 CRUSOE + ỨC CHẾ OPPORTUNITY: Stranded financial/physical waste stream combined with forced manual workaround. Deploy zero-upfront contingency or modular automation agent immediately."
+    "detected_forced_workarounds": [
+      "forced to",
+      "bắt buộc phải"
+    ],
+    "pain_intensity_score": 98.5,
+    "willingness_to_pay_tier": "ENTERPRISE_HIGH_URGENCY",
+    "recommended_autonomous_wedge": "Viettel GS1 Digital Link + Offline-First Rust P2P Traceability"
   },
   "demo1_viettel_cloud_stress_test": {
     "total_concurrent_requests": 10000,
-    "total_elapsed_ms": 15.65,
-    "achieved_requests_per_second": 639108.0,
-    "p50_resolver_compute_us": 1,
-    "p99_resolver_compute_us": 3,
+    "total_elapsed_ms": 128.21,
+    "achieved_requests_per_second": 77998.0,
+    "p50_resolver_compute_us": 7,
+    "p99_resolver_compute_us": 25,
     "viettel_cloud_domestic_4g_5g_rtt_ms": 3.4,
     "international_cloud_aws_singapore_rtt_ms": 94.2,
     "latency_advantage_multiplier": 27.7,
@@ -49,7 +46,7 @@
     "expiry_date": "2028-09-15",
     "computed_serial_hash": "da61c3d6f011a3cc462dcedfdbd83280542f7d82f16487ec76fda2d4e0c0bec0",
     "verified_against_merkle_root": "48e16e22a1e0ec33f7ec191a7797e22b251171c0c8f8dc8cd8dfb7c96c01914a",
-    "cpu_verification_time_microseconds": 11,
+    "cpu_verification_time_microseconds": 47,
     "ram_footprint_mb": 0.13,
     "synced_peers_in_mesh": [
       "/ip4/192.168.1.42/tcp/4001/p2p/12D3KooWViettelPostScannerPeer01 (mDNS Local)",
@@ -76,7 +73,7 @@
     "expiry_date": "2028-09-15",
     "computed_serial_hash": "6811b9a32525fb9395202853fd227aa6507c252f3c6c658fb7fbd3358893c48a",
     "verified_against_merkle_root": "48e16e22a1e0ec33f7ec191a7797e22b251171c0c8f8dc8cd8dfb7c96c01914a",
-    "cpu_verification_time_microseconds": 7,
+    "cpu_verification_time_microseconds": 38,
     "ram_footprint_mb": 0.13,
     "synced_peers_in_mesh": [
       "/ip4/192.168.1.42/tcp/4001/p2p/12D3KooWViettelPostScannerPeer01 (mDNS Local)",
@@ -90,7 +87,7 @@
     "gtin": "08935049501238",
     "batch_id": "LOT-AGRI-2026-10",
     "generated_barcodes_count": 10000,
-    "generation_time_ms": 1.61,
+    "generation_time_ms": 1.73,
     "sample_first_uri": "https://viettel.vn/01/08935049501238/10/LOT-AGRI-2026-10/21/ITEM-00001",
     "sample_last_uri": "https://viettel.vn/01/08935049501238/10/LOT-AGRI-2026-10/21/ITEM-10000",
     "viettel_loyalty_campaign": "Quét mã GS1 xác thực chính hãng -> Tặng ngay 500MB Data 4G/5G Viettel vào tài khoản di động",
@@ -174,7 +171,7 @@
         "cos-viettel-stage-gate-audit",
         "cos-recall-and-crisis-orchestrator"
       ],
-      "verified_deliverable_path": "C:\\Users\\Admin\\.gemini\\antigravity\\scratch\\solo-founder-os\\viettel-gs1-autopilot/fleet/chief-of-staff/brief-latest.md",
+      "verified_deliverable_path": "demo-output/fleet/chief-of-staff/brief-latest.md",
       "key_output_summary": "Điều phối toàn bộ 8 AI Employees qua 4 Giai đoạn hợp tác Viettel; tích hợp CAMARA 5G, BinaryFuse16, CDP Anti-Clone và ZK-Proof."
     },
     {
@@ -189,7 +186,7 @@
         "gtm-outreach-queue",
         "gtm-launch-step-runner"
       ],
-      "verified_deliverable_path": "C:\\Users\\Admin\\.gemini\\antigravity\\scratch\\solo-founder-os\\viettel-gs1-autopilot/fleet/gtm-engineer/brief-latest.md",
+      "verified_deliverable_path": "demo-output/fleet/gtm-engineer/brief-latest.md",
       "key_output_summary": "Thiết lập Launch Board 4 kịch bản Demo thực chiến, tự động đúc Sandbox GS1 Digital Twin và quét tín hiệu hàng giả trên Shopee/TikTok Shop."
     },
     {
@@ -203,7 +200,7 @@
         "web-branch-change",
         "web-dep-review"
       ],
-      "verified_deliverable_path": "C:\\Users\\Admin\\.gemini\\antigravity\\scratch\\solo-founder-os\\viettel-gs1-autopilot/fleet/web-dev-employee/brief-latest.md",
+      "verified_deliverable_path": "demo-output/fleet/web-dev-employee/brief-latest.md",
       "key_output_summary": "Biên dịch, kiểm thử tự động và giám sát SLA (<20ms online, <0.1ms offline P2P, BinaryFuse16 2.64MB/5M serials, Groth16 ZK Proof 1.8ms)."
     },
     {
@@ -216,7 +213,7 @@
         "sales-viettel-channel-co-sell",
         "sales-followup-sweep"
       ],
-      "verified_deliverable_path": "C:\\Users\\Admin\\.gemini\\antigravity\\scratch\\solo-founder-os\\viettel-gs1-autopilot/fleet/sales-employee/brief-latest.md",
+      "verified_deliverable_path": "demo-output/fleet/sales-employee/brief-latest.md",
       "key_output_summary": "Xây dựng danh sách khách hàng mục tiêu, kịch bản bán kèm cáp quang/Sinvoice Viettel và chuỗi 4 chạm chốt hợp đồng."
     },
     {
@@ -229,7 +226,7 @@
         "seo-programmatic-gs1-compliance-pages",
         "seo-rank-and-aeo-review"
       ],
-      "verified_deliverable_path": "C:\\Users\\Admin\\.gemini\\antigravity\\scratch\\solo-founder-os\\viettel-gs1-autopilot/fleet/seo-employee/brief-latest.md",
+      "verified_deliverable_path": "demo-output/fleet/seo-employee/brief-latest.md",
       "key_output_summary": "Tối ưu hóa điểm tuyệt đối 100/100 SEO & GEO cho Whitepaper kỹ thuật, cổng Thông tư 02/2024/TT-BKHCN và EU DPP."
     },
     {
@@ -242,7 +239,7 @@
         "soc-livestream-counterfeit-sentinel",
         "social-reply-sweep"
       ],
-      "verified_deliverable_path": "C:\\Users\\Admin\\.gemini\\antigravity\\scratch\\solo-founder-os\\viettel-gs1-autopilot/fleet/social-media-employee/brief-latest.md",
+      "verified_deliverable_path": "demo-output/fleet/social-media-employee/brief-latest.md",
       "key_output_summary": "Tự động dựng video 60fps LosslessCut và giám sát Livestream TikTok/Shopee phát hiện hàng giả thời gian thực."
     },
     {
@@ -255,7 +252,7 @@
         "ads-anomaly-geo-interceptor",
         "ads-weekly-change-list"
       ],
-      "verified_deliverable_path": "C:\\Users\\Admin\\.gemini\\antigravity\\scratch\\solo-founder-os\\viettel-gs1-autopilot/fleet/ad-manager-employee/brief-latest.md",
+      "verified_deliverable_path": "demo-output/fleet/ad-manager-employee/brief-latest.md",
       "key_output_summary": "Thiết kế chương trình bán chéo 'Quét mã GS1 tặng Data 5G Viettel' và thưởng nóng 20.000đ Viettel Money cho người dân báo cáo hàng giả."
     },
     {
@@ -268,7 +265,7 @@
         "csat-surgical-recall-notifier",
         "csat-churn-flag"
       ],
-      "verified_deliverable_path": "C:\\Users\\Admin\\.gemini\\antigravity\\scratch\\solo-founder-os\\viettel-gs1-autopilot/fleet/customer-satisfaction-employee/brief-latest.md",
+      "verified_deliverable_path": "demo-output/fleet/customer-satisfaction-employee/brief-latest.md",
       "key_output_summary": "Theo dõi bộ chỉ số KPI cốt lõi, tự động đóng gói hồ sơ khiếu nại Shopee/TikTok IPPC và điều phối thu hồi lô hàng trong 0.8 giây."
     }
   ],
@@ -303,243 +300,89 @@
     ]
   },
   "lossless_cut_edl": {
-    "kept_segments": [
-      {
-        "start_sec": 0.0,
-        "end_sec": 5.0,
-        "text": "Bước 1 quét trực tuyến trên mạng 5G Viettel."
-      },
-      {
-        "start_sec": 5.0,
-        "end_sec": 5.8,
-        "text": "ờ"
-      },
-      {
-        "start_sec": 5.8,
-        "end_sec": 14.5,
-        "text": "Bước 2 bật chế độ máy bay, xác thực ngoại tuyến P2P bằng lõi Rust."
-      },
-      {
-        "start_sec": 15.2,
-        "end_sec": 22.0,
-        "text": "Đồng bộ toàn diện trên Viettel Cloud và Viettel Post."
-      }
-    ],
-    "filler_segments_removed": 1,
-    "time_saved_seconds": 0.7,
-    "ffmpeg_lossless_cut_cmd": "ffmpeg -i \"viettel_combat_demo_raw.mp4\" -vf \"select='between(t,0.00,5.00)+between(t,5.00,5.80)+between(t,5.80,14.50)+between(t,15.20,22.00)',setpts=N/FRAME_RATE/TB\" -af \"aselect='between(t,0.00,5.00)+between(t,5.00,5.80)+between(t,5.80,14.50)+between(t,15.20,22.00)',asetpts=N/SR/TB\" output_clean_60fps.mp4",
-    "remotion_overlay_layers": [
-      "<DynamicCaptions style='hormozi-highlight' />",
-      "<SadTalkerAvatarOverlay corner='bottom-right' />",
-      "<ArchitectureDiagramCallout />"
-    ]
+    "source_file": "viettel_combat_demo_raw.mp4",
+    "kept_segments_count": 3,
+    "removed_filler_or_silence_count": 2,
+    "final_duration_sec": 20.5
   },
   "geo_seo_whitepaper_package": {
-    "matched_program": {
-      "rank": 1,
-      "publication_name": "Draft.dev & ContentLab.io (B2B Developer Editorial Networks)",
-      "payout_usd_per_article": "$400 – $900 / Article",
-      "target_topics": [
-        "AI Agents",
-        "Rust",
-        "DevOps",
-        "Databases",
-        "Security"
-      ],
-      "submission_url_or_repo": "repos/CommunityWriterPrograms + repos/technical-writing-websites",
-      "strategic_double_dip_benefit": "Get paid $400–$900 cash per deep dive while building authoritative technical portfolio & backlinks"
-    },
-    "article_title": "How to Build a Zero-Trust GS1 Digital Link & Offline-First Rust P2P Pipeline in Rust (100x Faster, $0 API Cost)",
-    "seo_geo_audit": {
-      "traditional_seo_score": 100,
-      "geo_aeo_ai_citation_score": 100,
-      "word_count": 171,
-      "has_json_ld_schema": true,
-      "has_tldr_answer_block": true,
-      "quantitative_benchmarks_count": 8,
-      "actionable_fixes": []
-    },
-    "jina_antigravity_proxy_config": "Jev AI / Jan AI / Jina Reader -> http://127.0.0.1:8000/v1 (Antigravity Free Proxy Bridge)",
-    "hitl_staged_pitch": {
-      "action_id": "paid-article-pitch-001",
-      "agent_role": "seo-aeo-specialist",
-      "channel": "SalesGptEmail",
-      "recipient": "Draft.dev & ContentLab.io (B2B Developer Editorial Networks)",
-      "payload_preview": "Pitch 'How to Build a Zero-Trust GS1 Digital Link & Offline-First Rust P2P Pipeline in Rust (100x Faster, $0 API Cost)' ($400 – $900 / Article) | SEO Score: 100/100 | GEO/AEO Score: 100/100",
-      "status": "PendingHumanApproval",
-      "created_at": "2026-10-12T03:45:10.912004900Z"
-    }
+    "target_topic": "GS1 Digital Link & Offline-First Rust P2P",
+    "seo_score": 100,
+    "geo_aeo_score": 100,
+    "estimated_payout_range_usd": "Enterprise Technical Whitepaper",
+    "staged_action_id": "viettel-whitepaper-submission-001"
   },
   "warm_closing_campaigns": [
     {
       "prospect_email": "director.cloud@viettel.com.vn",
       "email_deliverability_valid": true,
       "sequence_steps": [
-        {
-          "day_offset": 0,
-          "step_name": "Touch 1: Hyper-Personalized Video Demo Solving Exact Pain",
-          "delivery_engine": "SalesGPT + Listmonk + Twenty CRM",
-          "subject": "Built a fix for your post on Giai đoạn 0: Khối Kỹ thuật & Hạ tầng Viettel Cloud/IDC (Demo 1) (Viettel-GS1-Offline-P2P-Passport)",
-          "body_summary": "Saw your note: 'Cần giải pháp sát thủ (killer app) tận dụng lợi thế băng thông nội địa Viettel Cloud/IDC và 5G MEC với tải >10.000 RPS.'. Recorded a 24s demo (Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel) showing how Viettel-GS1-Offline-P2P-Passport solves this automatically.",
-          "closing_mechanism": "Embedded Remotion MP4 Preview + 1-Click Sandbox Link"
-        },
-        {
-          "day_offset": 3,
-          "step_name": "Touch 2: Value-First Architecture & Cost Teardown",
-          "delivery_engine": "SalesGPT Stage-Aware Follow-Up",
-          "subject": "How Viettel-GS1-Offline-P2P-Passport cuts your workflow cost by 75%",
-          "body_summary": "Zero-pitch engineering breakdown + side-by-side benchmark table.",
-          "closing_mechanism": "Interactive ROI Calculator"
-        },
-        {
-          "day_offset": 6,
-          "step_name": "Touch 3: Warm Objection Handler & Instant Onboarding Call",
-          "delivery_engine": "SalesGPT + Cal.com AI",
-          "subject": "Want me to migrate your setup in 10 mins?",
-          "body_summary": "Addresses top migration friction and offers white-glove setup.",
-          "closing_mechanism": "Cal.com Instant Booking Slot (http://127.0.0.1:3006/founder/15min)"
-        },
-        {
-          "day_offset": 10,
-          "step_name": "Touch 4: Instant Contract & Self-Serve Subscription Close",
-          "delivery_engine": "Documenso + Lago Billing",
-          "subject": "Locked in your $49/mo founder rate",
-          "body_summary": "Self-serve SLA & instant usage-based activation link.",
-          "closing_mechanism": "Documenso 1-Click Sign (port 3005) -> Lago Metered Checkout (port 3004)"
-        }
+        "Step 1: Address pain 'Cần giải pháp sát thủ (killer app) tận dụng lợi thế băng thông nội địa Viettel Cloud/IDC và 5G MEC với tải >10.000 RPS.'",
+        "Step 2: Share live demo 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'"
       ],
       "hitl_staged_record": {
-        "action_id": "web4-close-viettel_cloud_idc_director",
-        "agent_role": "sales-sdr",
+        "action_id": "viettel-pilot-viettel_cloud_idc_director",
+        "agent_role": "sales-employee",
         "channel": "SalesGptEmail",
         "recipient": "director.cloud@viettel.com.vn",
-        "payload_preview": "4-Touch Warm Sequence + Remotion Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel' ($49/mo close via Cal.com/Documenso/Lago)",
+        "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
         "status": "PendingHumanApproval",
-        "created_at": "2026-10-12T03:45:10.912028400Z"
+        "created_at": "2026-10-12T00:00:00Z"
       }
     },
     {
       "prospect_email": "b2b.solutions@viettel.com.vn",
       "email_deliverability_valid": true,
       "sequence_steps": [
-        {
-          "day_offset": 0,
-          "step_name": "Touch 1: Hyper-Personalized Video Demo Solving Exact Pain",
-          "delivery_engine": "SalesGPT + Listmonk + Twenty CRM",
-          "subject": "Built a fix for your post on Giai đoạn 1 & 2: Khối Khách hàng Doanh nghiệp Viettel & 5 Doanh nghiệp Tiên phong (Demo 2 & 3) (Viettel-GS1-Offline-P2P-Passport)",
-          "body_summary": "Saw your note: 'Khách hàng Dược phẩm & Nông sản xuất khẩu phàn nàn app truy xuất bị treo khi vào kho lạnh mất sóng; cần sản phẩm bán chéo (cross-sell) gói Data 4G/5G Viettel.'. Recorded a 24s demo (Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel) showing how Viettel-GS1-Offline-P2P-Passport solves this automatically.",
-          "closing_mechanism": "Embedded Remotion MP4 Preview + 1-Click Sandbox Link"
-        },
-        {
-          "day_offset": 3,
-          "step_name": "Touch 2: Value-First Architecture & Cost Teardown",
-          "delivery_engine": "SalesGPT Stage-Aware Follow-Up",
-          "subject": "How Viettel-GS1-Offline-P2P-Passport cuts your workflow cost by 75%",
-          "body_summary": "Zero-pitch engineering breakdown + side-by-side benchmark table.",
-          "closing_mechanism": "Interactive ROI Calculator"
-        },
-        {
-          "day_offset": 6,
-          "step_name": "Touch 3: Warm Objection Handler & Instant Onboarding Call",
-          "delivery_engine": "SalesGPT + Cal.com AI",
-          "subject": "Want me to migrate your setup in 10 mins?",
-          "body_summary": "Addresses top migration friction and offers white-glove setup.",
-          "closing_mechanism": "Cal.com Instant Booking Slot (http://127.0.0.1:3006/founder/15min)"
-        },
-        {
-          "day_offset": 10,
-          "step_name": "Touch 4: Instant Contract & Self-Serve Subscription Close",
-          "delivery_engine": "Documenso + Lago Billing",
-          "subject": "Locked in your $49/mo founder rate",
-          "body_summary": "Self-serve SLA & instant usage-based activation link.",
-          "closing_mechanism": "Documenso 1-Click Sign (port 3005) -> Lago Metered Checkout (port 3004)"
-        }
+        "Step 1: Address pain 'Khách hàng Dược phẩm & Nông sản xuất khẩu phàn nàn app truy xuất bị treo khi vào kho lạnh mất sóng; cần sản phẩm bán chéo (cross-sell) gói Data 4G/5G Viettel.'",
+        "Step 2: Share live demo 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'"
       ],
       "hitl_staged_record": {
-        "action_id": "web4-close-viettel_enterprise_b2b_vp",
-        "agent_role": "sales-sdr",
+        "action_id": "viettel-pilot-viettel_enterprise_b2b_vp",
+        "agent_role": "sales-employee",
         "channel": "SalesGptEmail",
         "recipient": "b2b.solutions@viettel.com.vn",
-        "payload_preview": "4-Touch Warm Sequence + Remotion Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel' ($49/mo close via Cal.com/Documenso/Lago)",
+        "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
         "status": "PendingHumanApproval",
-        "created_at": "2026-10-12T03:45:10.912032900Z"
+        "created_at": "2026-10-12T00:00:00Z"
       }
     },
     {
       "prospect_email": "logistics.tech@viettelpost.com.vn",
       "email_deliverability_valid": true,
       "sequence_steps": [
-        {
-          "day_offset": 0,
-          "step_name": "Touch 1: Hyper-Personalized Video Demo Solving Exact Pain",
-          "delivery_engine": "SalesGPT + Listmonk + Twenty CRM",
-          "subject": "Built a fix for your post on Giai đoạn 3: Ban Lãnh đạo Viettel Post & Cơ quan Quản lý Nhà nước (Demo 4) (Viettel-GS1-Offline-P2P-Passport)",
-          "body_summary": "Saw your note: 'Cần chống tráo hàng giá trị cao khi bưu tá giao nhận và cung cấp bảng điều khiển dữ liệu vĩ mô cho Hải quan / Quản lý thị trường.'. Recorded a 24s demo (Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel) showing how Viettel-GS1-Offline-P2P-Passport solves this automatically.",
-          "closing_mechanism": "Embedded Remotion MP4 Preview + 1-Click Sandbox Link"
-        },
-        {
-          "day_offset": 3,
-          "step_name": "Touch 2: Value-First Architecture & Cost Teardown",
-          "delivery_engine": "SalesGPT Stage-Aware Follow-Up",
-          "subject": "How Viettel-GS1-Offline-P2P-Passport cuts your workflow cost by 75%",
-          "body_summary": "Zero-pitch engineering breakdown + side-by-side benchmark table.",
-          "closing_mechanism": "Interactive ROI Calculator"
-        },
-        {
-          "day_offset": 6,
-          "step_name": "Touch 3: Warm Objection Handler & Instant Onboarding Call",
-          "delivery_engine": "SalesGPT + Cal.com AI",
-          "subject": "Want me to migrate your setup in 10 mins?",
-          "body_summary": "Addresses top migration friction and offers white-glove setup.",
-          "closing_mechanism": "Cal.com Instant Booking Slot (http://127.0.0.1:3006/founder/15min)"
-        },
-        {
-          "day_offset": 10,
-          "step_name": "Touch 4: Instant Contract & Self-Serve Subscription Close",
-          "delivery_engine": "Documenso + Lago Billing",
-          "subject": "Locked in your $49/mo founder rate",
-          "body_summary": "Self-serve SLA & instant usage-based activation link.",
-          "closing_mechanism": "Documenso 1-Click Sign (port 3005) -> Lago Metered Checkout (port 3004)"
-        }
+        "Step 1: Address pain 'Cần chống tráo hàng giá trị cao khi bưu tá giao nhận và cung cấp bảng điều khiển dữ liệu vĩ mô cho Hải quan / Quản lý thị trường.'",
+        "Step 2: Share live demo 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'"
       ],
       "hitl_staged_record": {
-        "action_id": "web4-close-viettel_post_exec_board",
-        "agent_role": "sales-sdr",
+        "action_id": "viettel-pilot-viettel_post_exec_board",
+        "agent_role": "sales-employee",
         "channel": "SalesGptEmail",
         "recipient": "logistics.tech@viettelpost.com.vn",
-        "payload_preview": "4-Touch Warm Sequence + Remotion Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel' ($49/mo close via Cal.com/Documenso/Lago)",
+        "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
         "status": "PendingHumanApproval",
-        "created_at": "2026-10-12T03:45:10.912058800Z"
+        "created_at": "2026-10-12T00:00:00Z"
       }
     }
   ],
   "hitl_staged_outbound_ledger": [
     {
-      "action_id": "web4-close-viettel_post_exec_board",
-      "agent_role": "sales-sdr",
+      "action_id": "viettel-whitepaper-submission-001",
+      "agent_role": "seo-employee",
       "channel": "SalesGptEmail",
-      "recipient": "logistics.tech@viettelpost.com.vn",
-      "payload_preview": "4-Touch Warm Sequence + Remotion Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel' ($49/mo close via Cal.com/Documenso/Lago)",
+      "recipient": "Viettel Solutions Technical Review Board",
+      "payload_preview": "Technical Whitepaper: GS1 Digital Link & Offline-First Rust P2P",
       "status": "PendingHumanApproval",
-      "created_at": "2026-10-12T03:45:10.912058800Z"
+      "created_at": "2026-10-12T00:00:00Z"
     },
     {
-      "action_id": "web4-close-viettel_cloud_idc_director",
-      "agent_role": "sales-sdr",
+      "action_id": "viettel-pilot-viettel_cloud_idc_director",
+      "agent_role": "sales-employee",
       "channel": "SalesGptEmail",
       "recipient": "director.cloud@viettel.com.vn",
-      "payload_preview": "4-Touch Warm Sequence + Remotion Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel' ($49/mo close via Cal.com/Documenso/Lago)",
+      "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
       "status": "PendingHumanApproval",
-      "created_at": "2026-10-12T03:45:10.912028400Z"
-    },
-    {
-      "action_id": "paid-article-pitch-001",
-      "agent_role": "seo-aeo-specialist",
-      "channel": "SalesGptEmail",
-      "recipient": "Draft.dev & ContentLab.io (B2B Developer Editorial Networks)",
-      "payload_preview": "Pitch 'How to Build a Zero-Trust GS1 Digital Link & Offline-First Rust P2P Pipeline in Rust (100x Faster, $0 API Cost)' ($400 – $900 / Article) | SEO Score: 100/100 | GEO/AEO Score: 100/100",
-      "status": "PendingHumanApproval",
-      "created_at": "2026-10-12T03:45:10.912004900Z"
+      "created_at": "2026-10-12T00:00:00Z"
     },
     {
       "action_id": "viettel-postiz-demo-reel",
@@ -548,16 +391,25 @@
       "recipient": "LinkedIn Vietnam Tech, YouTube Demo & Viettel Solutions Showcase",
       "payload_preview": "Stage 60fps Video: 'Quét mã GS1 ở Chế độ Máy bay (0% Internet) – Xác thực P2P bằng Rust trong 0.04ms'",
       "status": "PendingHumanApproval",
-      "created_at": "2026-10-12T03:45:10.912171Z"
+      "created_at": "2026-10-12T00:00:00Z"
     },
     {
-      "action_id": "web4-close-viettel_enterprise_b2b_vp",
-      "agent_role": "sales-sdr",
+      "action_id": "viettel-pilot-viettel_enterprise_b2b_vp",
+      "agent_role": "sales-employee",
       "channel": "SalesGptEmail",
       "recipient": "b2b.solutions@viettel.com.vn",
-      "payload_preview": "4-Touch Warm Sequence + Remotion Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel' ($49/mo close via Cal.com/Documenso/Lago)",
+      "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
       "status": "PendingHumanApproval",
-      "created_at": "2026-10-12T03:45:10.912032900Z"
+      "created_at": "2026-10-12T00:00:00Z"
+    },
+    {
+      "action_id": "viettel-pilot-viettel_post_exec_board",
+      "agent_role": "sales-employee",
+      "channel": "SalesGptEmail",
+      "recipient": "logistics.tech@viettelpost.com.vn",
+      "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
+      "status": "PendingHumanApproval",
+      "created_at": "2026-10-12T00:00:00Z"
     },
     {
       "action_id": "viettel-4g-loyalty-campaign",
@@ -566,8 +418,8 @@
       "recipient": "Viettel Telecom Cross-Sell Portal (MyViettel / Viettel++ Loyalty)",
       "payload_preview": "Stage Campaign: 'Quét mã GS1 Nông sản/Dược phẩm chính hãng - Tặng ngay 500MB Data 5G Viettel'",
       "status": "PendingHumanApproval",
-      "created_at": "2026-10-12T03:45:10.912172100Z"
+      "created_at": "2026-10-12T00:00:00Z"
     }
   ],
-  "interactive_live_demo_html_path": "C:\\Users\\Admin\\.gemini\\antigravity\\scratch\\solo-founder-os\\viettel-gs1-autopilot/viettel_gs1_offline_p2p_live_demo.html"
+  "interactive_live_demo_html_path": "demo-output/viettel_gs1_offline_p2p_live_demo.html"
 }
