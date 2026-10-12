@@ -2171,7 +2171,7 @@ mod tests {
             "viettel-founder-hmac-key-2026",
         )
         .expect("Viettel autopilot execution must succeed");
-        assert!(dossier.demo1_viettel_cloud_stress_test.achieved_requests_per_second >= 10_000);
+        assert!(dossier.demo1_viettel_cloud_stress_test.achieved_requests_per_second >= 10_000.0);
         assert_eq!(dossier.demo2_step1_online_scan.gtin, "09501101420014");
         assert!(!dossier.demo2_step1_online_scan.airplane_mode_offline);
         assert!(dossier.demo2_step2_airplane_offline_p2p_scan.airplane_mode_offline);
