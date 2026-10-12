@@ -27,7 +27,7 @@ Tài liệu này giải phẫu **từ gốc rễ (First-Principles)** từng Đ�
 
 #### 2. Tư duy & Lý luận gốc (Logic & Reasoning)
 - Trong cơ sở dữ liệu truyền thống, mỗi sự kiện (Nhà máy $\to$ Kho lạnh $\to$ Đại lý $\to$ Nhà thuốc) là một dòng dữ liệu rời rạc; càng đi qua nhiều chặng, dữ liệu càng phình to.
-- Định lý 1 nhìn dữ liệu như **sóng giao thoa (Hologram)**: mỗi cặp `(Vai trò * Giá trị)` là một sóng pha trải đều trên $D = 1024$ chiều. Vì 2 vector ngẫu nhiên trên không gian $1024$ chiều gần như vuông góc tuyệt đối với nhau ($\mathbb{E}[\langle \mathbf{u}, \mathbf{v}\rangle^2] = 1/D \approx 0.00097$), ta có thể **cộng chồng (superpose)** hàng chục sự kiện vào **cùng 1 mảng cố định 4 KB** ($\mathbf{S} = \sum_i \mathbf{k}_i \circledast \mathbf{v}_i$). Khi cần hỏi *"Nhiệt độ ở chặng Kho lạnh là bao nhiêu?"*, ta chỉ việc chiếu sóng khóa $\mathbf{k}_{\text{KhoLanh}} \star \mathbf{S}$: tín hiệu cần tìm hội tụ về biên độ `1.0`, còn mọi chặng khác triệt tiêu thành nhiễu nền Gaussian cực nhỏ.
+- Định lý 1 nhìn dữ liệu như **sóng giao thoa (Hologram)**: mỗi cặp `(Vai trò x Giá trị)` là một sóng pha trải đều trên $D = 1024$ chiều. Vì 2 vector ngẫu nhiên trên không gian $1024$ chiều gần như vuông góc tuyệt đối với nhau ($\mathbb{E}[\langle \mathbf{u}, \mathbf{v}\rangle^2] = 1/D \approx 0.00097$), ta có thể **cộng chồng (superpose)** hàng chục sự kiện vào **cùng 1 mảng cố định 4 KB** ($\mathbf{S} = \sum_i \mathbf{k}_i \circledast \mathbf{v}_i$). Khi cần hỏi *"Nhiệt độ ở chặng Kho lạnh là bao nhiêu?"*, ta chỉ việc chiếu sóng khóa $\mathbf{k}_{\text{KhoLanh}} \star \mathbf{S}$: tín hiệu cần tìm hội tụ về biên độ `1.0`, còn mọi chặng khác triệt tiêu thành nhiễu nền Gaussian cực nhỏ.
 
 #### 3. Năng lực & Lợi thế vượt trội (Capabilities & Advantages)
 - **Bộ nhớ hằng số $\mathcal{O}(1)$ (`4 KB`):** Dù hộp thuốc đi qua 3 chặng hay 50 chặng, kích thước trạng thái vẫn cố định `4 KB`.
@@ -129,7 +129,7 @@ Tài liệu này giải phẫu **từ gốc rễ (First-Principles)** từng Đ�
   Nếu chuỗi cung ứng chỉ là một cây phân nhánh một chiều (`Nhà máy -> Tổng kho -> Đại lý cấp 1 -> Cửa hàng`) không có chu trình khép kín (số Betti thứ nhất $b_1(G) = |E| - |V| + 1 = 0$), thì nhóm đối đồng điều bậc 1 triệt tiêu: $H^1(T; \mathcal{F}) = 0$. Nghĩa là nếu Tổng kho tráo hàng giả và tự ký lại toàn bộ giấy tờ cho các nhánh con bên dưới, việc kiểm tra cục bộ giữa hai nút kế tiếp sẽ không phát hiện được!
 - **Đột phá Dây Cung Neo Ảo (`Virtual Anchor Chords` + Định vị nút gian lận bằng $\Delta_0^{\mathcal{F}}$):**
   Nối các **Dây cung neo mật mã $E_{\text{anchor}}$** trực tiếp từ gốc Nhà máy ($v_0$) xuống các điểm quét thực địa (qua chữ ký `Ed25519` gốc của nhà máy trong QR + tọa độ `Viettel CAMARA Cell-ID`). Đồ thị mở rộng $\tilde{G} = (V, E \cup E_{\text{anchor}})$ có số chu trình $b_1(\tilde{G}) = |E_{\text{anchor}}| \ge 1$, biến mọi hành vi tráo hàng 1-đổi-1 ở giữa dòng thành **độ cong trường chuẩn khác không ($E_{\text{sheaf}} > 0$)** và chỉ đích danh kho gian lận thông qua cực đại vector thặng dư Hodge:
-  $$v^* = \arg\max_{v \in V \setminus \{v_0\}} \bigl\| (\Delta_0^{\mathcal{F}} x)_v \bigr\|_2$$
+  $$v_opt = \arg\max_{v \in V \setminus \{v_0\}} \bigl\| (\Delta_0^{\mathcal{F}} x)_v \bigr\|_2$$
 
 #### 2. Năng lực & Lợi thế vượt trội
 - **Bắt sống thủ đoạn "Tráo hàng 1-đổi-1 cùng trọng lượng" (`0.0 kg` lệch khối lượng):** Các hệ thống ERP chỉ cộng trừ số lượng hộp sẽ bị lừa khi đại lý rút 200 hộp thuốc thật ra và nhét 200 hộp thuốc giả nặng y hệt vào. Nhưng vì pha Holographic/Ed25519 của 200 hộp giả lệch với dây cung neo từ Nhà máy, toán tử Hodge Laplacian $\Delta_0^{\mathcal{F}}$ lập tức chỉ đích danh **`Node 2: Regional_Distributor_Hub`** với độ chính xác 100%!
@@ -172,7 +172,7 @@ Tài liệu này giải phẫu **từ gốc rễ (First-Principles)** từng Đ�
 ### ĐỊNH LÝ 8 & 9 (Dự Án 2 — Solo-Founder Automation AI OS): Phương Trình Sóng Eikonal, Luồng Cực Đại - Lát Cắt Cực Tiểu Bền Vững (IBC §1005.5) & Đồng Hồ Tự Động Hữu Hạn Alur-Dill DBM
 
 - **Định lý 8 ([`verify_resilient_egress_min_cut`](file:///C:/Users/Admin/.gemini/antigravity/scratch/solo-founder-os/rust-core/src/restless_company_daemon.rs#L1392-L1470)):** Giải bài toán thoát hiểm tòa nhà bằng thuật toán Edmonds-Karp trên đồ thị mạng luồng, đồng thời kiểm tra điều kiện **mất 1 cầu thang bất kỳ do đám cháy (`IBC §1005.5`)** vẫn đảm bảo $\ge 50\%$ lưu lượng thoát nạn (`650 >= 450 người`).
-- **Định lý 9 ([`verify_dbm_statutory_clock_closure`](file:///C:/Users/Admin/.gemini/antigravity/scratch/solo-founder-os/rust-core/src/restless_company_daemon.rs#L1472-L1525)):** Biểu diễn thời hạn luật định (30 ngày xuất hóa đơn lưu cont 46 CFR §541.6; 72 giờ duyệt bảo hiểm y tế CMS-0057) thành **Ma trận Ràng buộc Hiệu số (DBM)** và chạy bao đóng bắc cầu Floyd-Warshall $D^*_{i,j} = \min_k (D_{i,k} + D_{k,j})$. Khi đường chéo âm ($D^*_{0,0} = -12 < 0$), hệ thống xuất ra **chứng chỉ toán học bác bỏ hóa đơn phạt** tự động 100%!
+- **Định lý 9 ([`verify_dbm_statutory_clock_closure`](file:///C:/Users/Admin/.gemini/antigravity/scratch/solo-founder-os/rust-core/src/restless_company_daemon.rs#L1472-L1525)):** Biểu diễn thời hạn luật định (30 ngày xuất hóa đơn lưu cont 46 CFR §541.6; 72 giờ duyệt bảo hiểm y tế CMS-0057) thành **Ma trận Ràng buộc Hiệu số (DBM)** và chạy bao đóng bắc cầu Floyd-Warshall $D_opt_{i,j} = \min_k (D_{i,k} + D_{k,j})$. Khi đường chéo âm ($D_opt_{0,0} = -12 < 0$), hệ thống xuất ra **chứng chỉ toán học bác bỏ hóa đơn phạt** tự động 100%!
 
 ---
 
@@ -258,7 +258,7 @@ flowchart LR
 
 - **Phân hạng & Chi phí phần cứng:** **Tier A (`$0.00` trên điện thoại có NFC)** kết hợp **Tier B (`$0.10–$0.12` tem NFC NTAG 224/424 DNA dán sát thành chai/vỉ thuốc)**.
 - **Nguyên lý Vật lý & Tự hiệu chuẩn:**
-  - Cuộn dây ăng-ten NFC `13.56 MHz` dán trên thân lọ thuốc/hộp sữa tạo ra từ trường xuyên sâu `5–12 mm` vào lớp vật chất ngay phía sau nhãn. Hằng số điện môi phức $\varepsilon_r^* = \varepsilon_r' - i\varepsilon_r''$ của chất lỏng/viên thuốc làm dịch chuyển tần số cộng hưởng $\Delta f_0$ và góc pha điều chế tải $\tan\Phi_{\text{LM}} = -Q_L(\varepsilon_r'') \cdot \xi(\varepsilon_r')$ hoàn toàn độc lập với khoảng cách cầm tay của người dùng!
+  - Cuộn dây ăng-ten NFC `13.56 MHz` dán trên thân lọ thuốc/hộp sữa tạo ra từ trường xuyên sâu `5–12 mm` vào lớp vật chất ngay phía sau nhãn. Hằng số điện môi phức $\varepsilon_r = \varepsilon_r' - i\varepsilon_r''$ của chất lỏng/viên thuốc làm dịch chuyển tần số cộng hưởng $\Delta f_0$ và góc pha điều chế tải $\tan\Phi_{\text{LM}} = -Q_L(\varepsilon_r'') \cdot \xi(\varepsilon_r')$ hoàn toàn độc lập với khoảng cách cầm tay của người dùng!
 - **🎯 Thực tiễn Use Case & Hành trình Khách hàng:**
   - Áp lưng điện thoại chạm nhẹ vào tem NFC trên lọ thuốc đặc trị ung thư hoặc hộp sữa cao cấp (`0.3 giây`): Vừa xác thực chữ ký phần cứng `AES-128 SUN CMAC` chống sao chép 100%, vừa đo ngay hằng số điện môi của thuốc bên trong lọ (`\varepsilon_r' = 42.5` chuẩn vs. `78.2` nếu bị tráo bằng nước lọc).
 
