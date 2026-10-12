@@ -11,7 +11,9 @@
 
 use std::io::{Read, Write};
 use std::net::TcpListener;
-use viettel_gs1_traceability::frontier_instruments_and_theorems::FrontierInstrumentSuite;
+use viettel_gs1_traceability::frontier_instruments_and_theorems::{
+    FrontierInstrumentSuite, PolyglotDualEvmAndZeroPreSyncEngine,
+};
 use viettel_gs1_traceability::{
     Gs1UriResolverEngine, HyperledgerPolygonLedgerAnchor, RustP2pMobileCore,
     ViettelAiEmployeesAutopilot,
@@ -33,8 +35,18 @@ fn main() {
             let instruments_json = serde_json::to_string_pretty(&instruments).unwrap();
             std::fs::write("demo-output/frontier_instruments_audit.json", &instruments_json)
                 .expect("Failed to write frontier_instruments_audit.json");
+            let new_arch = PolyglotDualEvmAndZeroPreSyncEngine::run_all_4_new_scenarios_audit();
+            let new_arch_json = serde_json::to_string_pretty(&new_arch).unwrap();
+            std::fs::write(
+                "demo-output/new_architecture_4_scenarios_audit.json",
+                &new_arch_json,
+            )
+            .expect("Failed to write new_architecture_4_scenarios_audit.json");
+            if let Ok(sol) = std::fs::read_to_string("contracts/ViettelTraceabilityEAS.sol") {
+                let _ = std::fs::write("demo-output/contracts/ViettelTraceabilityEAS.sol", sol);
+            }
             println!(
-                "Viettel GS1 Offline-First P2P Demo & 5-Instrument Audit generated at:\n  - {}\n  - demo-output/frontier_instruments_audit.json",
+                "Viettel GS1 Offline-First P2P Demo, 5-Instrument Audit & 4 New Architecture Scenarios generated at:\n  - {}\n  - demo-output/frontier_instruments_audit.json\n  - demo-output/new_architecture_4_scenarios_audit.json",
                 dossier.interactive_live_demo_html_path
             );
         }
@@ -125,6 +137,13 @@ fn main() {
                         "HTTP/1.1 200 OK",
                         "application/json",
                         serde_json::to_string_pretty(&suite).unwrap_or_default(),
+                    )
+                } else if path == "/api/v1/new-arch-scenarios" {
+                    let rep = PolyglotDualEvmAndZeroPreSyncEngine::run_all_4_new_scenarios_audit();
+                    (
+                        "HTTP/1.1 200 OK",
+                        "application/json",
+                        serde_json::to_string_pretty(&rep).unwrap_or_default(),
                     )
                 } else if path == "/v1/viettel-autopilot"
                     || path == "/api/status"

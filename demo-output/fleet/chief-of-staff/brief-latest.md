@@ -2,8 +2,8 @@
 
 ## Today
 - fleet/fleet.json: 8 AI Employees active, 60+ routines reconciled, 0 open faults
-- Program 1 (Rust GS1 Resolver + Pingora/rkyv + CAMARA 5G) đạt 133548 RPS trên Viettel Cloud (p99 compute: 18 us, RTT 5G nội địa: 3.4ms vs Quốc tế: 94.2ms)
-- Program 2 (Rust P2P Mobile Core + BinaryFuse16 + RoaringBitmap + Loro CRDT) xác thực ngoại tuyến hộp thuốc BOX-0002 trong 32 us ở Chế độ máy bay (RAM: 0.13 MB < 30MB SLA)
+- Program 1 (Rust GS1 Resolver + Pingora/rkyv + CAMARA 5G) đạt 154113 RPS trên Viettel Cloud (p99 compute: 17 us, RTT 5G nội địa: 3.4ms vs Quốc tế: 94.2ms)
+- Program 2 (Rust P2P Mobile Core + BinaryFuse16 + RoaringBitmap + Loro CRDT) xác thực ngoại tuyến hộp thuốc BOX-0002 trong 41 us ở Chế độ máy bay (RAM: 0.13 MB < 30MB SLA)
 
 ## Three Strategic Moves (cos-decision-brief)
 - Move 1 (Giai đoạn 0 - Tháng 1-2): Chốt biên bản thử nghiệm tải 10.000+ RPS + CAMARA 3GPP Cell-ID API với Viettel Cloud/IDC và cấu hình Universal Links trên domain demo.viettel.vn

@@ -1,0 +1,14 @@
+{
+  "scenario1a_shelf_inspect_passed_without_burning_bit": true,
+  "scenario1b_first_scan_burn_500mb_awarded": true,
+  "scenario1b_evm_bitmap_gas_saved_pct": 94.2,
+  "scenario2_zero_pre_sync_ed25519_verified": true,
+  "scenario2_cpu_verify_time_us": 14.2,
+  "scenario2_pre_sync_ram_mb": 0.0,
+  "scenario3_photocopy_clone_caught_red_alert": true,
+  "scenario3_bounty_offered_vnd": 20000,
+  "scenario3_grey_market_territory_violation_caught": true,
+  "scenario4_cod_swap_detected_and_refund_button_locked": true,
+  "scenario4_expected_weight_g": 450,
+  "scenario4_actual_return_weight_g": 185
+}

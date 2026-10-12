@@ -18,10 +18,10 @@
   },
   "demo1_viettel_cloud_stress_test": {
     "total_concurrent_requests": 10000,
-    "total_elapsed_ms": 74.88,
-    "achieved_requests_per_second": 133548.0,
-    "p50_resolver_compute_us": 5,
-    "p99_resolver_compute_us": 18,
+    "total_elapsed_ms": 64.89,
+    "achieved_requests_per_second": 154113.0,
+    "p50_resolver_compute_us": 4,
+    "p99_resolver_compute_us": 17,
     "viettel_cloud_domestic_4g_5g_rtt_ms": 3.4,
     "international_cloud_aws_singapore_rtt_ms": 94.2,
     "latency_advantage_multiplier": 27.7,
@@ -46,7 +46,7 @@
     "expiry_date": "2028-09-15",
     "computed_serial_hash": "da61c3d6f011a3cc462dcedfdbd83280542f7d82f16487ec76fda2d4e0c0bec0",
     "verified_against_merkle_root": "48e16e22a1e0ec33f7ec191a7797e22b251171c0c8f8dc8cd8dfb7c96c01914a",
-    "cpu_verification_time_microseconds": 43,
+    "cpu_verification_time_microseconds": 55,
     "ram_footprint_mb": 0.13,
     "synced_peers_in_mesh": [
       "/ip4/192.168.1.42/tcp/4001/p2p/12D3KooWViettelPostScannerPeer01 (mDNS Local)",
@@ -73,7 +73,7 @@
     "expiry_date": "2028-09-15",
     "computed_serial_hash": "6811b9a32525fb9395202853fd227aa6507c252f3c6c658fb7fbd3358893c48a",
     "verified_against_merkle_root": "48e16e22a1e0ec33f7ec191a7797e22b251171c0c8f8dc8cd8dfb7c96c01914a",
-    "cpu_verification_time_microseconds": 32,
+    "cpu_verification_time_microseconds": 41,
     "ram_footprint_mb": 0.13,
     "synced_peers_in_mesh": [
       "/ip4/192.168.1.42/tcp/4001/p2p/12D3KooWViettelPostScannerPeer01 (mDNS Local)",
@@ -87,7 +87,7 @@
     "gtin": "08935049501238",
     "batch_id": "LOT-AGRI-2026-10",
     "generated_barcodes_count": 10000,
-    "generation_time_ms": 2.27,
+    "generation_time_ms": 1.76,
     "sample_first_uri": "https://viettel.vn/01/08935049501238/10/LOT-AGRI-2026-10/21/ITEM-00001",
     "sample_last_uri": "https://viettel.vn/01/08935049501238/10/LOT-AGRI-2026-10/21/ITEM-10000",
     "viettel_loyalty_campaign": "Quét mã GS1 xác thực chính hãng -> Tặng ngay 500MB Data 4G/5G Viettel vào tài khoản di động",
@@ -367,20 +367,11 @@
   ],
   "hitl_staged_outbound_ledger": [
     {
-      "action_id": "viettel-pilot-viettel_post_exec_board",
-      "agent_role": "sales-employee",
-      "channel": "SalesGptEmail",
-      "recipient": "logistics.tech@viettelpost.com.vn",
-      "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
-      "status": "PendingHumanApproval",
-      "created_at": "2026-10-12T00:00:00Z"
-    },
-    {
-      "action_id": "viettel-pilot-viettel_enterprise_b2b_vp",
-      "agent_role": "sales-employee",
-      "channel": "SalesGptEmail",
-      "recipient": "b2b.solutions@viettel.com.vn",
-      "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
+      "action_id": "viettel-postiz-demo-reel",
+      "agent_role": "social-media-employee",
+      "channel": "PostizSocialPost",
+      "recipient": "LinkedIn Vietnam Tech, YouTube Demo & Viettel Solutions Showcase",
+      "payload_preview": "Stage 60fps Video: 'Quét mã GS1 ở Chế độ Máy bay (0% Internet) – Xác thực P2P bằng Rust trong 0.04ms'",
       "status": "PendingHumanApproval",
       "created_at": "2026-10-12T00:00:00Z"
     },
@@ -394,15 +385,6 @@
       "created_at": "2026-10-12T00:00:00Z"
     },
     {
-      "action_id": "viettel-4g-loyalty-campaign",
-      "agent_role": "ad-manager-employee",
-      "channel": "TwentyCrmMutation",
-      "recipient": "Viettel Telecom Cross-Sell Portal (MyViettel / Viettel++ Loyalty)",
-      "payload_preview": "Stage Campaign: 'Quét mã GS1 Nông sản/Dược phẩm chính hãng - Tặng ngay 500MB Data 5G Viettel'",
-      "status": "PendingHumanApproval",
-      "created_at": "2026-10-12T00:00:00Z"
-    },
-    {
       "action_id": "viettel-pilot-viettel_cloud_idc_director",
       "agent_role": "sales-employee",
       "channel": "SalesGptEmail",
@@ -412,11 +394,29 @@
       "created_at": "2026-10-12T00:00:00Z"
     },
     {
-      "action_id": "viettel-postiz-demo-reel",
-      "agent_role": "social-media-employee",
-      "channel": "PostizSocialPost",
-      "recipient": "LinkedIn Vietnam Tech, YouTube Demo & Viettel Solutions Showcase",
-      "payload_preview": "Stage 60fps Video: 'Quét mã GS1 ở Chế độ Máy bay (0% Internet) – Xác thực P2P bằng Rust trong 0.04ms'",
+      "action_id": "viettel-pilot-viettel_post_exec_board",
+      "agent_role": "sales-employee",
+      "channel": "SalesGptEmail",
+      "recipient": "logistics.tech@viettelpost.com.vn",
+      "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
+      "status": "PendingHumanApproval",
+      "created_at": "2026-10-12T00:00:00Z"
+    },
+    {
+      "action_id": "viettel-4g-loyalty-campaign",
+      "agent_role": "ad-manager-employee",
+      "channel": "TwentyCrmMutation",
+      "recipient": "Viettel Telecom Cross-Sell Portal (MyViettel / Viettel++ Loyalty)",
+      "payload_preview": "Stage Campaign: 'Quét mã GS1 Nông sản/Dược phẩm chính hãng - Tặng ngay 500MB Data 5G Viettel'",
+      "status": "PendingHumanApproval",
+      "created_at": "2026-10-12T00:00:00Z"
+    },
+    {
+      "action_id": "viettel-pilot-viettel_enterprise_b2b_vp",
+      "agent_role": "sales-employee",
+      "channel": "SalesGptEmail",
+      "recipient": "b2b.solutions@viettel.com.vn",
+      "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
       "status": "PendingHumanApproval",
       "created_at": "2026-10-12T00:00:00Z"
     }
