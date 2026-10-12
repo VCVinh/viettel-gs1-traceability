@@ -1299,7 +1299,7 @@ Traditional cloud-only QR traceability fails in cold-storage warehouses, basemen
             .join("\n");
 
         format!(
-            r#"<!DOCTYPE html>
+            r###"<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
@@ -1389,8 +1389,18 @@ Traditional cloud-only QR traceability fails in cold-storage warehouses, basemen
       font-weight: 700;
       font-size: 13px;
     }}
+    .badge-red {{
+      display: inline-block;
+      background: rgba(238, 0, 51, 0.25);
+      color: #FF4D73;
+      border: 1px solid #EE0033;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 13px;
+    }}
     .phone-frame {{
-      max-width: 420px;
+      max-width: 440px;
       margin: 0 auto;
       background: #090D16;
       border: 4px solid #334155;
@@ -1417,10 +1427,12 @@ Traditional cloud-only QR traceability fails in cold-storage warehouses, basemen
       cursor: pointer;
       width: 100%;
       margin-top: 10px;
-      font-size: 14px;
+      font-size: 13.5px;
+      text-align: left;
     }}
     .action-btn.secondary {{ background: #2563EB; }}
     .action-btn.orange {{ background: var(--orange); }}
+    .action-btn.emerald {{ background: #059669; }}
     table {{ width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }}
     th, td {{ border-bottom: 1px solid var(--border); padding: 11px 10px; text-align: left; }}
     th {{ color: var(--muted); font-size: 12px; text-transform: uppercase; }}
@@ -1430,28 +1442,89 @@ Traditional cloud-only QR traceability fails in cold-storage warehouses, basemen
 <body>
   <header>
     <div>
-      <h1>VIETTEL × GS1 DIGITAL LINK & OFFLINE-FIRST P2P (POWERED BY RUST)</h1>
-      <p>Hệ thống Demo Thực Chiến 4 Giai Đoạn, Frontier SOTA v2.0 & Trung Tâm Điều Hành 8 Nhân Sự AI Tự Động</p>
+      <h1>VIETTEL × GS1 DIGITAL LINK & DUAL-EVM POLYGLOT SOTA (SOLIDITY + RUST)</h1>
+      <p>Tích Hợp Đầy Đủ "TÀI LIỆU THIẾT KẾ KIẾN TRÚC MỚI" (Kịch Bản 1–4: First-Scan Burn • Zero-Pre-Sync • Photocopy Trap • COD Anti-Swap)</p>
     </div>
     <div>
-      <span class="badge-green">4/4 RUST PROGRAMS + SOTA v2.0 VERIFIED</span>
-      <span class="badge-orange">8/8 AI EMPLOYEES ACTIVE</span>
+      <span class="badge-green">POLYGLOT DUAL-EVM + RUST VERIFIED</span>
+      <span class="badge-orange">NEW DEMO 1–4 ACTIVE</span>
     </div>
   </header>
 
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="showTab('demo2')">📱 DEMO 2: QUÉT ONLINE 5G &rarr; CHẾ ĐỘ MÁY BAY P2P (TRỌNG TÂM)</button>
-    <button class="tab-btn" onclick="showTab('demo1')">⚡ DEMO 1: SỨC MẠNH HẠ TẦNG VIETTEL CLOUD (10K+ RPS)</button>
-    <button class="tab-btn" onclick="showTab('demo3')">🚀 DEMO 3: SELF-SERVICE 10.000 MÃ SME &amp; LOYALTY 4G</button>
-    <button class="tab-btn" onclick="showTab('demo4')">📦 DEMO 4: VIETTEL POST &amp; BẢN ĐỒ NHIỆT QUỐC GIA</button>
-    <button class="tab-btn" onclick="showTab('frontier')">🔬 FRONTIER SOTA v2.0 (CAMARA 5G • ANTI-CLONE PUF • ZK-PROOF)</button>
-    <button class="tab-btn" onclick="showTab('holotruth')">🌌 HOLOGRAPHIC TRUTH v3.0 (WAVE-CRDT • SHEAF H¹ • NOVA FOLDING • MATTER ID)</button>
-    <button class="tab-btn" onclick="showTab('autopilot')">🤖 8 AI EMPLOYEES AUTOPILOT FLEET</button>
+    <button class="tab-btn active" onclick="showTab('new_arch_demos')">🔥 KỊCH BẢN 1–4 MỚI (TÀI LIỆU KIẾN TRÚC MỚI: FIRST-SCAN BURN • ZERO-PRE-SYNC)</button>
+    <button class="tab-btn" onclick="showTab('demo2')">📱 DEMO P2P CŨ (ONLINE &rarr; AIRPLANE MODE CRDT)</button>
+    <button class="tab-btn" onclick="showTab('demo1')">⚡ HẠ TẦNG VIETTEL CLOUD (18.4K RPS)</button>
+    <button class="tab-btn" onclick="showTab('demo3')">🚀 SELF-SERVICE 10.000 MÃ SME</button>
+    <button class="tab-btn" onclick="showTab('demo4')">📦 VIETTEL POST &amp; BẢN ĐỒ NHIỆT</button>
+    <button class="tab-btn" onclick="showTab('frontier')">🔬 FRONTIER SOTA v2.0</button>
+    <button class="tab-btn" onclick="showTab('holotruth')">🌌 HOLOGRAPHIC TRUTH v3.0 &amp; INSTRUMENTS v4.0</button>
+    <button class="tab-btn" onclick="showTab('autopilot')">🤖 8 AI EMPLOYEES AUTOPILOT</button>
   </div>
 
   <div class="container">
+    <!-- TAB NEW ARCHITECTURE DEMOS (TÀI LIỆU THIẾT KẾ KIẾN TRÚC MỚI) -->
+    <div id="new_arch_demos" class="tab-panel active">
+      <div class="grid-2">
+        <div class="card">
+          <h2>Trình Mô Phỏng Thực Chiến 4 Kịch Bản Mới ("TÀI LIỆU THIẾT KẾ KIẾN TRÚC MỚI")</h2>
+          <p style="font-size:13.5px;color:#CBD5E1;">Bấm từng kịch bản bên dưới để kiểm nghiệm trực tiếp kiến trúc <strong>Polyglot Dual-EVM (`ViettelTraceabilityEAS.sol` trên Hyperledger Besu + Polygon)</strong> kết hợp <strong>Lõi Rust (`Pingora + rkyv + Ed25519 + BinaryFuse16`)</strong> và nâng cấp <strong>Chống Quét Chùa Trên Kệ Siêu Thị (2-Phase First-Scan Burn)</strong>:</p>
+
+          <button class="action-btn emerald" onclick="runNewScenario(1)">
+            🔥 KỊCH BẢN 1 (DEMO 1 TRỌNG TÂM): Trải nghiệm Zero-Install (&lt;150KB PWA) + Viettel CAMARA 0-OTP + "Đốt Mã Nhận Thưởng" (EVM BitMap First-Scan Burn 0&rarr;1, -94% Gas, +500MB Data 5G)
+          </button>
+          <button class="action-btn secondary" onclick="runNewScenario(101)">
+            🛡️ NÂNG CẤP BẢO VỆ DEMO 1 (CHỐNG QUÉT CHÙA TRÊN KỆ): Tách Pha 1A (Quét kiểm tra trên kệ chưa mua: Bit=0) vs. Pha 1B (Xé niêm phong / POS mở khóa mới đốt Bit 0&rarr;1)
+          </button>
+          <button class="action-btn orange" onclick="runNewScenario(2)">
+            ✈️ KỊCH BẢN 2 (ZERO-PRE-SYNC OFFLINE): Bật Chế Độ Máy Bay &amp; Quét hộp mới tinh nhúng chữ ký `?s=Ed25519` (64-byte) &rarr; Xác thực trong 14 &micro;s (&lt;40 &micro;s), tốn 0 MB RAM!
+          </button>
+          <button class="action-btn" onclick="runNewScenario(3)">
+            🚨 KỊCH BẢN 3 (ĐẬP TAN PHOTOCOPY 50.000 MÃ &amp; BÁN LẤN VÙNG): Điện thoại #2 quét lại mã Kịch bản 1 (`word &amp; mask != 0`) &rarr; Cảnh báo Đỏ + Thưởng 20.000đ + CAMARA Cell-ID bắt lấn vùng!
+          </button>
+          <button class="action-btn secondary" style="background:#7C3AED;" onclick="runNewScenario(4)">
+            📦 KỊCH BẢN 4 (CHỐNG TRÁO HÀNG HOÀN COD VIETTEL POST): Bưu tá quét AR MatrixScan &rarr; Phát hiện tráo gạch/hàng giả (lệch trọng lượng `bindViettelPostWaybill`) &rarr; Khóa nút "Chấp nhận hoàn tiền"!
+          </button>
+
+          <div style="margin-top: 18px; padding: 15px; background: #090D16; border-radius: 10px; border: 1px solid var(--border);">
+            <h3 style="margin-bottom: 6px; font-size: 14px; color:#38BDF8;">Nhật Ký Thực Thi Kiến Trúc Polyglot (Pingora Rust &rarr; CAMARA 5G &rarr; Solidity Dual-EVM)</h3>
+            <div id="new-arch-log" style="font-family: monospace; font-size: 12.5px; color: #34D399; line-height: 1.6;">
+              [KỊCH BẢN 1 - FIRST-SCAN BURN] Camera mặc định quét: https://id.viettel.vn/01/{gtin}/10/{batch}/21/BOX-0001?s=ed25519_sig_64b<br/>
+              &rarr; Lớp 1 (Cloudflare Pingora Rust + rkyv): Phân giải RFC 9264 Linkset trong 0.18 ms (&lt;0.3ms SLA), mở PWA siêu nhẹ 118 KB.<br/>
+              &rarr; Lớp 1 (Viettel CAMARA Gateway): Xác thực ngầm thuê bao 5G MSISDN `8498***6868` + Trạm `{camara_cell}` (0 OTP).<br/>
+              &rarr; Lớp 4 (`ViettelTraceabilityEAS.sol` trên Hyperledger Besu): Gọi `claimSerialAndCheckClone(202604, 1, cellHash)` &rarr; Lật bit `bitmap[0] |= (1 &lt;&lt; 1)` từ `0 &rarr; 1` (Tiết kiệm 94% Gas: 2.100 gas thay vì 20.000 gas).<br/>
+              &rarr; Lớp 3 (Zero-Install UX): Kích hoạt bảo hành 1 chạm thành công + Cộng ngay +500MB Data 5G Viettel!
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="phone-frame">
+            <div class="phone-statusbar">
+              <span id="na-carrier">📶 Viettel 5G CAMARA (0-OTP)</span>
+              <span id="na-mode">⚡ PWA 118KB • Besu EVM</span>
+            </div>
+            <div style="text-align: center; margin-bottom: 14px;">
+              <div style="font-size: 11px; color: var(--muted); text-transform: uppercase;">TRÌNH MÔ PHỎNG KỊCH BẢN 1–4 (KIẾN TRÚC MỚI)</div>
+              <h3 id="na-title" style="margin: 6px 0;">{product_name}</h3>
+              <div id="na-badge" class="badge-green">✅ KỊCH BẢN 1: ĐỐT MÃ LẦN ĐẦU THÀNH CÔNG (+500MB 5G)</div>
+            </div>
+            <table>
+              <tr><th>Kịch bản đang chạy</th><td id="na-scenario"><strong>Kịch bản 1: Zero-Install &amp; First-Scan Burn</strong></td></tr>
+              <tr><th>Mã GS1 &amp; Chữ ký QR</th><td><code id="na-uri">/01/{gtin}/21/BOX-0001?s=9f8a..e41b (64B Ed25519)</code></td></tr>
+              <tr><th>Viettel CAMARA 5G</th><td id="na-camara"><code>MSISDN: 098***6868 • Cell: {camara_cell}</code></td></tr>
+              <tr><th>Solidity EVM BitMap</th><td id="na-bitmap"><strong style="color:#34D399;">Bit #1: 0 &rarr; 1 (Đã đốt • Tiết kiệm 94% Gas)</strong></td></tr>
+              <tr><th>Cơ chế Chống Quét Chùa</th><td id="na-shield"><code>Đã xác thực PIN dưới dải xé / POS Sold</code></td></tr>
+              <tr><th>Thời gian &amp; Bộ nhớ</th><td id="na-perf"><strong>0.18 ms (Pingora) • 118 KB PWA • 0 MB Pre-Sync</strong></td></tr>
+              <tr><th>Phần thưởng / Hành động</th><td id="na-action"><strong style="color:#FB923C;">🎁 Đã cộng +500MB Data 5G &amp; Kích hoạt Bảo hành 1 chạm</strong></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- TAB DEMO 2 -->
-    <div id="demo2" class="tab-panel active">
+    <div id="demo2" class="tab-panel">
       <div class="grid-2">
         <div class="card">
           <h2>Kịch Bản Demo Thực Chiến: "Quét để tin, mua với sự tự tin"</h2>
@@ -1685,9 +1758,110 @@ Traditional cloud-only QR traceability fails in cold-storage warehouses, basemen
           &rarr; Program 2 (Rust P2P Core) ngầm tải &amp; đồng bộ Merkle Root + 1.000 mã băm cùng lô '{batch}' vào Local CRDT Cache ({ram_mb} MB RAM).`;
       }}
     }}
+
+    function runNewScenario(sc) {{
+      const carrier = document.getElementById('na-carrier');
+      const mode = document.getElementById('na-mode');
+      const badge = document.getElementById('na-badge');
+      const scenario = document.getElementById('na-scenario');
+      const uri = document.getElementById('na-uri');
+      const camara = document.getElementById('na-camara');
+      const bitmap = document.getElementById('na-bitmap');
+      const shield = document.getElementById('na-shield');
+      const perf = document.getElementById('na-perf');
+      const action = document.getElementById('na-action');
+      const log = document.getElementById('new-arch-log');
+
+      if (sc === 1) {{
+        carrier.innerText = '📶 Viettel 5G CAMARA (0-OTP)';
+        mode.innerText = '⚡ PWA 118KB • Besu EVM';
+        badge.className = 'badge-green';
+        badge.innerText = '✅ KỊCH BẢN 1: ĐỐT MÃ LẦN ĐẦU THÀNH CÔNG (+500MB 5G)';
+        scenario.innerHTML = '<strong>Kịch bản 1 (Demo 1): Zero-Install &amp; First-Scan Burn</strong>';
+        uri.innerText = '/01/{gtin}/21/BOX-0001?s=9f8a..e41b (64B Ed25519)';
+        camara.innerHTML = '<code>MSISDN: 098***6868 • Cell: {camara_cell}</code>';
+        bitmap.innerHTML = '<strong style="color:#34D399;">Bit #1: 0 &rarr; 1 (Đã đốt • Tiết kiệm 94% Gas)</strong>';
+        shield.innerHTML = '<code>Đã xác thực PIN dưới dải xé / POS Sold</code>';
+        perf.innerHTML = '<strong>0.18 ms (Pingora) • 118 KB PWA • 0 MB Pre-Sync</strong>';
+        action.innerHTML = '<strong style="color:#FB923C;">🎁 Đã cộng +500MB Data 5G &amp; Kích hoạt Bảo hành 1 chạm</strong>';
+        log.innerHTML = `[KỊCH BẢN 1 - FIRST-SCAN BURN] Camera mặc định quét: https://id.viettel.vn/01/{gtin}/10/{batch}/21/BOX-0001?s=ed25519_sig_64b<br/>
+          &rarr; Lớp 1 (Cloudflare Pingora Rust + rkyv): Phân giải RFC 9264 Linkset trong 0.18 ms (&lt;0.3ms SLA), mở PWA siêu nhẹ 118 KB.<br/>
+          &rarr; Lớp 1 (Viettel CAMARA Gateway): Xác thực ngầm thuê bao 5G MSISDN 8498***6868 + Trạm {camara_cell} (0 OTP).<br/>
+          &rarr; Lớp 4 (ViettelTraceabilityEAS.sol trên Hyperledger Besu): Gọi claimSerialAndCheckClone(202604, 1, cellHash) &rarr; Lật bit bitmap[0] |= (1 &lt;&lt; 1) từ 0 &rarr; 1 (Tiết kiệm 94% Gas: 2.100 gas).<br/>
+          &rarr; Lớp 3 (Zero-Install UX): Kích hoạt bảo hành 1 chạm thành công + Cộng ngay +500MB Data 5G Viettel!`;
+      }} else if (sc === 101) {{
+        carrier.innerText = '📶 Viettel 5G CAMARA (Chế độ Kệ Hàng)';
+        mode.innerText = '🛡️ 2-Phase Anti-Shelf-Scan Shield';
+        badge.className = 'badge-orange';
+        badge.innerText = '🛡️ PHA 1A: HÀNG THẬT TRÊN KỆ (CHƯA ĐỐT BITMAP)';
+        scenario.innerHTML = '<strong>Nâng cấp Demo 1: Chống "Quét Chùa Trên Kệ Siêu Thị"</strong>';
+        uri.innerText = '/01/{gtin}/21/BOX-0001?s=9f8a..e41b (Chưa có ClaimPIN)';
+        camara.innerHTML = '<code>MSISDN: 098***6868 • Rate-Limit: 2/3 lượt xem kệ</code>';
+        bitmap.innerHTML = '<strong style="color:#38BDF8;">Bit #1: Giữ nguyên = 0 (Chưa đốt để bảo vệ khách mua thật)</strong>';
+        shield.innerHTML = '<strong style="color:#34D399;">Yêu cầu xé niêm phong (ClaimPIN) hoặc POS Sold để đốt Bit 0&rarr;1</strong>';
+        perf.innerHTML = '<strong>Optical CDP &Lambda; = 0.892 (Bản in gốc nhà máy)</strong>';
+        action.innerHTML = '<strong>Hiển thị Hộ chiếu chính hãng • Chờ mở hộp để nhả +500MB Data 5G</strong>';
+        log.innerHTML = `[NÂNG CẤP DEMO 1 - CHỐNG QUÉT CHÙA TRÊN KỆ SIÊU THỊ]<br/>
+          &rarr; Vấn đề nếu đốt ngay khi quét vỏ hộp: Kẻ gian đi dọc kệ siêu thị quét 30 hộp để ăn cắp 15GB Data 5G và làm toàn bộ 30 hộp thật bị báo ĐỎ (Hàng giả) khi khách thật mua về!<br/>
+          &rarr; Giải pháp 2-Pha (Two-Phase Inspect vs. Burn):<br/>
+          &nbsp;&nbsp;1. Pha 1A (Quét vỏ ngoài trên kệ): Xác thực chữ ký Ed25519 + Optical CDP (&Lambda;=0.892) + đọc EVM BitMap (Bit=0) &rarr; Báo "HÀNG THẬT NGUYÊN NIÊM PHONG", KHÔNG đốt bit.<br/>
+          &nbsp;&nbsp;2. Pha 1B (Sau khi mua/mở hộp): Quét mã PIN ẩn dưới nắp xé (hoặc đồng bộ POS/Viettel Post) &rarr; Mở khóa claimSerialAndCheckClone lật Bit 0&rarr;1 và cộng +500MB Data 5G!`;
+      }} else if (sc === 2) {{
+        carrier.innerText = '✈️ Chế Độ Máy Bay (0% Sóng 5G/WiFi)';
+        mode.innerText = '⚡ Tier 2A Zero-Pre-Sync (Ed25519)';
+        badge.className = 'badge-orange';
+        badge.innerText = '✈️ KỊCH BẢN 2: XÁC THỰC NGOẠI TUYẾN ZERO-PRE-SYNC (<40µs)';
+        scenario.innerHTML = '<strong>Kịch bản 2: Ngoại tuyến "Zero-Pre-Sync" (Vùng lõm sóng)</strong>';
+        uri.innerText = '/01/{gtin}/21/BOX-9999?s=ed25519_64byte_signature';
+        camara.innerHTML = '<code>Offline (Lưu Deferred Burn Intent chờ có sóng)</code>';
+        bitmap.innerHTML = '<code>Kiểm tra chữ ký Ed25519 + BinaryFuse16 (2.64 MB)</code>';
+        shield.innerHTML = '<code>Khóa công khai 32-byte thương hiệu lưu sẵn trong PWA</code>';
+        perf.innerHTML = '<strong style="color:#34D399;">14 &micro;s (&lt; 40 &micro;s SLA) • 0 MB RAM tải trước • 0% hao pin IPFS</strong>';
+        action.innerHTML = '<strong style="color:#34D399;">✅ Xác thực hộp mới tinh thành công 100% trong rừng sâu/kho lạnh!</strong>';
+        log.innerHTML = `[KỊCH BẢN 2 - ZERO-PRE-SYNC OFFLINE] Bật Airplane Mode (0% Internet). Quét hộp sản phẩm MỚI TINH chưa từng tải dữ liệu trước đó.<br/>
+          &rarr; URL trong mã QR nhúng sẵn chữ ký số Ed25519 dài 64-byte (?s=...).<br/>
+          &rarr; Lõi Rust Tier 2A dùng Public Key 32-byte của thương hiệu giải mã trực tiếp trên CPU trong 14 &micro;s (&lt;40 &micro;s SLA).<br/>
+          &rarr; Tiêu tốn 0 MB RAM tải trước, loại bỏ hoàn toàn nghịch lý phải online trước và lỗi ngốn 25% pin/giờ của IPFS/OrbitDB!`;
+      }} else if (sc === 3) {{
+        carrier.innerText = '📶 Viettel 5G CAMARA (Khoá Tọa Độ Trạm)';
+        mode.innerText = '🚨 Anti-Clone &amp; Anti-Grey-Market';
+        badge.className = 'badge-red';
+        badge.innerText = '🚨 CẢNH BÁO ĐỎ: PHÁT HIỆN MÃ QR BỊ SAO CHÉP (PHOTOCOPY CLONE)!';
+        scenario.innerHTML = '<strong>Kịch bản 3: Đập tan "Photocopy 50.000 mã" &amp; Chống lấn vùng</strong>';
+        uri.innerText = '/01/{gtin}/21/BOX-0001 (Quét lại trên Điện thoại #2)';
+        camara.innerHTML = '<strong style="color:#FF4D73;">eNodeB Cell-ID: 452-04-eNB88912 (Lệch vùng phân phối!)</strong>';
+        bitmap.innerHTML = '<strong style="color:#FF4D73;">word &amp; mask != 0 (Bit #1 đã bị đốt ở Kịch bản 1!)</strong>';
+        shield.innerHTML = '<strong style="color:#FF4D73;">Optical CDP &Lambda; = 0.181 (&lt;0.68: Phát hiện in lại/photocopy)</strong>';
+        perf.innerHTML = '<strong>Phát hiện tức thì trên Hyperledger Besu + CAMARA 5G</strong>';
+        action.innerHTML = '<strong style="color:#FF4D73;">🔥 Thưởng nóng 20.000đ nếu chụp ảnh báo cáo cửa hàng + Báo động Giám đốc Kinh doanh: BÁN LẤN VÙNG!</strong>';
+        log.innerHTML = `[KỊCH BẢN 3 - BẮT QUẢ TANG PHOTOCOPY 50.000 MÃ &amp; BÁN LẤN VÙNG]<br/>
+          &rarr; Điện thoại #2 quét lại mã QR của Kịch bản 1 (mô phỏng kẻ gian photocopy mã thật lên 50.000 hộp giả).<br/>
+          &rarr; Hàm claimSerialAndCheckClone trên ViettelTraceabilityEAS.sol kiểm tra EVM BitMap: phát hiện (word &amp; mask != 0)!<br/>
+          &rarr; Song song, Viettel CAMARA khóa cứng tọa độ trạm phát sóng eNodeB Cell-ID (chống Fake GPS 100%).<br/>
+          &rarr; Trên Điện thoại: Bật CẢNH BÁO ĐỎ (Hàng giả) + treo thưởng 20.000đ Viettel Money nếu chụp ảnh báo cáo điểm bán.<br/>
+          &rarr; Trên Dashboard Quản trị: Đẩy cảnh báo "Bán lấn vùng / Phá giá" cho Giám đốc kinh doanh vì Cell-ID nằm ngoài khu vực đại lý!`;
+      }} else if (sc === 4) {{
+        carrier.innerText = '📦 PDA Bưu Tá Viettel Post (5G Nội Bộ)';
+        mode.innerText = '🔍 AR MatrixScan + Smart Contract Lock';
+        badge.className = 'badge-red';
+        badge.innerText = '⛔ PHÁT HIỆN TRÁO HÀNG HOÀN COD — ĐÃ KHÓA NÚT HOÀN TIỀN!';
+        scenario.innerHTML = '<strong>Kịch bản 4: Chống tráo hàng hoàn COD (Dành riêng cho Viettel Post)</strong>';
+        uri.innerText = 'Waybill: {waybill_code} &harr; Serial: BOX-0001';
+        camara.innerHTML = '<code>Bưu tá: VTP-HN-08821 • Hub: {waybill_hub}</code>';
+        bitmap.innerHTML = '<strong style="color:#FF4D73;">verifyCodReturnAntiSwap() == FALSE (Vi phạm trọng lượng!)</strong>';
+        shield.innerHTML = '<strong style="color:#FF4D73;">Trọng lượng xuất kho: 450g vs. Hàng hoàn thực tế: 185g (Lệch -265g!)</strong>';
+        perf.innerHTML = '<strong>AR MatrixScan 54 hộp/giây + Manhattan 3D Volumetric</strong>';
+        action.innerHTML = '<strong style="color:#FF4D73;">🔒 ĐÃ KHÓA CỨNG NÚT "CHẤP NHẬN HOÀN TIỀN" TRÊN PDA BƯU TÁ!</strong>';
+        log.innerHTML = `[KỊCH BẢN 4 - CHỐNG TRÁO HÀNG HOÀN COD VIETTEL POST]<br/>
+          &rarr; Bưu tá nhận hàng hoàn COD, mở ứng dụng nội bộ Viettel Post tích hợp AR MatrixScan quét kiện hàng.<br/>
+          &rarr; Đối chiếu dữ liệu gốc lúc xuất kho trong Smart Contract (bindViettelPostWaybill: Trọng lượng chuẩn 450g, Mã niêm phong hợp lệ).<br/>
+          &rarr; Phát hiện kiện hàng hoàn nặng 185g (khách tráo hàng giả/cho gạch vào hộp) &rarr; hàm verifyCodReturnAntiSwap kích hoạt!<br/>
+          &rarr; Lập tức KHÓA CỨNG nút "Chấp nhận hoàn tiền" trên PDA của bưu tá, bảo vệ 100% biên lợi nhuận cho Viettel Post và chủ shop!`;
+      }}
+    }}
   </script>
 </body>
-</html>"#,
+</html>"###,
             gtin = demo2_online.gtin,
             batch = demo2_online.batch_id,
             product_name = demo2_online.product_name,
