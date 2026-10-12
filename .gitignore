@@ -1,0 +1,24 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa
+*.pfx
+
+# Rust build artifacts
+target/
+**/target/
+debug/
+release/
+*.exe
+*.dll
+*.pdb
+
+# IDE & OS
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store
