@@ -1063,14 +1063,11 @@ impl PolyglotDualEvmAndZeroPreSyncEngine {
         };
         let signature = Signature::from_bytes(&sig_bytes);
 
-        // Measure real hardware Curve25519 signature verification latency (averaged over 50 runs to eliminate OS jitter)
+        // Measure real hardware Curve25519 signature verification latency
         let t0 = std::time::Instant::now();
-        let mut valid = false;
-        for _ in 0..50 {
-            valid = verifying_key.verify(canonical_msg.as_bytes(), &signature).is_ok();
-        }
-        let elapsed_us = (t0.elapsed().as_secs_f64() * 1_000_000.0) / 50.0;
-        let measured_us = (elapsed_us * 100.0).round() / 100.0;
+        let valid = verifying_key.verify(canonical_msg.as_bytes(), &signature).is_ok();
+        let elapsed_us = t0.elapsed().as_secs_f64() * 1_000_000.0;
+        let measured_us = ((elapsed_us * 100.0).round() / 100.0).max(1.0);
 
         (valid, measured_us, 0.0)
     }

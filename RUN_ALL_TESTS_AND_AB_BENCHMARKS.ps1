@@ -1,16 +1,19 @@
-# 1-Click Automated Test, Real A/B Benchmark & E2E Verification Script
+# 1-Click Automated Test, Real A/B Benchmark and E2E Verification Script
 $ErrorActionPreference = "Stop"
 Write-Host "=========================================================================================" -ForegroundColor Cyan
-Write-Host "  VIETTEL GS1 TRACEABILITY — 1-CLICK UNIT TESTS + 6 REAL A/B BENCHMARKS + E2E VERIFIER" -ForegroundColor Cyan
+Write-Host "  VIETTEL GS1 TRACEABILITY - 1-CLICK UNIT TESTS + 6 REAL A/B BENCHMARKS + E2E VERIFIER" -ForegroundColor Cyan
 Write-Host "=========================================================================================" -ForegroundColor Cyan
 
-Write-Host "`n[STEP 1/3] Running all Rust Unit Tests & Cryptographic/Physical Invariant Assertions..." -ForegroundColor Yellow
+Write-Host ""
+Write-Host "[STEP 1/3] Running all Rust Unit Tests and Cryptographic/Physical Invariant Assertions..." -ForegroundColor Yellow
 cargo test
 
-Write-Host "`n[STEP 2/3] Running all 6 Real A/B Experiments (2,950 Real-World Adversarial Events)..." -ForegroundColor Yellow
+Write-Host ""
+Write-Host "[STEP 2/3] Running all 6 Real A/B Experiments (2,950 Real-World Adversarial Events)..." -ForegroundColor Yellow
 cargo run -- ab-test
 
-Write-Host "`n[STEP 3/3] Verifying Generated Artifacts, Templates & JSON Audit Outputs..." -ForegroundColor Yellow
+Write-Host ""
+Write-Host "[STEP 3/3] Verifying Generated Artifacts, Templates and JSON Audit Outputs..." -ForegroundColor Yellow
 $requiredFiles = @(
     "demo-output/viettel_gs1_offline_p2p_live_demo.html",
     "demo-output/ab_testing_and_real_usecases_report.json",
@@ -29,8 +32,9 @@ foreach ($f in $requiredFiles) {
         $size = (Get-Item $f).Length
         Write-Host ("  [OK] {0} ({1} bytes)" -f $f, $size) -ForegroundColor Green
     } else {
-        throw "Missing required file: $f"
+        throw ("Missing required file: {0}" -f $f)
     }
 }
 
-Write-Host "`nALL UNIT TESTS, 6 REAL A/B EXPERIMENTS, AND REFERENCE TEMPLATES VERIFIED 100%!" -ForegroundColor Green
+Write-Host ""
+Write-Host "ALL UNIT TESTS, 6 REAL A/B EXPERIMENTS, AND REFERENCE TEMPLATES VERIFIED 100%!" -ForegroundColor Green

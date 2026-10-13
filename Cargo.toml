@@ -16,3 +16,7 @@ hmac = "0.12"
 hex = "0.4"
 ed25519-dalek = "2.1"
 
+[profile.dev.package."*"]
+opt-level = 3
+
+

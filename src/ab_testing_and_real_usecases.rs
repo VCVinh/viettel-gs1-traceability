@@ -16,9 +16,8 @@
 
 use crate::frontier_instruments_and_theorems::{
     FrontierInstrumentSuite, HodgeSheafLaplacianPinpointer, PolyglotDualEvmAndZeroPreSyncEngine,
-    Quaternion, STALK_DIM,
 };
-use crate::{SheafCustodyEdge, SheafVertexState, SupplyChainCellularSheaf};
+use crate::{Quaternion, SheafCustodyEdge, SheafVertexState, SupplyChainCellularSheaf, STALK_DIM};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::time::Instant;
@@ -506,7 +505,7 @@ impl RealAbTestAndUseCaseHarness {
         // --- SYSTEM B: Non-Abelian Wreath-Product GHRR + Cellular Sheaf Cohomology H^1 Pinpointer ---
         let mut sys_b_detected_and_pinpointed = 0usize;
         for i in 0..n_shipments {
-            let angle = 0.25 + (i as f64) * 0.03;
+            let angle = 0.25f32 + (i as f32) * 0.03f32;
             let base_stalk = [Quaternion::new(angle.cos(), angle.sin(), 0.0, 0.0); STALK_DIM];
             let t_hop1 = [Quaternion::new(0.0, 1.0, 0.0, 0.0); STALK_DIM];
             let t_hop2_genuine = [Quaternion::new(0.0, 0.0, 1.0, 0.0); STALK_DIM];
