@@ -2,8 +2,8 @@
 
 > **Compiled by:** 5-Agent Super Senior Research Swarm + 8 Autonomous AI Employees Fleet (`solo-founder-os`)
 > **Framework:** 16-Principle Whole-System Research Framework × Elon Musk's 5-Step Algorithm × Hardware-Empathetic Rust Engineering
-> **Live Codebase:** [`viettel_gs1_p2p_engine.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/solo-founder-os/rust-core/src/viettel_gs1_p2p_engine.rs)
-> **Interactive 6-Tab Live Demo App:** [`viettel_gs1_offline_p2p_live_demo.html`](file:///C:/Users/Admin/.gemini/antigravity/scratch/solo-founder-os/viettel-gs1-autopilot/viettel_gs1_offline_p2p_live_demo.html)
+> **Live Codebase:** [`viettel_gs1_p2p_engine.rs`](../solo-founder-os/rust-core/src/viettel_gs1_p2p_engine.rs)
+> **Interactive 6-Tab Live Demo App:** [`viettel_gs1_offline_p2p_live_demo.html`](../solo-founder-os/viettel-gs1-autopilot/viettel_gs1_offline_p2p_live_demo.html)
 
 ---
 
@@ -99,7 +99,7 @@ Our swarm dissected the exact physical/cryptographic mechanisms, unit economics,
 
 ## 4. DEEP ARCHITECTURAL RESEARCH & UPGRADES ACROSS ALL 4 STACKS (FRONTIER SOTA v2.0)
 
-We have engineered and integrated the world's most advanced techniques from across all global syndicates and academic literature directly into our **4 Core Rust Programs** (`FrontierSotaUpgradeReport` in [`viettel_gs1_p2p_engine.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/solo-founder-os/rust-core/src/viettel_gs1_p2p_engine.rs#L741-L781)):
+We have engineered and integrated the world's most advanced techniques from across all global syndicates and academic literature directly into our **4 Core Rust Programs** (`FrontierSotaUpgradeReport` in [`viettel_gs1_p2p_engine.rs`](../solo-founder-os/rust-core/src/viettel_gs1_p2p_engine.rs#L741-L781)):
 
 ```mermaid
 flowchart TD
@@ -224,7 +224,7 @@ What if a counterfeiter dumps 500 cloned boxes of `/21/BOX-0002` into a rural vi
 
 | Claim / Subsystem | Epistemological State | Empirical Evidence & Verification Source |
 | :--- | :--- | :--- |
-| **Program 1: Rust GS1 Digital Link Resolver (`>10,000 RPS`, `<20ms` SLA)** | **Established** | Verified in `cargo test`: **`93,216–181,494 RPS`**, `p50 = 8 µs`, `p99 = 35 µs` in [`viettel_gs1_p2p_engine.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/solo-founder-os/rust-core/src/viettel_gs1_p2p_engine.rs#L112-L343). |
+| **Program 1: Rust GS1 Digital Link Resolver (`>10,000 RPS`, `<20ms` SLA)** | **Established** | Verified in `cargo test`: **`93,216–181,494 RPS`**, `p50 = 8 µs`, `p99 = 35 µs` in [`viettel_gs1_p2p_engine.rs`](../solo-founder-os/rust-core/src/viettel_gs1_p2p_engine.rs#L112-L343). |
 | **Program 2: Airplane Mode Offline P2P Verification (`<0.1s` SLA, `<30MB` RAM)** | **Established** | Verified in `cargo test`: **`8–50 µs`** offline CPU verification, `0.13 MB` RAM for 1k batch (`2.64 MB` for 5M serials via `BinaryFuse16`). |
 | **Viettel GSMA Open Gateway / CAMARA 5G APIs (`Cell-ID` & `Number Verification`)** | **Established** | Viettel signed GSMA Open Gateway MoU (MWC 2024), Vietnam 3-Telco Alliance (Apr 2025), and Aduna CAMARA partnership (MWC 2026). |
 | **Vietnam Circular 02/2024/TT-BKHCN 10-Field National Portal Sync** | **Established** | Enforced June 1, 2024 by MOST (`truyxuatnguongoc.gov.vn` / TCVN 12850, 13274, 13275). |

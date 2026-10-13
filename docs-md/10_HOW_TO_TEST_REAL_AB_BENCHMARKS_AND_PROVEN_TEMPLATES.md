@@ -12,7 +12,7 @@ Tài liệu này trả lời trực tiếp 3 câu hỏi cốt lõi:
 ### Cách 1: Chạy 1-Click toàn bộ Unit Tests + 6 Bài A/B Testing (Khuyên dùng)
 Mở PowerShell tại thư mục dự án và chạy duy nhất 1 lệnh:
 ```powershell
-cd C:\Users\Admin\.gemini\antigravity\scratch\viettel-gs1-traceability
+cd .
 .\RUN_ALL_TESTS_AND_AB_BENCHMARKS.ps1
 ```
 Hoặc chạy trực tiếp bằng Cargo:

@@ -67,7 +67,7 @@ Tài liệu này giải phẫu **từ gốc rễ (First-Principles)** từng Đ�
 - Tổng hạng của các không gian con độc lập tuyệt đối không vượt quá số chiều vật lý $D$ ($\sum \operatorname{rank}(\mathbf{P}_t) \le D$). Khi ghi quá nhiều khóa mới, các khóa cũ giảm dần biên độ theo quy luật lũy thừa $(1 - p)^k$ (Memory Graceful Forgetting).
 
 #### 5. Không gian Cải tiến & Đột phá
-- **✅ Đủ điều kiện áp dụng ngay hôm nay:** Đã triển khai trực tiếp trong [`SubspaceMaskedDeltaHrr`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L116-L185) với mặt nạ tần số băm định định từ SHA-256.
+- **✅ Đủ điều kiện áp dụng ngay hôm nay:** Đã triển khai trực tiếp trong [`SubspaceMaskedDeltaHrr`](./src/frontier_instruments_and_theorems.rs#L116-L185) với mặt nạ tần số băm định định từ SHA-256.
 - **🚀 Không gian đi xa hơn khi điền thêm mảnh ghép mới:** Dùng **Mã sửa lỗi đại số Reed-Solomon / Phân hoạch trực giao Hadamard-Walsh** để phân bổ mặt nạ $M_t$ hoàn toàn không đụng độ (zero collision) cho $1/p$ trường dữ liệu chuẩn của GS1 Digital Link (`AI 01`, `AI 10`, `AI 17`, `AI 21`, `Temp`, `Cell-ID`, `Waybill`, `Status`).
 
 ---
@@ -95,7 +95,7 @@ Tài liệu này giải phẫu **từ gốc rễ (First-Principles)** từng Đ�
 - **Giải mã 2 đầu chính xác tuyệt đối (`1.000000`):** Có phần tử nghịch đảo tường minh $(\mathbf{q}, \pi)^{-1} = (\overline{\mathbf{q}} \circ \pi, \pi^{-1})$.
 
 #### 4. Không gian Cải tiến & Đột phá
-- **✅ Đủ điều kiện áp dụng ngay hôm nay:** Đã code và kiểm thử trong [`WreathProductGhrrElement`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L187-L315) (chỉ tốn thêm đúng `64 bytes` để lưu hoán vị $\pi \in S_{64}$).
+- **✅ Đủ điều kiện áp dụng ngay hôm nay:** Đã code và kiểm thử trong [`WreathProductGhrrElement`](./src/frontier_instruments_and_theorems.rs#L187-L315) (chỉ tốn thêm đúng `64 bytes` để lưu hoán vị $\pi \in S_{64}$).
 
 ---
 
@@ -115,7 +115,7 @@ Tài liệu này giải phẫu **từ gốc rễ (First-Principles)** từng Đ�
 - Phép cộng thông thường ($1 + 1 = 2$) bị cộng dồn vô hạn khi tin nhắn lặp vòng trong mạng P2P. Phép lấy cực đại $\max(a, b)$ trên tập thứ tự toàn phần luôn thỏa mãn tuyệt đối $\max(a, a) = a$, $\max(a, b) = \max(b, a)$ và $\max(\max(a,b), c) = \max(a, \max(b,c))$ với **sai số bằng `0.000000000`**!
 
 #### 3. Năng lực & Ứng dụng ngay
-- **✅ Đủ điều kiện áp dụng ngay hôm nay:** Đã triển khai trong [`TropicalEnvelopeWaveCrdt`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L317-L408), cho phép hàng trăm điện thoại của bà con nông dân hoặc bưu tá Viettel Post ở vùng mất sóng truyền trạng thái thu hồi/cảnh báo hàng giả qua Bluetooth/Wi-Fi Direct mà không bao giờ bị lệch trạng thái.
+- **✅ Đủ điều kiện áp dụng ngay hôm nay:** Đã triển khai trong [`TropicalEnvelopeWaveCrdt`](./src/frontier_instruments_and_theorems.rs#L317-L408), cho phép hàng trăm điện thoại của bà con nông dân hoặc bưu tá Viettel Post ở vùng mất sóng truyền trạng thái thu hồi/cảnh báo hàng giả qua Bluetooth/Wi-Fi Direct mà không bao giờ bị lệch trạng thái.
 
 ---
 
@@ -133,7 +133,7 @@ Tài liệu này giải phẫu **từ gốc rễ (First-Principles)** từng Đ�
 
 #### 2. Năng lực & Lợi thế vượt trội
 - **Bắt sống thủ đoạn "Tráo hàng 1-đổi-1 cùng trọng lượng" (`0.0 kg` lệch khối lượng):** Các hệ thống ERP chỉ cộng trừ số lượng hộp sẽ bị lừa khi đại lý rút 200 hộp thuốc thật ra và nhét 200 hộp thuốc giả nặng y hệt vào. Nhưng vì pha Holographic/Ed25519 của 200 hộp giả lệch với dây cung neo từ Nhà máy, toán tử Hodge Laplacian $\Delta_0^{\mathcal{F}}$ lập tức chỉ đích danh **`Node 2: Regional_Distributor_Hub`** với độ chính xác 100%!
-- **✅ Đủ điều kiện áp dụng ngay hôm nay:** Đã chạy thật trong hàm [`verify_augmented_sheaf_tree_pinpointer`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L410-L485).
+- **✅ Đủ điều kiện áp dụng ngay hôm nay:** Đã chạy thật trong hàm [`verify_augmented_sheaf_tree_pinpointer`](./src/frontier_instruments_and_theorems.rs#L410-L485).
 
 ---
 
@@ -147,7 +147,7 @@ Tài liệu này giải phẫu **từ gốc rễ (First-Principles)** từng Đ�
 
 #### 2. Giới hạn & Đột phá Kết hợp 2 Tầng
 - **Giới hạn của `BinaryFuse16` thuần túy:** Là cấu trúc **tĩnh (immutable)** — một khi đã đúc mảng XOR ở nhà máy thì không thể xóa 1 mã bị thu hồi mà không làm hỏng các mã khác dùng chung ô nhớ.
-- **✅ Đột phá Đủ điều kiện áp dụng ngay (Đã code trong [`RealBinaryFuse16Filter`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L487-L610)):**
+- **✅ Đột phá Đủ điều kiện áp dụng ngay (Đã code trong [`RealBinaryFuse16Filter`](./src/frontier_instruments_and_theorems.rs#L487-L610)):**
   Ghép `BinaryFuse16` (lưu danh sách trắng bất biến từ nhà máy) với **`RoaringBitmap` Run-Length Container** (lưu các dải serial bị thu hồi/hỏng nhiệt độ, ví dụ từ hộp `20.001` đến `30.000` chỉ tốn đúng **`28 bytes` RAM**!). Công thức kiểm tra ngoại tuyến:
   $$\text{Hợp lệ}(x) \iff \text{BinaryFuse16}(x) \land \neg \text{RoaringRevoked}(x)$$
 
@@ -165,14 +165,14 @@ Tài liệu này giải phẫu **từ gốc rễ (First-Principles)** từng Đ�
 #### 2. Năng lực, Giới hạn & Đột phá
 - **Năng lực:** Nén toàn bộ bằng chứng tuân thủ qua $k$ chặng thành **1 bằng chứng kích thước hằng số `384 bytes`**, xác thực ngoại tuyến trong `< 1.8 ms`, giảm `2.000.000x` số giao dịch phải ghi lên chuỗi công khai Polygon!
 - **Giới hạn (Lỗi Fiat-Shamir yếu / Frozen-Heart):** Nếu chỉ băm phần tử đầu tiên của vector chéo $T[0]$ để sinh thử thách $r$, kẻ gian có thể làm giả các tọa độ $T[1 \dots m-1]$ sau khi biết $r$.
-- **✅ Đột phá Đủ điều kiện áp dụng ngay (Đã code trong [`RelaxedR1csInstance`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L612-L715)):** Băm toàn bộ vector `(u1, u2, x1, x2, T[0..m], E1[0..m])` bằng SHA-256 tách miền (domain-separated transcript).
+- **✅ Đột phá Đủ điều kiện áp dụng ngay (Đã code trong [`RelaxedR1csInstance`](./src/frontier_instruments_and_theorems.rs#L612-L715)):** Băm toàn bộ vector `(u1, u2, x1, x2, T[0..m], E1[0..m])` bằng SHA-256 tách miền (domain-separated transcript).
 
 ---
 
 ### ĐỊNH LÝ 8 & 9 (Dự Án 2 — Solo-Founder Automation AI OS): Phương Trình Sóng Eikonal, Luồng Cực Đại - Lát Cắt Cực Tiểu Bền Vững (IBC §1005.5) & Đồng Hồ Tự Động Hữu Hạn Alur-Dill DBM
 
-- **Định lý 8 ([`verify_resilient_egress_min_cut`](file:///C:/Users/Admin/.gemini/antigravity/scratch/solo-founder-os/rust-core/src/restless_company_daemon.rs#L1392-L1470)):** Giải bài toán thoát hiểm tòa nhà bằng thuật toán Edmonds-Karp trên đồ thị mạng luồng, đồng thời kiểm tra điều kiện **mất 1 cầu thang bất kỳ do đám cháy (`IBC §1005.5`)** vẫn đảm bảo $\ge 50\%$ lưu lượng thoát nạn (`650 >= 450 người`).
-- **Định lý 9 ([`verify_dbm_statutory_clock_closure`](file:///C:/Users/Admin/.gemini/antigravity/scratch/solo-founder-os/rust-core/src/restless_company_daemon.rs#L1472-L1525)):** Biểu diễn thời hạn luật định (30 ngày xuất hóa đơn lưu cont 46 CFR §541.6; 72 giờ duyệt bảo hiểm y tế CMS-0057) thành **Ma trận Ràng buộc Hiệu số (DBM)** và chạy bao đóng bắc cầu Floyd-Warshall $D_opt_{i,j} = \min_k (D_{i,k} + D_{k,j})$. Khi đường chéo âm ($D_opt_{0,0} = -12 < 0$), hệ thống xuất ra **chứng chỉ toán học bác bỏ hóa đơn phạt** tự động 100%!
+- **Định lý 8 ([`verify_resilient_egress_min_cut`](../solo-founder-os/rust-core/src/restless_company_daemon.rs#L1392-L1470)):** Giải bài toán thoát hiểm tòa nhà bằng thuật toán Edmonds-Karp trên đồ thị mạng luồng, đồng thời kiểm tra điều kiện **mất 1 cầu thang bất kỳ do đám cháy (`IBC §1005.5`)** vẫn đảm bảo $\ge 50\%$ lưu lượng thoát nạn (`650 >= 450 người`).
+- **Định lý 9 ([`verify_dbm_statutory_clock_closure`](../solo-founder-os/rust-core/src/restless_company_daemon.rs#L1472-L1525)):** Biểu diễn thời hạn luật định (30 ngày xuất hóa đơn lưu cont 46 CFR §541.6; 72 giờ duyệt bảo hiểm y tế CMS-0057) thành **Ma trận Ràng buộc Hiệu số (DBM)** và chạy bao đóng bắc cầu Floyd-Warshall $D_opt_{i,j} = \min_k (D_{i,k} + D_{k,j})$. Khi đường chéo âm ($D_opt_{0,0} = -12 < 0$), hệ thống xuất ra **chứng chỉ toán học bác bỏ hóa đơn phạt** tự động 100%!
 
 ---
 

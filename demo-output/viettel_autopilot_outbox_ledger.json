@@ -18,10 +18,10 @@
   },
   "demo1_viettel_cloud_stress_test": {
     "total_concurrent_requests": 10000,
-    "total_elapsed_ms": 62.04,
-    "achieved_requests_per_second": 161196.0,
+    "total_elapsed_ms": 67.47,
+    "achieved_requests_per_second": 148204.0,
     "p50_resolver_compute_us": 4,
-    "p99_resolver_compute_us": 10,
+    "p99_resolver_compute_us": 11,
     "viettel_cloud_domestic_4g_5g_rtt_ms": 3.4,
     "international_cloud_aws_singapore_rtt_ms": 94.2,
     "latency_advantage_multiplier": 27.7,
@@ -46,7 +46,7 @@
     "expiry_date": "2028-09-15",
     "computed_serial_hash": "da61c3d6f011a3cc462dcedfdbd83280542f7d82f16487ec76fda2d4e0c0bec0",
     "verified_against_merkle_root": "48e16e22a1e0ec33f7ec191a7797e22b251171c0c8f8dc8cd8dfb7c96c01914a",
-    "cpu_verification_time_microseconds": 27,
+    "cpu_verification_time_microseconds": 42,
     "ram_footprint_mb": 0.13,
     "synced_peers_in_mesh": [
       "/ip4/192.168.1.42/tcp/4001/p2p/12D3KooWViettelPostScannerPeer01 (mDNS Local)",
@@ -73,7 +73,7 @@
     "expiry_date": "2028-09-15",
     "computed_serial_hash": "6811b9a32525fb9395202853fd227aa6507c252f3c6c658fb7fbd3358893c48a",
     "verified_against_merkle_root": "48e16e22a1e0ec33f7ec191a7797e22b251171c0c8f8dc8cd8dfb7c96c01914a",
-    "cpu_verification_time_microseconds": 16,
+    "cpu_verification_time_microseconds": 31,
     "ram_footprint_mb": 0.13,
     "synced_peers_in_mesh": [
       "/ip4/192.168.1.42/tcp/4001/p2p/12D3KooWViettelPostScannerPeer01 (mDNS Local)",
@@ -87,7 +87,7 @@
     "gtin": "08935049501238",
     "batch_id": "LOT-AGRI-2026-10",
     "generated_barcodes_count": 10000,
-    "generation_time_ms": 1.86,
+    "generation_time_ms": 4.14,
     "sample_first_uri": "https://viettel.vn/01/08935049501238/10/LOT-AGRI-2026-10/21/ITEM-00001",
     "sample_last_uri": "https://viettel.vn/01/08935049501238/10/LOT-AGRI-2026-10/21/ITEM-10000",
     "viettel_loyalty_campaign": "Quét mã GS1 xác thực chính hãng -> Tặng ngay 500MB Data 4G/5G Viettel vào tài khoản di động",
@@ -376,20 +376,20 @@
       "created_at": "2026-10-12T00:00:00Z"
     },
     {
-      "action_id": "viettel-pilot-viettel_post_exec_board",
-      "agent_role": "sales-employee",
-      "channel": "SalesGptEmail",
-      "recipient": "logistics.tech@viettelpost.com.vn",
-      "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
-      "status": "PendingHumanApproval",
-      "created_at": "2026-10-12T00:00:00Z"
-    },
-    {
       "action_id": "viettel-whitepaper-submission-001",
       "agent_role": "seo-employee",
       "channel": "SalesGptEmail",
       "recipient": "Viettel Solutions Technical Review Board",
       "payload_preview": "Technical Whitepaper: GS1 Digital Link & Offline-First Rust P2P",
+      "status": "PendingHumanApproval",
+      "created_at": "2026-10-12T00:00:00Z"
+    },
+    {
+      "action_id": "viettel-pilot-viettel_post_exec_board",
+      "agent_role": "sales-employee",
+      "channel": "SalesGptEmail",
+      "recipient": "logistics.tech@viettelpost.com.vn",
+      "payload_preview": "Pilot Proposal: Viettel-GS1-Offline-P2P-Passport + Demo Video 'Tái Định Nghĩa Truy Xuất Nguồn Gốc: GS1 Digital Link & Offline-First Rust P2P trên Hạ tầng Viettel'",
       "status": "PendingHumanApproval",
       "created_at": "2026-10-12T00:00:00Z"
     },

@@ -240,7 +240,7 @@
             <h3 style="margin-bottom: 8px; font-size: 15px;">Nhật Ký Lõi Kỹ Thuật (Rust FFI, CAMARA 5G &amp; CRDT Trace Log)</h3>
             <div id="tech-log" style="font-family: monospace; font-size: 12.5px; color: #38BDF8;">
               [STEP 1 ONLINE] GET https://viettel.vn/01/09501101420014/10/LOT-VN-2026-09/21/BOX-0001<br/>
-              &rarr; Program 1 (Axum Resolver) phản hồi trong 27 &micro;s (&lt;10ms SLA) + Xác thực trạm phát sóng CAMARA `452-04-gNB8821 (Viettel 5G SA Base Station • 0% Browser GPS Popup • 100% Anti-Fake-GPS)`<br/>
+              &rarr; Program 1 (Axum Resolver) phản hồi trong 42 &micro;s (&lt;10ms SLA) + Xác thực trạm phát sóng CAMARA `452-04-gNB8821 (Viettel 5G SA Base Station • 0% Browser GPS Popup • 100% Anti-Fake-GPS)`<br/>
               &rarr; Universal Link đánh thức Program 3 (Mobile App / &lt;180KB WASM)<br/>
               &rarr; Program 2 (Rust P2P Core) ngầm tải &amp; đồng bộ Merkle Root + 1.000 mã băm cùng lô `LOT-VN-2026-09` vào Local CRDT Cache (0.13 MB RAM).
             </div>
@@ -266,7 +266,7 @@
               <tr><th>Hạn sử dụng</th><td>2028-09-15</td></tr>
               <tr><th>Mã băm (SHA-256)</th><td><code id="p-hash">da61c3d6f011a3cc462dcedfdbd83280542f7d82f16487ec76fda2d4e0c0bec0</code></td></tr>
               <tr><th>Merkle Root Sổ cái</th><td><code>48e16e22a1e0ec33f7ec191a7797e22b251171c0c8f8dc8cd8dfb7c96c01914a</code></td></tr>
-              <tr><th>Thời gian xử lý CPU</th><td><strong id="p-time" style="color:#34D399;">27 &micro;s (0.01 ms)</strong></td></tr>
+              <tr><th>Thời gian xử lý CPU</th><td><strong id="p-time" style="color:#34D399;">42 &micro;s (0.01 ms)</strong></td></tr>
               <tr><th>Bộ nhớ RAM Lõi Rust</th><td><strong>0.13 MB / 30 MB</strong></td></tr>
             </table>
           </div>
@@ -279,13 +279,13 @@
       <div class="grid-3">
         <div class="card">
           <h3>Tốc Độ Chịu Tải (Rust Axum Resolver)</h3>
-          <div class="metric-big">161196 RPS</div>
+          <div class="metric-big">148204 RPS</div>
           <p>Xử lý đồng thời 10000 truy vấn GS1 URI trên Viettel Cloud (Vượt mốc yêu cầu 10.000+ RPS).</p>
         </div>
         <div class="card">
           <h3>Độ Trễ Mạng 4G/5G Nội Địa Viettel Cloud</h3>
           <div class="metric-big" style="color: #34D399;">3.4 ms</div>
-          <p>Nhanh gấp <strong>27.7x</strong> so với Cloud Quốc tế (94.2 ms qua cáp quang biển) + p99 Rust compute chỉ 10 &micro;s.</p>
+          <p>Nhanh gấp <strong>27.7x</strong> so với Cloud Quốc tế (94.2 ms qua cáp quang biển) + p99 Rust compute chỉ 11 &micro;s.</p>
         </div>
         <div class="card">
           <h3>Cam Kết Kỹ Thuật (SLA &lt; 20ms)</h3>
@@ -304,7 +304,7 @@
           <div class="card">
             <h3>Số Lượng Mã Khởi Tạo</h3>
             <div class="metric-big">10000 Mã GS1</div>
-            <p>Hoàn thành trong <strong>1.86 ms</strong> + tự động đồng bộ 10 trường dữ liệu Cổng Quốc gia `truyxuatnguongoc.gov.vn`.</p>
+            <p>Hoàn thành trong <strong>4.14 ms</strong> + tự động đồng bộ 10 trường dữ liệu Cổng Quốc gia `truyxuatnguongoc.gov.vn`.</p>
           </div>
           <div class="card">
             <h3>Chiến Dịch Bán Chéo Viettel</h3>
@@ -566,11 +566,11 @@
         serial.innerText = 'LOT-VN-2026-09 / BOX-0002 (Hộp thuốc thứ 2 cùng lô)';
         hash.innerText = '6811b9a32525fb9395202853fd227aa6507c252f3c6c658fb7fbd3358893c48a';
         time.style.color = '#FB923C';
-        time.innerText = '16 µs (<0.001 giây trên CPU di động)';
+        time.innerText = '31 µs (<0.001 giây trên CPU di động)';
         log.innerHTML = `[STEP 2 OFFLINE P2P] Ngắt 100% kết nối mạng (Airplane Mode ON).<br/>
           &rarr; Quét hộp thuốc thứ 2: https://viettel.vn/01/09501101420014/10/LOT-VN-2026-09/21/BOX-0002<br/>
           &rarr; Không có Internet: Lõi Rust P2P chuyển hướng truy vấn vào BinaryFuse16 + Loro CRDT Cache cục bộ.<br/>
-          &rarr; Kiểm tra mã băm SHA-256 + tạo Gossip Witness Receipt (104B) trực tiếp trên CPU trong 16 µs (&lt;0.1s SLA).<br/>
+          &rarr; Kiểm tra mã băm SHA-256 + tạo Gossip Witness Receipt (104B) trực tiếp trên CPU trong 31 µs (&lt;0.1s SLA).<br/>
           &rarr; Đổi nhãn sang MÀU CAM: "Xác thực Ngoại tuyến (Offline Verified) qua mạng lưới P2P • Không có Internet".`;
       } else {
         carrier.innerText = '📶 Viettel 5G (SIM Nội Địa)';
@@ -580,9 +580,9 @@
         serial.innerText = 'LOT-VN-2026-09 / BOX-0001 (Hộp thuốc thứ 1)';
         hash.innerText = 'da61c3d6f011a3cc462dcedfdbd83280542f7d82f16487ec76fda2d4e0c0bec0';
         time.style.color = '#34D399';
-        time.innerText = '27 µs (<0.01 ms)';
+        time.innerText = '42 µs (<0.01 ms)';
         log.innerHTML = `[STEP 1 ONLINE] GET https://viettel.vn/01/09501101420014/10/LOT-VN-2026-09/21/BOX-0001<br/>
-          &rarr; Program 1 (Axum Resolver) phản hồi trong 27 µs (&lt;10ms SLA) + Xác thực trạm 5G CAMARA 452-04-gNB8821 (Viettel 5G SA Base Station • 0% Browser GPS Popup • 100% Anti-Fake-GPS)<br/>
+          &rarr; Program 1 (Axum Resolver) phản hồi trong 42 µs (&lt;10ms SLA) + Xác thực trạm 5G CAMARA 452-04-gNB8821 (Viettel 5G SA Base Station • 0% Browser GPS Popup • 100% Anti-Fake-GPS)<br/>
           &rarr; Universal Link đánh thức Program 3 (Mobile App / &lt;180KB WASM)<br/>
           &rarr; Program 2 (Rust P2P Core) ngầm tải &amp; đồng bộ Merkle Root + 1.000 mã băm cùng lô 'LOT-VN-2026-09' vào Local CRDT Cache (0.13 MB RAM).`;
       }

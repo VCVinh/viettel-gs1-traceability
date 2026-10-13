@@ -3,13 +3,13 @@
 > [!IMPORTANT]
 > **Executive Verification Summary (Two Strictly Separated Private Repositories):**
 > 1. **Project 1 — Viettel GS1 Digital Link & Offline-First P2P Traceability Platform (`viettel-gs1-traceability`):**
->    - **Local Workspace:** `C:\Users\Admin\.gemini\antigravity\scratch\viettel-gs1-traceability`
+>    - **Local Workspace:** `.`
 >    - **Private GitHub Repo:** `https://github.com/VCVinh/viettel-gs1-traceability` (`PRIVATE`)
->    - **Test & Audit Status:** **9/9 Rust Unit & E2E Tests PASS (`0.12s`)**, **4/4 Core Rust Programs**, **4/4 Combat Demos**, **6 Calibrated Physical/Software Instruments**, and **Theorems 1–7 Breakthroughs** live and verified in [`src/frontier_instruments_and_theorems.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs) and [`demo-output/frontier_instruments_audit.json`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/demo-output/frontier_instruments_audit.json).
+>    - **Test & Audit Status:** **9/9 Rust Unit & E2E Tests PASS (`0.12s`)**, **4/4 Core Rust Programs**, **4/4 Combat Demos**, **6 Calibrated Physical/Software Instruments**, and **Theorems 1–7 Breakthroughs** live and verified in [`src/frontier_instruments_and_theorems.rs`](./src/frontier_instruments_and_theorems.rs) and [`demo-output/frontier_instruments_audit.json`](./demo-output/frontier_instruments_audit.json).
 > 2. **Project 2 — Solo-Founder Multi-Agent Automation AI & Restless Company OS (`solo-founder-automation-ai`):**
->    - **Local Workspace:** `C:\Users\Admin\.gemini\antigravity\scratch\solo-founder-os`
+>    - **Local Workspace:** `../solo-founder-os`
 >    - **Private GitHub Repo:** `https://github.com/VCVinh/solo-founder-automation-ai` (`PRIVATE`)
->    - **Test & Audit Status:** **17/17 Rust Unit & E2E Tests PASS (`0.29s`)**, including **Theorem 8 (Edmonds-Karp Resilient Egress Min-Cut with IBC §1005.5 Single-Exit Loss)** and **Theorem 9 (Alur-Dill DBM Floyd-Warshall Statutory Clock Closure & Off-List Nullity Guard)** in [`rust-core/src/restless_company_daemon.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/solo-founder-os/rust-core/src/restless_company_daemon.rs).
+>    - **Test & Audit Status:** **17/17 Rust Unit & E2E Tests PASS (`0.29s`)**, including **Theorem 8 (Edmonds-Karp Resilient Egress Min-Cut with IBC §1005.5 Single-Exit Loss)** and **Theorem 9 (Alur-Dill DBM Floyd-Warshall Statutory Clock Closure & Off-List Nullity Guard)** in [`rust-core/src/restless_company_daemon.rs`](../solo-founder-os/rust-core/src/restless_company_daemon.rs).
 
 ---
 
@@ -102,7 +102,7 @@ A projection only isolates a key if its range is a **proper subspace** ($\operat
 - **Subspace Collision Decay:** Under random masks of density $p$, a memory written $k$ steps ago retains expected amplitude $(1 - p)^k$.
 
 #### 5. Space for Improvement & Breakthroughs
-- **Applied Immediately in Rust ([`src/frontier_instruments_and_theorems.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L116-L185)):** Implemented `SubspaceMaskedDeltaHrr` with BLAKE3/SHA-256 deterministic $p$-sparse frequency masks and verified in unit test `test_theorem2_subspace_masked_delta_hrr_beats_1d_degeneracy`.
+- **Applied Immediately in Rust ([`src/frontier_instruments_and_theorems.rs`](./src/frontier_instruments_and_theorems.rs#L116-L185)):** Implemented `SubspaceMaskedDeltaHrr` with BLAKE3/SHA-256 deterministic $p$-sparse frequency masks and verified in unit test `test_theorem2_subspace_masked_delta_hrr_beats_1d_degeneracy`.
 
 ---
 
@@ -136,7 +136,7 @@ In $SU(2)$, the scalar part $\operatorname{Re}(X_m Y_m) = a_X a_Y - \mathbf{v}_X
 - Wreath-product $S^3 \wr S_M$ requires storing the permutation $\pi \in S_M$ ($M$ `u8` bytes, i.e., `64 bytes` for $M=64$), which is negligible.
 
 #### 5. Space for Improvement & Breakthroughs
-- **Applied Immediately in Rust ([`src/frontier_instruments_and_theorems.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L187-L315)):** Implemented `WreathProductGhrrElement` over $S^3 \wr S_{64}$ and verified in `test_theorem3_wreath_product_ghrr_breaks_cyclic_and_trace_floor`.
+- **Applied Immediately in Rust ([`src/frontier_instruments_and_theorems.rs`](./src/frontier_instruments_and_theorems.rs#L187-L315)):** Implemented `WreathProductGhrrElement` over $S^3 \wr S_{64}$ and verified in `test_theorem3_wreath_product_ghrr_breaks_cyclic_and_trace_floor`.
 
 ---
 
@@ -172,7 +172,7 @@ Linear addition $A + A = 2A$ is associative and commutative, but not idempotent 
 - If two distinct events hash to the exact same frequency bin $m$ with equal amplitude, the tropical max keeps the lexicographically higher phase (which is why each event uses a $p$-sparse mask over multiple bins as in Theorem 2).
 
 #### 5. Space for Improvement & Breakthroughs
-- **Applied Immediately in Rust ([`src/frontier_instruments_and_theorems.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L317-L408)):** Implemented `TropicalEnvelopeWaveCrdt` and verified exact 3-way associativity.
+- **Applied Immediately in Rust ([`src/frontier_instruments_and_theorems.rs`](./src/frontier_instruments_and_theorems.rs#L317-L408)):** Implemented `TropicalEnvelopeWaveCrdt` and verified exact 3-way associativity.
 
 ---
 
@@ -203,7 +203,7 @@ Scalar mass conservation ($\sum m_{\text{in}} = \sum m_{\text{out}}$) is blind t
 
 #### 3. Capabilities & Quantitative Advantages
 - **Catches 1-for-1 Counterfeit Substitution (`0.0 kg` mass discrepancy)** BEFORE goods reach consumers.
-- **Pinpoints Rogue Node on Tree Topologies:** Verified in Rust (`verify_augmented_sheaf_tree_pinpointer` in [`src/frontier_instruments_and_theorems.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L410-L485)), where a 4-node linear tree with a 30% counterfeit swap at Node 2 (`Regional_Distributor_Hub`) is augmented with 2 Virtual Anchor Chords ($b_1(\tilde{G}) = 2$), yielding $E_{\text{sheaf}} = 0.220$ and pinpointing `Regional_Distributor_Hub` (`v* = 2`) with **100% accuracy**.
+- **Pinpoints Rogue Node on Tree Topologies:** Verified in Rust (`verify_augmented_sheaf_tree_pinpointer` in [`src/frontier_instruments_and_theorems.rs`](./src/frontier_instruments_and_theorems.rs#L410-L485)), where a 4-node linear tree with a 30% counterfeit swap at Node 2 (`Regional_Distributor_Hub`) is augmented with 2 Virtual Anchor Chords ($b_1(\tilde{G}) = 2$), yielding $E_{\text{sheaf}} = 0.220$ and pinpointing `Regional_Distributor_Hub` (`v* = 2`) with **100% accuracy**.
 
 ---
 
@@ -222,7 +222,7 @@ $$B[h_0(x)] \oplus B[h_1(x)] \oplus B[h_2(x)] = f_{16}(x) \quad \forall x \in S$
 
 #### 3. Space for Improvement & Breakthroughs (Applied Immediately in Rust)
 - **Two-Tier Static + Dynamic Hybrid (`RealBinaryFuse16Filter` + `RoaringBitmap` Delta Layer):**
-  1. **Tier 1 (`RealBinaryFuse16Filter` in [`src/frontier_instruments_and_theorems.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L487-L610)):** Stores the immutable factory-minted batch of $N$ valid serials in `2.25 bytes/key` (`11.25 MB` for 5,000,000 serials) with automatic seed retry until hypergraph peeling succeeds 100%.
+  1. **Tier 1 (`RealBinaryFuse16Filter` in [`src/frontier_instruments_and_theorems.rs`](./src/frontier_instruments_and_theorems.rs#L487-L610)):** Stores the immutable factory-minted batch of $N$ valid serials in `2.25 bytes/key` (`11.25 MB` for 5,000,000 serials) with automatic seed retry until hypergraph peeling succeeds 100%.
   2. **Tier 2 (`RoaringBitmap` Surgical Revocation Delta):** Stores contiguous revoked/recalled sub-ranges (e.g., boxes `20,001..30,000` that suffered a cold-chain excursion) as a Run-Container $(start, length)$ in **`28 bytes`** total!
   3. **Combined Offline Check:** $\text{Valid}(x) \iff \text{BinaryFuse16.contains}(x) \land \neg \text{RoaringRevoked.contains}(\text{id}(x))$.
 
@@ -249,7 +249,7 @@ $$= \bigl(u_1 C z_1 + E_1\bigr) + r\bigl(T + u_1 C z_2 + u_2 C z_1\bigr) + r^2\b
 
 #### 3. Exact Limits & Failure Modes (and Our Immediate Fix)
 - **Weak Fiat-Shamir Transcript Vulnerability (Frozen-Heart Class Bug):** Hashing only the first element $T[0]$ when deriving $r$ allows a malicious prover to forge $T[1 \dots m-1]$ after learning $r$.
-- **Fixed Immediately in Rust (`RelaxedR1csInstance::fold_step` in [`src/frontier_instruments_and_theorems.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L612-L715)):** The Fiat-Shamir transcript hashes the **entire domain-separated tuple** `(u1, u2, x1, x2, ALL coordinates of T[0..m], E1[0..m])` via SHA-256 over the Goldilocks prime field $p = 2^{64} - 2^{32} + 1$, verified across a 4-hop supply chain with exact algebraic satisfaction `(Az') o (Bz') == u'(Cz') + E'`.
+- **Fixed Immediately in Rust (`RelaxedR1csInstance::fold_step` in [`src/frontier_instruments_and_theorems.rs`](./src/frontier_instruments_and_theorems.rs#L612-L715)):** The Fiat-Shamir transcript hashes the **entire domain-separated tuple** `(u1, u2, x1, x2, ALL coordinates of T[0..m], E1[0..m])` via SHA-256 over the Goldilocks prime field $p = 2^{64} - 2^{32} + 1$, verified across a 4-hop supply chain with exact algebraic satisfaction `(Az') o (Bz') == u'(Cz') + E'`.
 
 ---
 
@@ -270,7 +270,7 @@ $$= \bigl(u_1 C z_1 + E_1\bigr) + r\bigl(T + u_1 C z_2 + u_2 C z_1\bigr) + r^2\b
 
 #### 2. Capabilities, Limits & Breakthrough Implemented in Project 2
 - **Limit of 1D Summing:** Simply summing door widths misses pinch-point hallways upstream of the exits and fails if a fire blocks the widest stairwell.
-- **Breakthrough Implemented in Project 2 (`RestlessCompanyDaemon::verify_resilient_egress_min_cut` in [`rust-core/src/restless_company_daemon.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/solo-founder-os/rust-core/src/restless_company_daemon.rs#L1392-L1470)):** Full BFS Edmonds-Karp augmenting-path solver that computes exact max-flow/min-cut (`1,100 occupants >= 900 required`) AND iterates over every stairwell exit to prove single-exit loss resilience (`650 occupants >= 450 required`, `100% PASS`).
+- **Breakthrough Implemented in Project 2 (`RestlessCompanyDaemon::verify_resilient_egress_min_cut` in [`rust-core/src/restless_company_daemon.rs`](../solo-founder-os/rust-core/src/restless_company_daemon.rs#L1392-L1470)):** Full BFS Edmonds-Karp augmenting-path solver that computes exact max-flow/min-cut (`1,100 occupants >= 900 required`) AND iterates over every stairwell exit to prove single-exit loss resilience (`650 occupants >= 450 required`, `100% PASS`).
 
 ---
 
@@ -293,7 +293,7 @@ $$= \bigl(u_1 C z_1 + E_1\bigr) + r\bigl(T + u_1 C z_2 + u_2 C z_1\bigr) + r^2\b
 
 ## PART II: 6 FRONTIER HARDWARE & SOFTWARE INSTRUMENT DESIGNS (TIERS A, B, C)
 
-We designed and implemented 6 concrete, calibrated instruments across **Tier A ($0 Smartphone-as-Laboratory)**, **Tier B (<$15 Viettel Post Courier Clip-On)**, and **Tier C (<$150 Warehouse / Cold-Chain Portal)** in [`src/frontier_instruments_and_theorems.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs#L717-L915):
+We designed and implemented 6 concrete, calibrated instruments across **Tier A ($0 Smartphone-as-Laboratory)**, **Tier B (<$15 Viettel Post Courier Clip-On)**, and **Tier C (<$150 Warehouse / Cold-Chain Portal)** in [`src/frontier_instruments_and_theorems.rs`](./src/frontier_instruments_and_theorems.rs#L717-L915):
 
 | Instrument | Tier & BOM Cost | Physical Principle & Calibration Equation | What Failure Mode It Solves | Live Rust Benchmark Result |
 | :--- | :--- | :--- | :--- | :--- |
@@ -308,7 +308,7 @@ We designed and implemented 6 concrete, calibrated instruments across **Tier A (
 
 ## PART III: 100% LINE-BY-LINE AUDIT OF `KẾ HOẠCH PHÁT TRIỂN SẢN PHẨM` (138 PARAGRAPHS)
 
-We audited every single section, stage, demo, and technical requirement of the uploaded 46 KB Word document (`media_1791650087066_ac8934f1.docx` / [`ORIGINAL_VIETTEL_PLAN_VERBATIM.md`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/docs-md/ORIGINAL_VIETTEL_PLAN_VERBATIM.md)) against our live Rust implementation in `viettel-gs1-traceability`:
+We audited every single section, stage, demo, and technical requirement of the uploaded 46 KB Word document (`media_1791650087066_ac8934f1.docx` / [`ORIGINAL_VIETTEL_PLAN_VERBATIM.md`](./docs-md/ORIGINAL_VIETTEL_PLAN_VERBATIM.md)) against our live Rust implementation in `viettel-gs1-traceability`:
 
 | Original Plan Section & Requirement | Plan Target / SLA | Our Implemented & Verified Capability | Status |
 | :--- | :--- | :--- | :--- |
@@ -320,4 +320,4 @@ We audited every single section, stage, demo, and technical requirement of the u
 | **Demo 2 (Trọng tâm — Online sang Offline Airplane Mode):** Scan Box #1 on 5G -> Turn on Airplane Mode -> Scan Box #2 from same batch | Instant offline verification from synced local P2P cache with Orange UI badge | Verified in `Demo2OnlineOfflineScenario` + live interactive Phone Simulator in `viettel_gs1_offline_p2p_live_demo.html` (`GET /viettel-demo` & `POST /api/v1/p2p/verify-offline`). | ✅ **100% DELIVERED & SURPASSED** |
 | **Demo 3 (Thương mại hóa SME & Bán chéo Viễn thông):** SME creates 10,000 codes in 60s + Consumer gets Viettel 4G/5G data | `< 60s` onboarding, live scan counter | Verified in `Demo3SmeSelfServiceResult`: Dalat Farm OCOP batch (`10,000 codes` in `4.2 ms`) + automated `+500MB Data 5G Viettel` / `5,000đ Viettel Money`. | ✅ **100% DELIVERED & SURPASSED** |
 | **Demo 4 (Hệ sinh thái Viettel Post & Bảng điều khiển Quốc gia):** Courier scan + National anti-counterfeit / smuggling radar | Bind waybill to serial; detect regional anomalies & grey-market dumping | Verified in `Demo4EcosystemHeatmapResult` + **Theorem 5 Augmented Cellular Sheaf Cohomology $H^1$** catching 1-for-1 counterfeit injection at the exact distributor hub before consumer scans. | ✅ **100% DELIVERED & SURPASSED** |
-| **4 Core Rust Programs (Section 5 of Plan):** (1) Axum Resolver, (2) Rust P2P Core, (3) Mobile UI/Super-App SDK, (4) Blockchain Smart Contract & Indexer | All 4 programs built, tested, and integrated | All 4 programs implemented in [`src/viettel_gs1_p2p_engine.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/viettel_gs1_p2p_engine.rs) + upgraded with **6 Frontier Instruments & Theorems 1–7** in [`src/frontier_instruments_and_theorems.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_instruments_and_theorems.rs). | ✅ **100% DELIVERED & SURPASSED** |
+| **4 Core Rust Programs (Section 5 of Plan):** (1) Axum Resolver, (2) Rust P2P Core, (3) Mobile UI/Super-App SDK, (4) Blockchain Smart Contract & Indexer | All 4 programs built, tested, and integrated | All 4 programs implemented in [`src/viettel_gs1_p2p_engine.rs`](./src/viettel_gs1_p2p_engine.rs) + upgraded with **6 Frontier Instruments & Theorems 1–7** in [`src/frontier_instruments_and_theorems.rs`](./src/frontier_instruments_and_theorems.rs). | ✅ **100% DELIVERED & SURPASSED** |

@@ -2,7 +2,7 @@
 
 > [!IMPORTANT]
 > **100% Live, Tested & Verified Codebase Backing:**
-> - **Production Engine:** [`src/frontier_v6_world_models_isac_pqc.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_v6_world_models_isac_pqc.rs)
+> - **Production Engine:** [`src/frontier_v6_world_models_isac_pqc.rs`](./src/frontier_v6_world_models_isac_pqc.rs)
 > - **Comprehensive Integration Test Suite:** `17/17` Rust unit tests PASS (`0.34s`) via `cargo test`, including 4 newly minted frontier v6.0 test suites covering all four branches with zero mock dependencies:
 >   1. `test_physical_world_model_genuine_and_tampered` (JEPA non-generative manifold energy functional + DVS event stream micro-vibration spectrum)
 >   2. `test_ambient_iot_and_5g_isac_radar` (3GPP Rel-19 Ambient IoT link budget with 64T64R beamforming + 5G ISAC micro-Doppler radar)
@@ -377,7 +377,7 @@ To prevent central points of failure, traceability assertions are anchored in th
 
 ## CONCRETE RUST CODE ENGINE VERIFICATION
 
-The entire v6.0 frontier architecture is implemented and verified in [`src/frontier_v6_world_models_isac_pqc.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/frontier_v6_world_models_isac_pqc.rs) and registered in [`src/lib.rs`](file:///C:/Users/Admin/.gemini/antigravity/scratch/viettel-gs1-traceability/src/lib.rs).
+The entire v6.0 frontier architecture is implemented and verified in [`src/frontier_v6_world_models_isac_pqc.rs`](./src/frontier_v6_world_models_isac_pqc.rs) and registered in [`src/lib.rs`](./src/lib.rs).
 
 ### Summary of Unit Test Results (`cargo test`):
 ```
