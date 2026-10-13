@@ -13,6 +13,7 @@
 
 pub mod ab_testing_and_real_usecases;
 pub mod frontier_instruments_and_theorems;
+pub mod frontier_v6_world_models_isac_pqc;
 pub mod support_types;
 use crate::support_types::{
     AutonomousVideoSpec, HitlApprovalGate, OutboundChannel, PaidArticleBountyEngine,
