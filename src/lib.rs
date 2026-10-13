@@ -211,6 +211,64 @@ pub struct ResolverDeepLinkResponse {
     pub resolution_latency_microseconds: u64,
 }
 
+impl ResolverDeepLinkResponse {
+    /// Formats the response as an IETF RFC 9264 compliant `application/linkset+json` document
+    /// adhering to official GS1 Digital Link 1.3/1.4 conformance standards.
+    pub fn to_rfc9264_linkset(&self) -> serde_json::Value {
+        let anchor = format!(
+            "https://{}/01/{}/10/{}/21/{}",
+            self.parsed_gs1.domain,
+            self.parsed_gs1.gtin,
+            self.blockchain_record.batch_id,
+            self.parsed_gs1.serial_number
+        );
+        serde_json::json!({
+            "linkset": [
+                {
+                    "anchor": anchor,
+                    "https://gs1.org/voc/pip": [
+                        {
+                            "href": format!(
+                                "https://trace.viettel.vn/passport/01/{}/10/{}/21/{}",
+                                self.parsed_gs1.gtin, self.blockchain_record.batch_id, self.parsed_gs1.serial_number
+                            ),
+                            "title": format!("{} Digital Product Passport", self.blockchain_record.product_name),
+                            "type": "text/html"
+                        }
+                    ],
+                    "https://gs1.org/voc/traceability": [
+                        {
+                            "href": format!(
+                                "https://trace.viettel.vn/api/v1/ledger/01/{}/10/{}/21/{}",
+                                self.parsed_gs1.gtin, self.blockchain_record.batch_id, self.parsed_gs1.serial_number
+                            ),
+                            "title": "Hyperledger Besu QBFT Enterprise Anchor Record",
+                            "type": "application/json"
+                        }
+                    ],
+                    "https://gs1.org/voc/epcis": [
+                        {
+                            "href": format!(
+                                "https://trace.viettel.vn/api/v1/epcis/01/{}/10/{}/21/{}",
+                                self.parsed_gs1.gtin, self.blockchain_record.batch_id, self.parsed_gs1.serial_number
+                            ),
+                            "title": "EPCIS 2.0 Event Repository (ISO/IEC 19987)",
+                            "type": "application/ld+json"
+                        }
+                    ],
+                    "https://gs1.org/voc/certificationInfo": [
+                        {
+                            "href": "https://trace.viettel.vn/certs/gmp-who",
+                            "title": "GMP-WHO Manufacturer Certificate",
+                            "type": "application/pdf"
+                        }
+                    ]
+                }
+            ]
+        })
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ViettelCloudStressTestReport {
     pub total_concurrent_requests: usize,
