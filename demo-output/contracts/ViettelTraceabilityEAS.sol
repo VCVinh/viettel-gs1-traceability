@@ -193,58 +193,81 @@ contract ViettelTraceabilityEAS {
     }
 
     // =========================================================================
-    // 5. BATCH ANCHORING + MASS-BALANCE ORACLE + TERRITORY GEOFENCE
+    // 5. BATCH ANCHORING + MASS-BALANCE ORACLE + TERRITORY GEOFENCE + ZK-SNARK
     // =========================================================================
+    struct BatchAnchorInput {
+        string gtin14;
+        string batchLotAi10;
+        bytes32 merkleBatchRoot;
+        bytes32 dppAndCircular02Hash;
+        bytes32 producerGlnHash;
+        bytes32 tearStripPinSaltHash;
+        uint64 expiryTimestamp;
+        uint32 totalUnits;
+        uint256 batchMassKg;
+        uint16 coldChainMktCelsiusX100;
+        bytes4 authorizedCellPrefix;
+        bool zkPrivacyVerified;
+        bool enforceTwoPhasePinGuard;
+    }
+
     function anchorBatchRoot(
-        string calldata gtin14,
-        string calldata batchLotAi10,
-        bytes32 merkleBatchRoot,
-        bytes32 dppAndCircular02Hash,
-        bytes32 producerGlnHash,
-        bytes32 tearStripPinSaltHash,
-        uint64 expiryTimestamp,
-        uint32 totalUnits,
-        uint256 batchMassKg,
-        uint16 coldChainMktCelsiusX100,
-        bytes4 authorizedCellPrefix,
-        bool zkPrivacyVerified,
-        bool enforceTwoPhasePinGuard
-    ) external onlyAuthorized returns (bytes32 batchKey) {
-        uint256 quota = glnAnnualMassQuotaKg[producerGlnHash];
+        BatchAnchorInput calldata input
+    ) public onlyAuthorized returns (bytes32 batchKey) {
+        uint256 quota = glnAnnualMassQuotaKg[input.producerGlnHash];
         if (quota > 0) {
             require(
-                glnMintedMassKg[producerGlnHash] + batchMassKg <= quota,
+                glnMintedMassKg[input.producerGlnHash] + input.batchMassKg <= quota,
                 "MASS_BALANCE_ORACLE_EXCEEDED: Farm/Factory yield ceiling breached"
             );
-            glnMintedMassKg[producerGlnHash] += batchMassKg;
+            glnMintedMassKg[input.producerGlnHash] += input.batchMassKg;
         }
 
-        batchKey = keccak256(abi.encodePacked(gtin14, "/", batchLotAi10));
+        batchKey = keccak256(abi.encodePacked(input.gtin14, "/", input.batchLotAi10));
         batches[batchKey] = BatchAttestation({
-            merkleBatchRoot: merkleBatchRoot,
-            dppAndCircular02Hash: dppAndCircular02Hash,
-            producerGlnHash: producerGlnHash,
-            tearStripPinSaltHash: tearStripPinSaltHash,
+            merkleBatchRoot: input.merkleBatchRoot,
+            dppAndCircular02Hash: input.dppAndCircular02Hash,
+            producerGlnHash: input.producerGlnHash,
+            tearStripPinSaltHash: input.tearStripPinSaltHash,
             issuer: msg.sender,
             mintedAt: uint64(block.timestamp),
-            expiryTimestamp: expiryTimestamp,
-            totalUnits: totalUnits,
-            coldChainMktCelsiusX100: coldChainMktCelsiusX100,
-            authorizedCellPrefix: authorizedCellPrefix,
+            expiryTimestamp: input.expiryTimestamp,
+            totalUnits: input.totalUnits,
+            coldChainMktCelsiusX100: input.coldChainMktCelsiusX100,
+            authorizedCellPrefix: input.authorizedCellPrefix,
             status: BatchStatus.ACTIVE_VERIFIED,
-            zkPrivacyVerified: zkPrivacyVerified,
-            enforceTwoPhasePinGuard: enforceTwoPhasePinGuard
+            zkPrivacyVerified: input.zkPrivacyVerified,
+            enforceTwoPhasePinGuard: input.enforceTwoPhasePinGuard
         });
 
         emit BatchAnchored(
             batchKey,
-            gtin14,
-            batchLotAi10,
-            merkleBatchRoot,
-            zkPrivacyVerified,
-            coldChainMktCelsiusX100,
-            authorizedCellPrefix
+            input.gtin14,
+            input.batchLotAi10,
+            input.merkleBatchRoot,
+            input.zkPrivacyVerified,
+            input.coldChainMktCelsiusX100,
+            input.authorizedCellPrefix
         );
+    }
+
+    /**
+     * @notice Anchors a batch only after verifying a Groth16 / Nova-compressed ZK-SNARK proof on-chain
+     *         (proving Arrhenius MKT cold-chain SLA and GLN mass-balance without revealing supplier prices/volumes).
+     */
+    function anchorBatchRootWithZkProof(
+        BatchAnchorInput calldata input,
+        uint256[2] calldata a,
+        uint256[2][2] calldata b,
+        uint256[2] calldata c,
+        uint256[6] calldata publicInputs
+    ) external onlyAuthorized returns (bytes32 batchKey) {
+        require(zkVerifier != address(0), "ZK_VERIFIER_NOT_CONFIGURED");
+        require(
+            IZkGroth16BatchVerifier(zkVerifier).verifyProof(a, b, c, publicInputs),
+            "INVALID_ZK_COLD_CHAIN_OR_MASS_PROOF"
+        );
+        return anchorBatchRoot(input);
     }
 
     // =========================================================================
@@ -288,6 +311,42 @@ contract ViettelTraceabilityEAS {
         _posOrPostUnlockedBitMap[batchKey][bucketIndex] |= unlockBitMask;
     }
 
+    function _enforceShelfGuardAndTerritory(
+        bytes32 batchKey,
+        uint256 serialIndex,
+        bytes8 camaraCellIdHash,
+        bytes32 providedTearStripPinProof,
+        bool checkPinGuard
+    ) internal returns (bool isTerritoryValid) {
+        BatchAttestation storage b = batches[batchKey];
+        require(b.status == BatchStatus.ACTIVE_VERIFIED, "BATCH_NOT_ACTIVE_OR_RECALLED");
+
+        uint256 bucket = serialIndex >> 8;
+        uint256 mask = 1 << (serialIndex & 0xff);
+        require((_recalledSerialBitMap[batchKey][bucket] & mask) == 0, "SERIAL_SURGICALLY_RECALLED");
+
+        isTerritoryValid = (b.authorizedCellPrefix == bytes4(0))
+            || (bytes4(camaraCellIdHash) == b.authorizedCellPrefix);
+        if (!isTerritoryValid) {
+            emit GreyMarketTerritoryViolationDetected(
+                batchKey,
+                serialIndex,
+                b.authorizedCellPrefix,
+                camaraCellIdHash,
+                "CANH_BAO_BAN_LAN_VUNG_PHA_GIA: Cell-ID outside authorized distributor territory"
+            );
+        }
+
+        if (checkPinGuard && b.enforceTwoPhasePinGuard) {
+            bool pinValid = (providedTearStripPinProof == keccak256(abi.encodePacked(b.tearStripPinSaltHash, serialIndex)));
+            bool posUnlocked = ((_posOrPostUnlockedBitMap[batchKey][bucket] & mask) != 0);
+            require(
+                pinValid || posUnlocked,
+                "SHELF_SCAN_GUARD_LOCKED: Tear-strip PIN or POS checkout required to burn & claim 500MB"
+            );
+        }
+    }
+
     /**
      * @notice Kịch bản 1 (First-Scan Burn +500MB Data 5G) & Kịch bản 3 (Photocopy 50,000 QR Red Alert + 20,000đ Bounty).
      *         Flips the bit in the 256-bit EVM BitMap word from 0 -> 1 on first valid post-purchase scan.
@@ -305,51 +364,27 @@ contract ViettelTraceabilityEAS {
         uint64 firstClaimTime,
         bytes8 originalCellId
     ) {
-        BatchAttestation storage b = batches[batchKey];
-        require(b.status == BatchStatus.ACTIVE_VERIFIED, "BATCH_NOT_ACTIVE_OR_RECALLED");
-
-        uint256 bucket = serialIndex >> 8; // serialIndex / 256
+        uint256 existingWord = _claimedSerialBitMap[batchKey][serialIndex >> 8];
         uint256 mask = 1 << (serialIndex & 0xff);
+        bool isUnburned = ((existingWord & mask) == 0);
 
-        require((_recalledSerialBitMap[batchKey][bucket] & mask) == 0, "SERIAL_SURGICALLY_RECALLED");
-
-        // Territory check via Viettel CAMARA eNodeB Cell-ID prefix
-        isTerritoryValid = (b.authorizedCellPrefix == bytes4(0))
-            || (bytes4(camaraCellIdHash) == b.authorizedCellPrefix);
-        if (!isTerritoryValid) {
-            emit GreyMarketTerritoryViolationDetected(
-                batchKey,
-                serialIndex,
-                b.authorizedCellPrefix,
-                camaraCellIdHash,
-                "CANH_BAO_BAN_LAN_VUNG_PHA_GIA: Cell-ID outside authorized distributor territory"
-            );
-        }
+        isTerritoryValid = _enforceShelfGuardAndTerritory(
+            batchKey,
+            serialIndex,
+            camaraCellIdHash,
+            providedTearStripPinProof,
+            isUnburned
+        );
 
         bytes32 serialKey = keccak256(abi.encodePacked(batchKey, serialIndex));
-        uint256 existingWord = _claimedSerialBitMap[batchKey][bucket];
 
-        if ((existingWord & mask) == 0) {
-            // Enforce Two-Phase Anti-Shelf-Scan Guard if enabled for this batch
-            if (b.enforceTwoPhasePinGuard) {
-                bytes32 expectedPinProof = keccak256(
-                    abi.encodePacked(b.tearStripPinSaltHash, serialIndex)
-                );
-                bool pinValid = (providedTearStripPinProof == expectedPinProof);
-                bool posUnlocked = ((_posOrPostUnlockedBitMap[batchKey][bucket] & mask) != 0);
-                require(
-                    pinValid || posUnlocked,
-                    "SHELF_SCAN_GUARD_LOCKED: Tear-strip PIN or POS checkout required to burn & claim 500MB"
-                );
-            }
-
+        if (isUnburned) {
             // Flip bit 0 -> 1 in 256-bit EVM BitMap word (94% gas reduction)
-            _claimedSerialBitMap[batchKey][bucket] = existingWord | mask;
+            _claimedSerialBitMap[batchKey][serialIndex >> 8] = existingWord | mask;
             uint64 nowTs = uint64(block.timestamp);
-            uint256 packedRecord = uint256(nowTs)
+            serialFirstClaimRecord[serialKey] = uint256(nowTs)
                 | (uint256(uint64(camaraCellIdHash)) << 64)
                 | (uint256(msisdnHmac) << 128);
-            serialFirstClaimRecord[serialKey] = packedRecord;
 
             emit ConsumerRewardClaimed(batchKey, serialIndex, camaraCellIdHash, nowTs, 500);
             return (true, isTerritoryValid, nowTs, camaraCellIdHash);
@@ -358,9 +393,8 @@ contract ViettelTraceabilityEAS {
             uint256 rec = serialFirstClaimRecord[serialKey];
             firstClaimTime = uint64(rec);
             originalCellId = bytes8(uint64(rec >> 64));
-            uint128 origMsisdn = uint128(rec >> 128);
 
-            if (origMsisdn != msisdnHmac || originalCellId != camaraCellIdHash) {
+            if (uint128(rec >> 128) != msisdnHmac || originalCellId != camaraCellIdHash) {
                 emit CounterfeitOrCloneDetected(
                     batchKey,
                     serialIndex,

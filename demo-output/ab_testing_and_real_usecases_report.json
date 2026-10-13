@@ -2,8 +2,8 @@
   "total_experiments": 6,
   "all_experiments_passed": true,
   "total_simulated_real_world_events": 3100,
-  "total_harness_wall_time_ms": 453.76,
-  "real_ed25519_single_verify_us": 87.0,
+  "total_harness_wall_time_ms": 224.43,
+  "real_ed25519_single_verify_us": 33.1,
   "real_2d_pixel_mtf_genuine_db": 0.01,
   "real_2d_pixel_mtf_photocopy_db": -20.58,
   "experiments": [
@@ -21,7 +21,7 @@
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
       "system_b_cost_or_overhead_metric": "0% báo giả oan trên kệ; 100% bắt trúng 500 bản photocopy; giảm 94.3% gas",
-      "measured_execution_time_ms": 2.74,
+      "measured_execution_time_ms": 1.52,
       "key_verdict": "PASS: System B loại bỏ hoàn toàn lỗi 25% khách thật bị báo hàng giả do quét trộm trên kệ."
     },
     {
@@ -38,7 +38,7 @@
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
       "system_b_cost_or_overhead_metric": "100% (200/200) nông dân được trả lại quyền sở hữu & thu hồi thưởng của kẻ gian",
-      "measured_execution_time_ms": 20.34,
+      "measured_execution_time_ms": 10.79,
       "key_verdict": "PASS: System B bảo vệ tuyệt đối người dùng Offline trước cuộc tấn công cướp quyền Online."
     },
     {
@@ -54,8 +54,8 @@
       "system_b_upgraded_name": "System B: Real Curve25519 Ed25519 Signature in URL + 225KB BinaryFuse16",
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
-      "system_b_cost_or_overhead_metric": "0 MB Pre-Sync cho mã mới; ~87.0 µs/lần giải mã Curve25519 thực tế; chặn 250/250 mã giả mạo",
-      "measured_execution_time_ms": 86.92,
+      "system_b_cost_or_overhead_metric": "0 MB Pre-Sync cho mã mới; ~33.1 µs/lần giải mã Curve25519 thực tế; chặn 250/250 mã giả mạo",
+      "measured_execution_time_ms": 44.87,
       "key_verdict": "PASS: Thực thi mật mã đường cong אליפטי Curve25519 thật 100% (ed25519-dalek), không dùng mock hash."
     },
     {
@@ -72,7 +72,7 @@
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
       "system_b_cost_or_overhead_metric": "Bản in gốc: 0.01 dB vs. Bản photocopy: -20.58 dB (Chặn 100/100 bản copy ngay lần quét đầu!)",
-      "measured_execution_time_ms": 342.71,
+      "measured_execution_time_ms": 166.66,
       "key_verdict": "PASS: Xử lý ma trận ảnh 64x64 thực tế phân biệt rõ rệt năng lượng tần số cao của tem gốc và tem photocopy."
     },
     {
@@ -89,7 +89,7 @@
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
       "system_b_cost_or_overhead_metric": "Bắt trúng 50/50 vụ tráo hàng 1-đổi-1 & chỉ đích danh Node 1 (Kho đại lý gian lận)",
-      "measured_execution_time_ms": 0.34,
+      "measured_execution_time_ms": 0.22,
       "key_verdict": "PASS: Đối đồng điều bó (Sheaf Cohomology H^1) phát hiện bất thường pha ngay cả khi tổng khối lượng bảo toàn."
     },
     {
