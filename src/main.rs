@@ -11,6 +11,7 @@
 
 use std::io::{Read, Write};
 use std::net::TcpListener;
+use viettel_gs1_traceability::ab_testing_and_real_usecases::RealAbTestAndUseCaseHarness;
 use viettel_gs1_traceability::frontier_instruments_and_theorems::{
     FrontierInstrumentSuite, PolyglotDualEvmAndZeroPreSyncEngine,
 };
@@ -19,12 +20,55 @@ use viettel_gs1_traceability::{
     ViettelAiEmployeesAutopilot,
 };
 
+fn print_ab_table(ab_report: &viettel_gs1_traceability::ab_testing_and_real_usecases::MasterAbTestAndRealUseCaseReport) {
+    println!("\n==========================================================================================================");
+    println!("  REAL A/B TESTING & ADVERSARIAL USE-CASE BENCHMARK REPORT (SYSTEM A LEGACY vs. SYSTEM B UPGRADED)");
+    println!("==========================================================================================================");
+    println!(
+        "  Total Real-World Simulated Events: {} | Total Wall Time: {:.2} ms | All 6 Experiments Passed: {}",
+        ab_report.total_simulated_real_world_events,
+        ab_report.total_harness_wall_time_ms,
+        ab_report.all_experiments_passed
+    );
+    println!(
+        "  Real Curve25519 (ed25519-dalek) Single Verify: {:.2} us | 64x64 CDP Genuine: {:.2} dB vs Photocopy: {:.2} dB",
+        ab_report.real_ed25519_single_verify_us,
+        ab_report.real_2d_pixel_mtf_genuine_db,
+        ab_report.real_2d_pixel_mtf_photocopy_db
+    );
+    println!("----------------------------------------------------------------------------------------------------------");
+    for exp in &ab_report.experiments {
+        println!(
+            "[{}] {} ({} events, {:.2} ms)",
+            exp.experiment_id, exp.experiment_title, exp.sample_size_events, exp.measured_execution_time_ms
+        );
+        println!("  Use Case   : {}", exp.real_world_use_case);
+        println!("  Provenance : {}", exp.inspiration_and_reference_source);
+        println!(
+            "  [-] {} -> Accuracy/Detect: {:.1}% | False-Pos/Fail: {:.1}% ({})",
+            exp.system_a_legacy_name,
+            exp.system_a_success_or_detection_pct,
+            exp.system_a_false_positive_or_failure_pct,
+            exp.system_a_cost_or_overhead_metric
+        );
+        println!(
+            "  [+] {} -> Accuracy/Detect: {:.1}% | False-Pos/Fail: {:.1}% ({})",
+            exp.system_b_upgraded_name,
+            exp.system_b_success_or_detection_pct,
+            exp.system_b_false_positive_or_failure_pct,
+            exp.system_b_cost_or_overhead_metric
+        );
+        println!("  Verdict    : {}\n", exp.key_verdict);
+    }
+    println!("==========================================================================================================\n");
+}
+
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     let cmd = args.get(1).map(|s| s.as_str()).unwrap_or("demo");
 
     match cmd {
-        "demo" | "audit" => {
+        "demo" | "audit" | "ab-test" => {
             let out_dir = "demo-output";
             let dossier = ViettelAiEmployeesAutopilot::execute_full_viettel_autopilot(
                 out_dir,
@@ -42,11 +86,19 @@ fn main() {
                 &new_arch_json,
             )
             .expect("Failed to write new_architecture_4_scenarios_audit.json");
+            let ab_report = RealAbTestAndUseCaseHarness::run_all_ab_tests_and_real_usecases();
+            let ab_json = serde_json::to_string_pretty(&ab_report).unwrap();
+            std::fs::write(
+                "demo-output/ab_testing_and_real_usecases_report.json",
+                &ab_json,
+            )
+            .expect("Failed to write ab_testing_and_real_usecases_report.json");
             if let Ok(sol) = std::fs::read_to_string("contracts/ViettelTraceabilityEAS.sol") {
                 let _ = std::fs::write("demo-output/contracts/ViettelTraceabilityEAS.sol", sol);
             }
+            print_ab_table(&ab_report);
             println!(
-                "Viettel GS1 Offline-First P2P Demo, 5-Instrument Audit & 4 New Architecture Scenarios generated at:\n  - {}\n  - demo-output/frontier_instruments_audit.json\n  - demo-output/new_architecture_4_scenarios_audit.json",
+                "Viettel GS1 Offline-First P2P Demo, 5-Instrument Audit, 4 New Scenarios & 6 Real A/B Tests generated at:\n  - {}\n  - demo-output/frontier_instruments_audit.json\n  - demo-output/new_architecture_4_scenarios_audit.json\n  - demo-output/ab_testing_and_real_usecases_report.json",
                 dossier.interactive_live_demo_html_path
             );
         }
@@ -145,6 +197,13 @@ fn main() {
                         "application/json",
                         serde_json::to_string_pretty(&rep).unwrap_or_default(),
                     )
+                } else if path == "/api/v1/ab-test" {
+                    let ab_rep = RealAbTestAndUseCaseHarness::run_all_ab_tests_and_real_usecases();
+                    (
+                        "HTTP/1.1 200 OK",
+                        "application/json",
+                        serde_json::to_string_pretty(&ab_rep).unwrap_or_default(),
+                    )
                 } else if path == "/v1/viettel-autopilot"
                     || path == "/api/status"
                     || path == "/health"
@@ -173,7 +232,7 @@ fn main() {
             }
         }
         _ => {
-            println!("Usage: cargo run -- [demo | audit | serve [127.0.0.1:8090]]");
+            println!("Usage: cargo run -- [demo | audit | ab-test | serve [127.0.0.1:8090]]");
         }
     }
 }
