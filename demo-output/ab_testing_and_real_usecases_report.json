@@ -2,8 +2,8 @@
   "total_experiments": 7,
   "all_experiments_passed": true,
   "total_simulated_real_world_events": 3612,
-  "total_harness_wall_time_ms": 244.7,
-  "real_ed25519_single_verify_us": 52.9,
+  "total_harness_wall_time_ms": 233.97,
+  "real_ed25519_single_verify_us": 36.1,
   "real_2d_pixel_mtf_genuine_db": 0.01,
   "real_2d_pixel_mtf_photocopy_db": -20.58,
   "experiments": [
@@ -21,7 +21,7 @@
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
       "system_b_cost_or_overhead_metric": "0% báo giả oan trên kệ; 100% bắt trúng 500 bản photocopy; giảm 94.3% gas",
-      "measured_execution_time_ms": 1.7,
+      "measured_execution_time_ms": 1.66,
       "key_verdict": "PASS: System B loại bỏ hoàn toàn lỗi 25% khách thật bị báo hàng giả do quét trộm trên kệ."
     },
     {
@@ -38,7 +38,7 @@
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
       "system_b_cost_or_overhead_metric": "100% (200/200) nông dân được trả lại quyền sở hữu & thu hồi thưởng của kẻ gian",
-      "measured_execution_time_ms": 12.23,
+      "measured_execution_time_ms": 12.67,
       "key_verdict": "PASS: System B bảo vệ tuyệt đối người dùng Offline trước cuộc tấn công cướp quyền Online."
     },
     {
@@ -54,8 +54,8 @@
       "system_b_upgraded_name": "System B: Real Curve25519 Ed25519 Signature in URL + 225KB BinaryFuse16",
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
-      "system_b_cost_or_overhead_metric": "0 MB Pre-Sync cho mã mới; ~52.9 µs/lần giải mã Curve25519 thực tế; chặn 250/250 mã giả mạo",
-      "measured_execution_time_ms": 58.21,
+      "system_b_cost_or_overhead_metric": "0 MB Pre-Sync cho mã mới; ~36.1 µs/lần giải mã Curve25519 thực tế; chặn 250/250 mã giả mạo",
+      "measured_execution_time_ms": 48.19,
       "key_verdict": "PASS: Thực thi mật mã đường cong אליפטי Curve25519 thật 100% (ed25519-dalek), không dùng mock hash."
     },
     {
@@ -72,7 +72,7 @@
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
       "system_b_cost_or_overhead_metric": "Bản in gốc: 0.01 dB vs. Bản photocopy: -20.58 dB (Chặn 100/100 bản copy ngay lần quét đầu!)",
-      "measured_execution_time_ms": 171.31,
+      "measured_execution_time_ms": 170.13,
       "key_verdict": "PASS: Xử lý ma trận ảnh 64x64 thực tế phân biệt rõ rệt năng lượng tần số cao của tem gốc và tem photocopy."
     },
     {
@@ -89,7 +89,7 @@
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
       "system_b_cost_or_overhead_metric": "Bắt trúng 50/50 vụ tráo hàng 1-đổi-1 & chỉ đích danh Node 1 (Kho đại lý gian lận)",
-      "measured_execution_time_ms": 0.18,
+      "measured_execution_time_ms": 0.24,
       "key_verdict": "PASS: Đối đồng điều bó (Sheaf Cohomology H^1) phát hiện bất thường pha ngay cả khi tổng khối lượng bảo toàn."
     },
     {
@@ -106,7 +106,7 @@
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
       "system_b_cost_or_overhead_metric": "Chặn đứng 200/200 (100%) vụ tráo hàng (kể cả bơm nước lã đúng 450g) & khóa cứng nút Hoàn Tiền COD",
-      "measured_execution_time_ms": 0.08,
+      "measured_execution_time_ms": 0.11,
       "key_verdict": "PASS: Kết hợp khóa mã vận đơn + cân điện tử + phổ âm học Bessel chặn 100% gian lận hoàn hàng COD."
     },
     {
@@ -123,7 +123,7 @@
       "system_b_success_or_detection_pct": 100.0,
       "system_b_false_positive_or_failure_pct": 0.0,
       "system_b_cost_or_overhead_metric": "Phân tán ra 510/512 slot độc lập (100% song song hóa); 0đ phí in thẻ cào (tiết kiệm 1,2 tỷ/10 triệu hộp)",
-      "measured_execution_time_ms": 0.75,
+      "measured_execution_time_ms": 0.71,
       "key_verdict": "PASS: Hoán vị Feistel song ánh triệt tiêu nghẽn cổ chai EVM song song & mở khóa tự động 0đ chi phí bao bì."
     }
   ]

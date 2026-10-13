@@ -3,7 +3,7 @@
   "scenario1b_first_scan_burn_500mb_awarded": true,
   "scenario1b_evm_bitmap_gas_saved_pct": 94.2,
   "scenario2_zero_pre_sync_ed25519_verified": true,
-  "scenario2_cpu_verify_time_us": 51.3,
+  "scenario2_cpu_verify_time_us": 50.0,
   "scenario2_pre_sync_ram_mb": 0.0,
   "scenario3_photocopy_clone_caught_red_alert": true,
   "scenario3_bounty_offered_vnd": 20000,
