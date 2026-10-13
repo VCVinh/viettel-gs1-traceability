@@ -1,0 +1,31 @@
+{
+  "name": "Viettel Trace — Hệ Thống Chống Giả & GS1 Digital Link",
+  "short_name": "Viettel Trace",
+  "description": "Nền tảng Truy xuất Nguồn gốc Chống Giả Thế hệ Mới Viettel: Offline P2P, Chống Photo Tem, Chống Tráo Hàng COD & 5G ISAC",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#EE0033",
+  "background_color": "#070B14",
+  "categories": ["business", "utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

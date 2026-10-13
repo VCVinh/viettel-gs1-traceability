@@ -1,0 +1,2529 @@
+# -*- coding: utf-8 -*-
+"""
+Builder for Viettel Trace Master PWA Application (index.html)
+Includes all 4 Docx Demos, 4 Customer Journeys, Frontier Combat Demos, and PWA Installability.
+"""
+
+HTML_CONTENT = """<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Viettel Trace — Xác Thực & Chống Giả GS1 (Combat Demo & PWA)</title>
+  <meta name="description" content="Nền tảng Truy xuất Nguồn gốc Chống Giả Thế hệ Mới: 5G ISAC, Offline P2P CRDT, Chống Photo Tem, Chống Tráo Hàng COD & Hyperledger Besu" />
+  
+  <!-- PWA & Mobile Capabilities -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#EE0033" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Viettel Trace" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+  
+  <style>
+    :root {
+      --vt-red: #EE0033;
+      --vt-red-glow: rgba(238, 0, 51, 0.4);
+      --bg-dark: #070B14;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --emerald: #10B981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --cyan: #00F0FF;
+      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --amber: #F59E0B;
+      --amber-glow: rgba(245, 158, 11, 0.35);
+      --viettel-blue: #0077CC;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Motion Graphic Background Canvas */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    /* Top HUD Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(7, 11, 20, 0.88);
+      border-bottom: 1px solid var(--card-border);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      background: var(--vt-red);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 17px;
+      color: white;
+      box-shadow: 0 0 16px var(--vt-red-glow);
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-title span {
+      color: var(--vt-red);
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hud-telemetry {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      transition: all 0.3s;
+    }
+
+    .status-pill.online {
+      color: var(--emerald);
+      border-color: var(--emerald);
+      background: rgba(16, 185, 129, 0.12);
+    }
+
+    .status-pill.offline {
+      color: var(--amber);
+      border-color: var(--amber);
+      background: rgba(245, 158, 11, 0.12);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 8px currentColor;
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* PWA Install Banner */
+    .pwa-banner {
+      background: linear-gradient(90deg, rgba(238, 0, 51, 0.18), rgba(0, 240, 255, 0.15));
+      border-bottom: 1px solid rgba(238, 0, 51, 0.35);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: sticky;
+      top: 59px;
+      z-index: 95;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .pwa-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pwa-icon {
+      font-size: 20px;
+    }
+
+    .pwa-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #FFF;
+    }
+
+    .pwa-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .btn-pwa-install {
+      background: var(--vt-red);
+      color: white;
+      border: 1px solid #FF3366;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 12px var(--vt-red-glow);
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .btn-pwa-install:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+
+    /* Sliding Navigation Pill Bar */
+    .nav-slider-container {
+      position: sticky;
+      top: 106px;
+      z-index: 90;
+      background: rgba(7, 11, 20, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 8px 16px;
+    }
+
+    .nav-slider-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-pills {
+      display: flex;
+      gap: 8px;
+      position: relative;
+      width: max-content;
+      margin: 0 auto;
+    }
+
+    .nav-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 8px 15px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-pill:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-pill.active {
+      color: white;
+      background: var(--vt-red);
+      border-color: #FF3366;
+      box-shadow: 0 0 16px var(--vt-red-glow);
+    }
+
+    /* Main Container */
+    main {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 16px 100px;
+    }
+
+    /* Tab Panels with Smooth Transitions */
+    .tab-panel {
+      display: none;
+      animation: fadeInSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card System */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(238, 0, 51, 0.6), transparent);
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--vt-red) 0%, #B30026 100%);
+      color: white;
+      box-shadow: 0 4px 18px var(--vt-red-glow);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 24px var(--vt-red-glow);
+      filter: brightness(1.1);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%);
+      color: white;
+      box-shadow: 0 4px 18px var(--emerald-glow);
+    }
+
+    .btn-amber {
+      background: linear-gradient(135deg, var(--amber) 0%, #D97706 100%);
+      color: white;
+      box-shadow: 0 4px 18px var(--amber-glow);
+    }
+
+    .btn-cyan {
+      background: linear-gradient(135deg, var(--cyan) 0%, #0099B8 100%);
+      color: #04101A;
+      box-shadow: 0 4px 18px var(--cyan-glow);
+    }
+
+    .btn-group-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    /* Badges */
+    .badge-green {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .badge-orange {
+      background: rgba(245, 158, 11, 0.18);
+      color: #FBBF24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .badge-red {
+      background: rgba(238, 0, 51, 0.18);
+      color: #FF4D73;
+      border: 1px solid rgba(238, 0, 51, 0.4);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    /* Metrics */
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .metric-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--cyan);
+      font-family: monospace;
+    }
+
+    .metric-lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Results */
+    .result-banner {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      animation: fadeInSlide 0.25s ease-out;
+    }
+
+    .result-banner.success {
+      border-color: var(--emerald);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .result-banner.danger {
+      border-color: var(--vt-red);
+      background: rgba(238, 0, 51, 0.12);
+    }
+
+    .result-banner.warning {
+      border-color: var(--amber);
+      background: rgba(245, 158, 11, 0.1);
+    }
+
+    .result-icon {
+      font-size: 26px;
+    }
+
+    .result-info h4 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .result-info p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Camera Viewfinder */
+    .viewfinder-wrap {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      background: #030712;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #camera-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .viewfinder-sim-canvas {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    #flash-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.08s ease-out;
+      z-index: 50;
+    }
+
+    .scan-reticle {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .scan-corner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-color: var(--vt-red);
+      border-style: solid;
+    }
+
+    .scan-corner.tl { top: -2px; left: -2px; border-width: 3px 0 0 3px; border-top-left-radius: 8px; }
+    .scan-corner.tr { top: -2px; right: -2px; border-width: 3px 3px 0 0; border-top-right-radius: 8px; }
+    .scan-corner.bl { bottom: -2px; left: -2px; border-width: 0 0 3px 3px; border-bottom-left-radius: 8px; }
+    .scan-corner.br { bottom: -2px; right: -2px; border-width: 0 3px 3px 0; border-bottom-right-radius: 8px; }
+
+    .laser-line {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--vt-red), #FF8099, var(--vt-red), transparent);
+      box-shadow: 0 0 12px var(--vt-red);
+      top: 0;
+      animation: scan-move 2.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes scan-move {
+      0% { top: 4%; opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { top: 96%; opacity: 0.3; }
+    }
+
+    /* Comparison Slider */
+    .compare-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      user-select: none;
+      touch-action: none;
+    }
+
+    .compare-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .compare-original {
+      background: radial-gradient(circle at center, #0B2418 0%, #030C07 100%);
+      color: #34D399;
+    }
+
+    .compare-clone {
+      background: radial-gradient(circle at center, #2E0B12 0%, #0E0305 100%);
+      color: #FF4D73;
+      clip-path: inset(0 0 0 50%);
+    }
+
+    .compare-slider-bar {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 3px;
+      height: 100%;
+      background: white;
+      transform: translateX(-50%);
+      pointer-events: none;
+      box-shadow: 0 0 10px white;
+    }
+
+    .compare-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 32px;
+      height: 32px;
+      background: white;
+      border-radius: 50%;
+      color: #070B14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    }
+
+    /* Simulated Phone Frame */
+    .phone-frame {
+      background: #030712;
+      border: 3px solid #1E293B;
+      border-radius: 28px;
+      padding: 16px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    .phone-statusbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th, td {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px 8px;
+      text-align: left;
+    }
+
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    code {
+      font-family: monospace;
+      color: var(--cyan);
+      background: rgba(0, 240, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11.5px;
+    }
+
+    /* Customer Journey Stepper */
+    .stepper-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .step-btn {
+      flex: 1;
+      min-width: 180px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px;
+      color: var(--text-muted);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .step-btn.active {
+      background: rgba(238, 0, 51, 0.12);
+      border-color: var(--vt-red);
+      color: #FFF;
+      box-shadow: 0 0 14px var(--vt-red-glow);
+    }
+
+    .step-btn .step-num {
+      font-size: 10px;
+      font-weight: 900;
+      color: var(--vt-red);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .step-btn .step-title {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .journey-step-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .journey-step-badge {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--vt-red);
+      color: white;
+      text-align: center;
+      line-height: 24px;
+      font-weight: 800;
+      font-size: 12px;
+      margin-right: 8px;
+    }
+
+    /* Canvases */
+    #spectrum-canvas, #radar-canvas {
+      width: 100%;
+      height: 180px;
+      background: #030712;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      margin-top: 12px;
+      display: block;
+    }
+
+    /* Modal for iOS PWA Install Guide */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #0C1222;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      max-width: 460px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      position: relative;
+      animation: fadeInSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Drawer */
+    .drawer-scrim {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+      display: none;
+    }
+
+    .drawer-scrim.open { display: block; }
+
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-height: 85vh;
+      background: #0A0F1D;
+      border-top: 2px solid var(--vt-red);
+      border-radius: 20px 20px 0 0;
+      z-index: 600;
+      padding: 24px 20px;
+      overflow-y: auto;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.7);
+    }
+
+    .bottom-sheet.open { transform: translateY(0); }
+
+    .sheet-handle {
+      width: 44px;
+      height: 4px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 999px;
+      margin: 0 auto 16px;
+    }
+
+    .sheet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .code-view {
+      background: #03060E;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px;
+      font-family: monospace;
+      font-size: 11.5px;
+      color: #38BDF8;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* Live Scan Stream ticker */
+    .scan-feed-list {
+      max-height: 220px;
+      overflow-y: auto;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      background: rgba(0,0,0,0.25);
+    }
+
+    .scan-feed-item {
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Motion Graphic Canvas -->
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Top HUD Header -->
+  <header>
+    <div class="brand-wrap">
+      <div class="brand-logo">V</div>
+      <div>
+        <div class="brand-title">VIETTEL <span>TRACE</span></div>
+        <div class="brand-sub">GS1 Digital Link • Offline P2P • 5G ISAC</div>
+      </div>
+    </div>
+
+    <div class="hud-telemetry">
+      <div id="net-status-pill" class="status-pill online">
+        <span class="status-dot"></span>
+        <span id="net-status-txt">4G/5G VIETTEL</span>
+      </div>
+      <button class="status-pill" style="cursor: pointer;" onclick="openProofDrawer()">
+        📜 Sổ Cái
+      </button>
+    </div>
+  </header>
+
+  <!-- PWA Install Banner -->
+  <div id="pwa-install-banner" class="pwa-banner">
+    <div class="pwa-banner-left">
+      <div class="pwa-icon">📲</div>
+      <div>
+        <div class="pwa-title">CÀI ĐẶT APP VIETTEL TRACE VỀ MÀN HÌNH CHÍNH</div>
+        <div class="pwa-sub" id="pwa-sub-status">Trải nghiệm Native App 60 FPS • Sẵn sàng quét Offline 100% khi bật Chế độ máy bay</div>
+      </div>
+    </div>
+    <button id="btn-pwa-install" class="btn-pwa-install" onclick="handlePwaInstallClick()">
+      ⬇️ Cài Đặt Ngay (Install PWA)
+    </button>
+  </div>
+
+  <!-- Sliding Tab Bar -->
+  <div class="nav-slider-container">
+    <div class="nav-pills">
+      <button class="nav-pill active" onclick="switchTab('camera-tab')">📱 1. Camera &amp; Quét Mã</button>
+      <button class="nav-pill" onclick="switchTab('journeys-tab')">🧭 2. Bốn Hành Trình Khách Hàng</button>
+      <button class="nav-pill" onclick="switchTab('demo2-tab')">✈️ 3. Demo 2: Online ➔ Offline Máy Bay</button>
+      <button class="nav-pill" onclick="switchTab('demo3-tab')">🏢 4. Demo 3: SME &amp; 10.000 Mã GS1</button>
+      <button class="nav-pill" onclick="switchTab('demo4-tab')">🚚 5. Demo 4: Viettel Post &amp; Bản Đồ 63 Tỉnh</button>
+      <button class="nav-pill" onclick="switchTab('demo1-tab')">☁️ 6. Demo 1: Viettel Cloud 18.4K RPS</button>
+      <button class="nav-pill" onclick="switchTab('combat-tab')">⚡ 7. Bốn Kịch Bản Chống Gian Lận</button>
+      <button class="nav-pill" onclick="switchTab('acoustic-tab')">🔊 8. Âm Học Chai Lọ &amp; 5G ISAC</button>
+      <button class="nav-pill" onclick="switchTab('ab-tab')">📊 9. Đo Kiểm A/B Thực Tế</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- ==================== TAB 1: CAMERA & LIVE SCAN ==================== -->
+    <div id="camera-tab" class="tab-panel active">
+      <div class="grid-2">
+        <div class="glass-card">
+          <div class="card-title">
+            <span>ỐNG KÍNH QUÉT HÀNG HÓA CHUẨN GS1</span>
+            <span id="fps-counter" style="font-size: 11px; color: var(--cyan);">60 FPS • NPU MATRIX</span>
+          </div>
+
+          <div class="viewfinder-wrap">
+            <video id="camera-video" playsinline autoplay muted></video>
+            <canvas id="viewfinder-sim-canvas" class="viewfinder-sim-canvas"></canvas>
+            <div id="flash-overlay"></div>
+            
+            <div class="scan-reticle">
+              <div class="scan-corner tl"></div>
+              <div class="scan-corner tr"></div>
+              <div class="scan-corner bl"></div>
+              <div class="scan-corner br"></div>
+              <div class="laser-line"></div>
+            </div>
+          </div>
+
+          <div class="btn-group-2">
+            <button id="btn-toggle-cam" class="btn btn-primary" onclick="toggleRealCamera()">
+              📷 Bật Camera Thật Trên Điện Thoại
+            </button>
+            <button class="btn btn-secondary" onclick="triggerScanSimulation()">
+              ⚡ Quét Thử Nhanh Mã Hộp Sữa
+            </button>
+          </div>
+
+          <div style="margin-top: 10px;">
+            <button class="btn btn-cyan" onclick="simulateLaserFlash()">
+              💡 Chớp Flash Soi Vân Mực In Vi Mô (40ms)
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-title">
+            <span>HỘ CHIẾU SẢN PHẨM &amp; KẾT QUẢ XÁC THỰC</span>
+            <span class="status-pill online" style="font-size: 10.5px;">RFC 9264 RESOLVER</span>
+          </div>
+
+          <div id="scan-result-banner" class="result-banner success">
+            <div class="result-icon">🛡️</div>
+            <div class="result-info">
+              <h4 id="result-title">Sữa Bột Vinamilk Dielac Alpha 850g</h4>
+              <p id="result-desc">GTIN: 08934673123456 • Lô: LOT-2026-10 • Serial: BOX-0001</p>
+              <p style="margin-top: 4px; color: var(--emerald); font-weight: 700;">
+                ✓ Chữ ký số Ed25519 Hợp Lệ (36.1 µs) • Chưa từng mở nắp
+              </p>
+            </div>
+          </div>
+
+          <div class="metric-row">
+            <div class="metric-box">
+              <div class="metric-val" id="metric-latency">36 µs</div>
+              <div class="metric-lbl">Tốc Độ Giải Mã</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-val" id="metric-ram">0 MB</div>
+              <div class="metric-lbl">Bộ Nhớ Tải Trước</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-val" id="metric-cdp">0.892</div>
+              <div class="metric-lbl">Chỉ Số Sắc Nét MTF</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px;">
+            <button class="btn btn-emerald" onclick="executeFirstScanBurn()">
+              🎁 Mở Nắp Lần Đầu &amp; Nhận 500MB Data 5G Viettel
+            </button>
+          </div>
+
+          <div style="margin-top: 10px;">
+            <button class="btn btn-amber" onclick="switchTab('demo2-tab')">
+              ✈️ Thử Nghiệm Bật Chế Độ Máy Bay Quét Hộp #2 ➔
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: BỐN HÀNH TRÌNH KHÁCH HÀNG (CUSTOMER JOURNEYS) ==================== -->
+    <div id="journeys-tab" class="tab-panel">
+      <div class="glass-card">
+        <div class="card-title">
+          <span>THIẾT KẾ TRẢI NGHIỆM ĐỒNG BỘ 4 ĐỐI TƯỢNG (CUSTOMER JOURNEYS)</span>
+          <span class="badge-green">CHUẨN TẬP ĐOÀN VIETTEL</span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Nền tảng được thiết kế trải nghiệm riêng biệt cho 4 nhóm người dùng chính trong hệ sinh thái:
+        </p>
+
+        <div class="stepper-nav">
+          <button class="step-btn active" onclick="selectJourney('cj-consumer')">
+            <div class="step-num">HÀNH TRÌNH 1</div>
+            <div class="step-title">👤 Người Tiêu Dùng</div>
+          </button>
+          <button class="step-btn" onclick="selectJourney('cj-sme')">
+            <div class="step-num">HÀNH TRÌNH 2</div>
+            <div class="step-title">🏢 Chủ Hợp Tác Xã SME</div>
+          </button>
+          <button class="step-btn" onclick="selectJourney('cj-courier')">
+            <div class="step-num">HÀNH TRÌNH 3</div>
+            <div class="step-title">🚚 Bưu Tá Viettel Post</div>
+          </button>
+          <button class="step-btn" onclick="selectJourney('cj-regulator')">
+            <div class="step-num">HÀNH TRÌNH 4</div>
+            <div class="step-title">⚖️ Cơ Quan Quản Lý &amp; QLTT</div>
+          </button>
+        </div>
+
+        <!-- CJ 1: Consumer -->
+        <div id="cj-consumer" class="journey-content-panel">
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">1</span> Quét mã tại siêu thị bằng Camera điện thoại thường (0 cài đặt app)</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Khách hàng dùng camera iPhone / Android quét mã QR trên hộp sản phẩm. Hệ thống tự động mở PWA siêu nhẹ (&lt;150KB) mà không bắt tải app cồng kềnh.
+            </p>
+            <button class="btn btn-secondary" style="margin-top: 10px; width: auto;" onclick="switchTab('camera-tab')">Thử Quét Ngay ➔</button>
+          </div>
+
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">2</span> Xem Hộ chiếu Kỹ thuật số (Xuất xứ, Hạn dùng, Nhà máy GMP-WHO)</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Thông tin minh bạch 100% được chứng thực bởi chữ ký số Viettel-CA và trạm phát sóng 5G CAMARA (chống giả mạo vị trí GPS).
+            </p>
+          </div>
+
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">3</span> Về nhà mở seal lần đầu ➔ Nhận ngay 500MB Data 5G Viettel</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Khi xé seal mở nắp, người dùng bấm "Mở Nắp Nhận Thưởng", hệ thống ghi nhận trên sổ cái EVM BitMap và cộng trực tiếp 500MB Data vào sim Viettel qua số điện thoại 0-OTP.
+            </p>
+          </div>
+
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">4</span> Mang về quê mất sóng (Chế độ máy bay) ➔ Quét tiếp vẫn báo chính hãng</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Thử nghiệm ngắt toàn bộ Wifi/4G, quét hộp thứ 2: Đạt 100% xác thực nhờ lõi Ed25519 &amp; P2P Cache nội bộ.
+            </p>
+            <button class="btn btn-amber" style="margin-top: 10px; width: auto;" onclick="switchTab('demo2-tab')">Thử Demo Chế Độ Máy Bay ➔</button>
+          </div>
+        </div>
+
+        <!-- CJ 2: SME Co-op -->
+        <div id="cj-sme" class="journey-content-panel" style="display: none;">
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">1</span> Đăng ký Hợp tác xã trong 60 giây (Self-Service)</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Chủ HTX Sầu Riêng Đắk Lắk hoặc HTX Nông Sản nhập mã số thuế, kết nối phần mềm bán hàng KiotViet / Sapo chỉ với 1 click.
+            </p>
+          </div>
+
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">2</span> Bấm 1 chạm khởi tạo 10.000 mã GS1 Digital Link (trong 2.1 ms)</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Hệ thống tự động sinh 10.000 mã định danh chuẩn GS1 có chữ ký số Ed25519, đồng bộ ngay 10 trường dữ liệu Thông tư 02/2024/TT-BKHCN lên Cổng Quốc gia.
+            </p>
+            <button class="btn btn-emerald" style="margin-top: 10px; width: auto;" onclick="switchTab('demo3-tab')">Thử Tạo 10.000 Mã SME ➔</button>
+          </div>
+
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">3</span> Bật chiến dịch Loyalty bán chéo Data Viettel 4G/5G</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Tạo động lực kích cầu tiêu dùng: Mỗi quả sầu riêng hoặc hộp nông sản gắn tem sẽ tặng 500MB Data hoặc 10.000đ Viettel Money khi người mua quét tem.
+            </p>
+          </div>
+
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">4</span> Giám sát dòng chảy hàng hóa và bản đồ tiêu thụ thời gian thực</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Biết chính xác lô hàng xuất khẩu sang Trung Quốc hoặc phân phối ở TP.HCM đang được quét ở đâu, phát hiện ngay nếu có đại lý bán lấn vùng.
+            </p>
+          </div>
+        </div>
+
+        <!-- CJ 3: Viettel Post Courier -->
+        <div id="cj-courier" class="journey-content-panel" style="display: none;">
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">1</span> Bưu tá mở PDA tại bưu cục Viettel Post nhận đơn COD</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Màn hình chuyên dụng cho bưu tá: Chọn đơn hàng vận chuyển (ví dụ VTP-2026-99887766), chuẩn bị giao cho khách hàng hoặc nhận hàng hoàn.
+            </p>
+          </div>
+
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">2</span> Quét MatrixScan đối soát đồng thời Mã Vận Đơn + Mã Hộp Sản Phẩm</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Camera quét chớp nhoáng 50 hộp/giây, tự động đối soát cặp khóa mật mã giữa vỏ kiện hàng và ruột sản phẩm bên trong.
+            </p>
+            <button class="btn btn-primary" style="margin-top: 10px; width: auto;" onclick="switchTab('demo4-tab')">Mở Màn Hình Bưu Tá PDA ➔</button>
+          </div>
+
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">3</span> Cân điện tử ±2g kết hợp cảm biến 3D ToF đo mật độ thể tích</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Bẫy lừa đảo tráo hàng: Nếu kẻ gian tráo chiếc iPhone bằng 1 cục gạch hoặc chai nước CÓ CÙNG CÂN NẶNG 450g, cảm biến phát hiện ngay độ lệch thể tích.
+            </p>
+          </div>
+
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">4</span> Khóa cứng nút "Hoàn Tiền COD" nếu phát hiện sai lệch</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Bảo vệ bưu tá không bao giờ bị trừ lương hoặc đền tiền oan vì nhận nhầm hàng hoàn bị tráo ruột.
+            </p>
+          </div>
+        </div>
+
+        <!-- CJ 4: Market Surveillance Regulator -->
+        <div id="cj-regulator" class="journey-content-panel" style="display: none;">
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">1</span> Giám sát Bản đồ nhiệt quét hàng hóa 63 tỉnh thành thời gian thực</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Theo dõi nhịp đập phân phối hàng hóa toàn quốc: Lượng quét tại Hà Nội, TP.HCM, Cửa khẩu Lạng Sơn, Vùng trồng Đắk Lắk.
+            </p>
+            <button class="btn btn-cyan" style="margin-top: 10px; width: auto;" onclick="switchTab('demo4-tab')">Xem Bản Đồ Nhiệt 63 Tỉnh ➔</button>
+          </div>
+
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">2</span> Radar phát hiện dị thường: Bắt quả tang tem nhân bản photocopy</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Khi cùng 1 mã tem được quét tại Hà Nội lúc 09:00:00 và tại Cần Thơ lúc 09:02:15 ➔ Bất khả thi vật lý (1.800km trong 2 phút) ➔ Báo động đỏ toàn hệ thống!
+            </p>
+          </div>
+
+          <div class="journey-step-card">
+            <h4><span class="journey-step-badge">3</span> Trích xuất Biên bản thanh tra số có chữ ký số Viettel-CA</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
+              Hệ thống tự động kết xuất hồ sơ vi phạm hành chính gồm toạ độ trạm 5G CAMARA, thời gian UTC Viettel-CA, chỉ số mực in vi mô CDP để bàn giao Đội QLTT xử lý.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: DEMO 2 (DOCX): ONLINE -> AIRPLANE P2P ==================== -->
+    <div id="demo2-tab" class="tab-panel">
+      <div class="grid-2">
+        <div class="glass-card">
+          <div class="card-title">
+            <span>KỊCH BẢN DEMO THỰC CHIẾN 2 (TRONG TÀI LIỆU DOCX VIETTEL)</span>
+            <span class="badge-green">DEMO TRỌNG TÂM</span>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+            Trình diễn sự phối hợp giữa <strong>Rust GS1 Resolver</strong>, <strong>Lõi Libp2p / CRDT</strong>, <strong>Ứng dụng Di động</strong> và <strong>Hyperledger Besu</strong>:
+          </p>
+
+          <button class="btn btn-secondary" onclick="setPhoneCombatMode('online')">
+            BƯỚC 1: BẬT 4G/5G VIETTEL &amp; QUÉT HỘP THUỐC #1
+          </button>
+          
+          <button class="btn btn-amber" style="margin-top: 10px;" onclick="setPhoneCombatMode('offline')">
+            BƯỚC 2: BẬT CHẾ ĐỘ MÁY BAY (0% INTERNET) &amp; QUÉT HỘP THUỐC #2
+          </button>
+
+          <div style="margin-top: 18px; padding: 14px; background: #090D16; border-radius: 12px; border: 1px solid var(--card-border);">
+            <div style="font-size: 12px; font-weight: 700; color: #FFF; margin-bottom: 6px;">
+              Nhật Ký Kỹ Thuật (Rust FFI, CAMARA 5G &amp; P2P CRDT Trace Log):
+            </div>
+            <div id="tech-log-demo2" style="font-family: monospace; font-size: 11.5px; color: #38BDF8; line-height: 1.5;">
+              [BƯỚC 1 ONLINE] GET https://viettel.vn/01/09501101420014/10/LOT-VN-2026-09/21/BOX-0001<br/>
+              ➔ Axum Resolver phản hồi trong 30 µs (&lt;10ms SLA) + Xác thực trạm CAMARA `452-04-gNB8821`<br/>
+              ➔ P2P CRDT Core ngầm tải &amp; đồng bộ Merkle Root + 1.000 mã hash vào Local Cache (0.13 MB RAM).
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="phone-frame">
+            <div class="phone-statusbar">
+              <span id="p2p-carrier">📶 Viettel 5G (SIM Nội Địa)</span>
+              <span id="p2p-net-mode">🌐 Online • Pin 98%</span>
+            </div>
+            <div style="text-align: center; margin-bottom: 14px;">
+              <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">
+                HỘ CHIẾU SẢN PHẨM SỐ (GS1 DIGITAL PASSPORT)
+              </div>
+              <h3 id="p2p-title" style="margin: 6px 0; font-size: 16px;">
+                Viên Nang Đông Trùng Hạ Thảo &amp; Sâm Ngọc Linh (Hộp 30 Viên)
+              </h3>
+              <div id="p2p-badge" class="badge-green">
+                Đã xác thực trên Blockchain (Online Verified • Hạ tầng Viettel 4G/5G)
+              </div>
+            </div>
+
+            <table>
+              <tr><th>Mã chuẩn GS1 (GTIN)</th><td><code id="p2p-gtin">09501101420014 (Mod-10 Valid)</code></td></tr>
+              <tr><th>Số Lô / Serial</th><td><code id="p2p-serial">LOT-VN-2026-09 / BOX-0001</code></td></tr>
+              <tr><th>Đơn vị sản xuất</th><td>CTCP Dược Phẩm Công Nghệ Cao Việt Nam (GMP-WHO)</td></tr>
+              <tr><th>Trạm 5G CAMARA</th><td id="p2p-camara"><code>452-04-gNB8821 (Viettel 5G SA • 0% Fake-GPS)</code></td></tr>
+              <tr><th>Mã băm SHA-256</th><td><code id="p2p-hash">da61c3d6f011a3cc462dcedfdbd83280542f7d82f16487ec76fda2d4e0c0bec0</code></td></tr>
+              <tr><th>Thời gian xử lý CPU</th><td><strong id="p2p-time" style="color: #34D399;">30 µs (0.03 ms)</strong></td></tr>
+              <tr><th>Bộ nhớ RAM Lõi Rust</th><td><strong>0.13 MB / 30 MB</strong></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: DEMO 3 (DOCX): SME SELF-SERVICE 10.000 MÃ ==================== -->
+    <div id="demo3-tab" class="tab-panel">
+      <div class="glass-card">
+        <div class="card-title">
+          <span>DEMO 3: CỔNG TỰ PHỤC VỤ SME 60 GIÂY &amp; KHỞI TẠO 10.000 MÃ GS1 TRONG 2.1 MS</span>
+          <span class="badge-green">THÔNG TƯ 02/2024/TT-BKHCN</span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Khách hàng mẫu: <strong>Hợp Tác Xã Sầu Riêng Đắk Lắk (Nông Sản Xuất Khẩu GACC / VietGAP)</strong>
+        </p>
+
+        <div class="grid-3">
+          <div class="glass-card" style="margin-bottom: 0;">
+            <div style="font-size: 12px; color: var(--text-muted);">SỐ LƯỢNG MÃ KHỞI TẠO</div>
+            <div class="metric-val" id="sme-code-count" style="font-size: 28px; margin: 8px 0; color: #FFF;">10.000 Mã</div>
+            <p style="font-size: 11.5px; color: var(--emerald);">
+              ✓ Hoàn thành trong <strong>2.1 ms</strong> (Tốc độ &gt; 4.7 triệu mã/giây)
+            </p>
+          </div>
+
+          <div class="glass-card" style="margin-bottom: 0;">
+            <div style="font-size: 12px; color: var(--text-muted);">CHIẾN DỊCH BÁN CHÉO VIETTEL</div>
+            <div class="metric-val" style="font-size: 26px; margin: 8px 0; color: var(--amber);">+500MB 5G</div>
+            <p style="font-size: 11.5px; color: var(--text-muted);">
+              Tặng Data Viettel / 10.000đ Viettel Money khi người tiêu dùng quét mở nắp.
+            </p>
+          </div>
+
+          <div class="glass-card" style="margin-bottom: 0;">
+            <div style="font-size: 12px; color: var(--text-muted);">TỐC ĐỘ QUÉT THỜI GIAN THỰC</div>
+            <div class="metric-val" style="font-size: 28px; margin: 8px 0; color: var(--cyan);">1.200 Scans/s</div>
+            <p style="font-size: 11.5px; color: var(--text-muted);">
+              Đồng bộ tự động lên Cổng Quốc Gia `truyxuatnguongoc.gov.vn`.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <div class="btn-group-2">
+            <button class="btn btn-emerald" onclick="simulateBatchMinting()">
+              ⚡ BẤM 1 CHẠM KHỞI TẠO LÔ 10.000 MÃ GS1 MỚI
+            </button>
+            <button class="btn btn-secondary" onclick="simulateLoyaltyToggle()">
+              🎁 Cài Đặt Chương Trình Loyalty Tặng Data Viettel
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Scan Stream -->
+        <div style="margin-top: 20px;">
+          <div style="font-size: 13px; font-weight: 700; margin-bottom: 8px;">
+            Luồng Dữ Liệu Khách Hàng Quét Mã Trực Tiếp (Real-Time Scan Stream):
+          </div>
+          <div class="scan-feed-list" id="scan-stream-box">
+            <div class="scan-feed-item">
+              <span>Hà Nội (gNodeB-8821): <code>/01/08935049501238/21/ITEM-00001</code></span>
+              <span class="badge-green">CHÍNH HÃNG (+500MB)</span>
+            </div>
+            <div class="scan-feed-item">
+              <span>TP.HCM (gNodeB-1042): <code>/01/08935049501238/21/ITEM-00042</code></span>
+              <span class="badge-green">CHÍNH HÃNG (+500MB)</span>
+            </div>
+            <div class="scan-feed-item">
+              <span>Đắk Lắk (gNodeB-3310): <code>/01/08935049501238/21/ITEM-00105</code></span>
+              <span class="badge-orange">OFFLINE P2P</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: DEMO 4 (DOCX): VIETTEL POST & BẢN ĐỒ 63 TỈNH ==================== -->
+    <div id="demo4-tab" class="tab-panel">
+      <div class="grid-2">
+        <!-- Action 1: Courier PDA -->
+        <div class="glass-card">
+          <div class="card-title">
+            <span>HÀNH ĐỘNG 1: MÁY QUÉT BƯU TÁ VIETTEL POST (PDA)</span>
+            <span class="badge-green">CHỐNG TRÁO COD 100%</span>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px;">
+            Mã vận đơn: <code>VTP-2026-99887766</code> • Tuyến: <strong>Bưu cục Cầu Giấy ➔ Kho Lạnh Nội Bài</strong>
+          </p>
+
+          <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 14px; border: 1px solid var(--card-border); margin-bottom: 14px;">
+            <div style="font-size: 12px; color: var(--text-muted);">MÃ BĂM ĐỐI SOÁT KIỆN HÀNG (WAYBILL + SERIAL):</div>
+            <code style="word-break: break-all; display: block; margin: 6px 0;">da61c3d6f011a3cc462dcedfdbd83280542f7d82f16487ec76fda2d4e0c0bec0</code>
+            <div style="font-size: 11.5px; color: #FFF; margin-top: 6px;">
+              • Trọng lượng chuẩn: <strong>450g (±2g sai số)</strong><br/>
+              • Mật độ thể tích chuẩn 3D ToF: <strong>0.75 g/cm³</strong>
+            </div>
+          </div>
+
+          <div class="btn-group-2">
+            <button class="btn btn-secondary" onclick="simulateCodGenuine()">
+              Quét Hàng Chuẩn (Mở Nút Hoàn Tiền)
+            </button>
+            <button class="btn btn-primary" onclick="simulateCodSwapBrick()">
+              Bắt Quả Tang Tráo Gạch / Nước 450g
+            </button>
+          </div>
+
+          <div id="cod-refund-btn-wrap" style="margin-top: 12px;">
+            <button id="btn-cod-refund" class="btn btn-emerald">
+              ✓ NÚT HOÀN TIỀN COD: ĐANG MỞ (HÀNG AN TOÀN)
+            </button>
+          </div>
+        </div>
+
+        <!-- Action 2: 63-province Heatmap & Anomaly Radar -->
+        <div class="glass-card">
+          <div class="card-title">
+            <span>HÀNH ĐỘNG 2: BẢN ĐỒ NHIỆT 63 TỈNH &amp; GIÁM SÁT THỊ TRƯỜNG</span>
+            <span class="badge-red" id="heatmap-alert-badge">3 CẢNH BÁO</span>
+          </div>
+
+          <!-- Interactive Vietnam SVG Map representation -->
+          <div style="background: #040812; border-radius: 12px; border: 1px solid var(--card-border); padding: 16px; text-align: center;">
+            <svg viewBox="0 0 400 240" style="width: 100%; max-height: 200px;">
+              <!-- Background grid -->
+              <defs>
+                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                </pattern>
+              </defs>
+              <rect width="400" height="240" fill="url(#grid)" />
+              
+              <!-- S-shape Vietnam stylized backbone -->
+              <path d="M 170 30 Q 190 50 180 80 Q 210 110 215 140 Q 200 170 170 200 Q 140 220 120 230" 
+                    fill="none" stroke="rgba(0, 240, 255, 0.4)" stroke-width="8" stroke-linecap="round" />
+              
+              <!-- Hotspots -->
+              <!-- Ha Noi -->
+              <circle cx="170" cy="45" r="9" fill="#10B981" opacity="0.8" />
+              <circle cx="170" cy="45" r="16" fill="none" stroke="#10B981" stroke-width="1.5">
+                <animate attributeName="r" values="9;24;9" dur="2.5s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.8;0;0.8" dur="2.5s" repeatCount="indefinite"/>
+              </circle>
+              <text x="185" y="48" fill="#FFF" font-size="10" font-weight="bold">Hà Nội (142k)</text>
+
+              <!-- Da Nang -->
+              <circle cx="210" cy="110" r="7" fill="#10B981" opacity="0.8" />
+              <text x="222" y="113" fill="#FFF" font-size="9">Đà Nẵng</text>
+
+              <!-- Dak Lak -->
+              <circle cx="205" cy="145" r="8" fill="#F59E0B" opacity="0.8" />
+              <text x="218" y="148" fill="#FFF" font-size="9">Đắk Lắk (Sầu Riêng)</text>
+
+              <!-- TP. HCM -->
+              <circle cx="175" cy="190" r="10" fill="#10B981" opacity="0.8" />
+              <text x="190" y="193" fill="#FFF" font-size="10" font-weight="bold">TP.HCM (198k)</text>
+
+              <!-- Can Tho (Anomaly Radar Target) -->
+              <circle id="map-can-tho-dot" cx="140" cy="215" r="6" fill="#10B981" />
+              <text x="75" y="218" fill="#FFF" font-size="9">Cần Thơ</text>
+            </svg>
+          </div>
+
+          <div style="margin-top: 14px;">
+            <button class="btn btn-primary" onclick="triggerAnomalyRadarAlert()">
+              🚨 KÍCH HOẠT RADAR BẮT TEM NHÂN BẢN (QUÉT TRÙNG 2 TỈNH)
+            </button>
+          </div>
+
+          <table style="margin-top: 14px;">
+            <tr><th>Tỉnh / Trung Tâm Logistics</th><th>Lượt Quét</th><th>Chính Hãng</th><th>Offline P2P</th></tr>
+            <tr><td><strong>Hà Nội (Nội Bài &amp; Cầu Giấy)</strong></td><td>142.850</td><td style="color:#10B981;">99.94%</td><td>14.2%</td></tr>
+            <tr><td><strong>TP.HCM (Cát Lái &amp; Thủ Đức)</strong></td><td>198.420</td><td style="color:#10B981;">99.91%</td><td>18.7%</td></tr>
+            <tr><td><strong>Đắk Lắk (Vùng Trồng Sầu Riêng)</strong></td><td>52.190</td><td style="color:#10B981;">100%</td><td>62.8%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 6: DEMO 1 (DOCX): VIETTEL CLOUD 18.4K RPS ==================== -->
+    <div id="demo1-tab" class="tab-panel">
+      <div class="glass-card">
+        <div class="card-title">
+          <span>DEMO 1: HẠ TẦNG VIETTEL CLOUD (18.4K RPS) &amp; STRESS TEST TRỰC TIẾP</span>
+          <span class="badge-green">SLA &lt; 20MS ĐẠT 100%</span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Kiểm thử tải đồng thời hàng nghìn kết nối HTTP/TCP trực tiếp tới cụm máy chủ Viettel Cloud MEC (Rust Axum Resolver).
+        </p>
+
+        <div class="grid-3">
+          <div class="glass-card" style="margin-bottom: 0;">
+            <div style="font-size: 12px; color: var(--text-muted);">TỐC ĐỘ CHỊU TẢI (STRESS TEST)</div>
+            <div class="metric-val" id="rps-counter-live" style="font-size: 28px; margin: 8px 0; color: #34D399;">18.420 RPS</div>
+            <p style="font-size: 11.5px; color: var(--text-muted);">
+              20 luồng worker đồng thời • 0.00% lỗi gói tin
+            </p>
+          </div>
+
+          <div class="glass-card" style="margin-bottom: 0;">
+            <div style="font-size: 12px; color: var(--text-muted);">ĐỘ TRỄ VIETTEL CLOUD (NỘI ĐỊA)</div>
+            <div class="metric-val" style="font-size: 28px; margin: 8px 0; color: #34D399;">3.4 ms</div>
+            <p style="font-size: 11.5px; color: var(--emerald);">
+              Nhanh gấp <strong>27.7x</strong> so với Cloud nước ngoài!
+            </p>
+          </div>
+
+          <div class="glass-card" style="margin-bottom: 0;">
+            <div style="font-size: 12px; color: var(--text-muted);">ĐỘ TRỄ CLOUD QUỐC TẾ (AWS SG)</div>
+            <div class="metric-val" style="font-size: 28px; margin: 8px 0; color: #FF4D73;">94.2 ms</div>
+            <p style="font-size: 11.5px; color: var(--text-muted);">
+              Bị ảnh hưởng nghẽn cáp quang biển AAG / APG
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <div class="btn-group-2">
+            <button class="btn btn-emerald" id="btn-run-stress" onclick="runLiveStressTest()">
+              ▶ BẮT ĐẦU CHẠY STRESS TEST 18.4K RPS (MÔ PHỎNG 20 WORKERS)
+            </button>
+            <button class="btn btn-secondary" onclick="validateRfc9264Linkset()">
+              🔍 Kiểm Tra Chuẩn IETF RFC 9264 (application/linkset+json)
+            </button>
+          </div>
+        </div>
+
+        <div id="rfc-validator-box" style="margin-top: 16px; display: none;">
+          <pre class="code-view">{
+  "linkset": [
+    {
+      "anchor": "https://viettel.vn/01/08934673123456/21/BOX-0001",
+      "https://ref.gs1.org/standards/linktypes/pip": [
+        {"href": "https://viettel.vn/pip/08934673123456", "title": "Digital Product Passport", "type": "application/json"}
+      ],
+      "https://ref.gs1.org/standards/linktypes/hasRetailers": [
+        {"href": "https://viettel.vn/retailers", "title": "Authorised Retailers"}
+      ],
+      "conformance": "IETF RFC 9264 & GS1 Digital Link 1.3 Strict Conformant"
+    }
+  ]
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 7: BỐN KỊCH BẢN CHIẾN LƯỢC ==================== -->
+    <div id="combat-tab" class="tab-panel">
+      <div class="grid-2">
+        <!-- Scenario 1 -->
+        <div class="glass-card">
+          <div class="card-title">
+            <span>KỊCH BẢN 1: QUÉT TRÊN KỆ SIÊU THỊ VS MỞ NẮP TẠI NHÀ</span>
+            <span style="font-size: 11px; color: var(--cyan);">TWO-PHASE GUARD</span>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px;">
+            Giải quyết triệt để lỗi 25% khách hàng bị báo hàng giả oan do có người quét trộm trên kệ siêu thị trước khi mua.
+          </p>
+
+          <div class="btn-group-2">
+            <button class="btn btn-secondary" onclick="simulateShelfScan1A()">
+              1A. Quét Trên Kệ (Chỉ Đọc)
+            </button>
+            <button class="btn btn-primary" onclick="simulateHomeUnseal1B()">
+              1B. Về Nhà Khui Nắp (+500MB)
+            </button>
+          </div>
+          <button class="btn btn-amber" style="margin-top: 10px;" onclick="simulateRescanTamper()">
+            1C. Quét Lần 2 (Gian Thương Tái Sử Dụng Hộp)
+          </button>
+        </div>
+
+        <!-- Scenario 2 -->
+        <div class="glass-card">
+          <div class="card-title">
+            <span>KỊCH BẢN 2: QUÉT OFFLINE 0 SÓNG Ở VÙNG NÔNG THÔN</span>
+            <span style="font-size: 11px; color: var(--amber);">AIRPLANE MODE</span>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px;">
+            Bà con nông dân Đắk Lắk / Mù Cang Chải ở nơi 0 vạch sóng vẫn kiểm tra được phân bón thật nhờ chữ ký Ed25519 nhúng trực tiếp.
+          </p>
+
+          <div class="btn-group-2">
+            <button class="btn btn-amber" onclick="toggleOfflineMode()">
+              ✈️ Bật/Tắt Chế Độ Máy Bay
+            </button>
+            <button class="btn btn-emerald" onclick="testOfflineEd25519()">
+              🌾 Quét Phân Bón Đầu Trâu
+            </button>
+          </div>
+        </div>
+
+        <!-- Scenario 3 -->
+        <div class="glass-card">
+          <div class="card-title">
+            <span>KỊCH BẢN 3: BẪY TEM PHOTOCOPY (OPTICAL CDP)</span>
+            <span style="font-size: 11px; color: var(--vt-red);">COPY DETECTION</span>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 8px;">
+            Kéo thanh trượt để so sánh hạt mực in gốc (+0.01 dB) vs bản in photocopy laser (-20.58 dB).
+          </p>
+
+          <div class="compare-container" id="compare-box">
+            <div class="compare-img compare-original">
+              <span>TEM GỐC NHÀ MÁY (Λ = 0.892)</span>
+            </div>
+            <div class="compare-img compare-clone" id="compare-clone-clip">
+              <span>TEM PHOTOCOPY LASER (Λ = 0.181)</span>
+            </div>
+            <div class="compare-slider-bar" id="compare-bar">
+              <div class="compare-handle">↔</div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" style="margin-top: 12px;" onclick="testPhotocopyDetection()">
+            📷 Quét Thử Bản In Photocopy (Bắt Gian Lận)
+          </button>
+        </div>
+
+        <!-- Scenario 4 -->
+        <div class="glass-card">
+          <div class="card-title">
+            <span>KỊCH BẢN 4: VIETTEL POST CHỐNG TRÁO HÀNG HOÀN COD</span>
+            <span style="font-size: 11px; color: var(--emerald);">3D DENSITY &amp; WEIGHT</span>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px;">
+            Khách tráo iPhone lấy cục gạch hoặc chai nước có CÙNG CÂN NẶNG 450g: Tự động phát hiện sai lệch mật độ thể tích.
+          </p>
+
+          <div class="btn-group-2">
+            <button class="btn btn-secondary" onclick="simulateCodGenuine()">
+              Hàng Chuẩn (Đúng Cân Nặng)
+            </button>
+            <button class="btn btn-primary" onclick="simulateCodSwapBrick()">
+              Tráo Gạch / Nước (450g)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 8: ÂM HỌC CHAI LỌ & 5G ISAC ==================== -->
+    <div id="acoustic-tab" class="tab-panel">
+      <div class="grid-2">
+        <div class="glass-card">
+          <div class="card-title">
+            <span>BỘ PHÁT TẦN SỐ CỘNG HƯỞNG (CHIRP PROBE)</span>
+            <span style="font-size: 11px; color: var(--cyan);">WEBAUDIO API THẬT</span>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px;">
+            Kiểm tra chất lỏng trong chai đóng kín (Rượu ngoại, Nước yến, Thuốc BVTV) mà không cần mở nắp.
+          </p>
+
+          <div class="btn-group-2">
+            <button class="btn btn-primary" onclick="playAcousticChirp(18000, 20000)">
+              🔊 Chíp Siêu Âm (18–20 kHz)
+            </button>
+            <button class="btn btn-secondary" onclick="playAcousticChirp(3500, 6000)">
+              🔊 Chíp Nghe Được (3.5–6 kHz)
+            </button>
+          </div>
+
+          <button id="btn-mic" class="btn btn-cyan" style="margin-top: 10px;" onclick="toggleMicrophoneAnalyser()">
+            🎙️ Bật Micro Điện Thoại Phân Tích Phổ Sóng Thật
+          </button>
+
+          <canvas id="spectrum-canvas"></canvas>
+
+          <div class="btn-group-2" style="margin-top: 10px;">
+            <button class="btn btn-secondary" onclick="simulateAcousticGenuine()">
+              Mẫu 1: Yến Xịn (Υ = 1.482)
+            </button>
+            <button class="btn btn-amber" onclick="simulateAcousticFakeSugar()">
+              Mẫu 2: Nước Đường Pha (Υ = 1.894)
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-title">
+            <span>TRẠM 5G ISAC MASSIVE MIMO (RADAR TỪ 500M)</span>
+            <span style="font-size: 11px; color: var(--cyan);">VIETTEL 64T64R DFRC</span>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 8px;">
+            Trạm phát sóng 5G Viettel vừa truyền dữ liệu vừa bắn radar đo độ rung xe tải để phát hiện tráo ruột thùng hàng từ xa.
+          </p>
+
+          <canvas id="radar-canvas"></canvas>
+
+          <div class="btn-group-2" style="margin-top: 10px;">
+            <button class="btn btn-secondary" onclick="setRadarMode('loaded')">
+              Xe Đầy Hàng (3.8 Hz Damping)
+            </button>
+            <button class="btn btn-primary" onclick="setRadarMode('unloaded')">
+              Xe Bị Rút Hàng (12.0 Hz)
+            </button>
+          </div>
+
+          <div style="margin-top: 14px;">
+            <button class="btn btn-cyan" onclick="testJepaManifold()">
+              🧪 Chạy Mô Hình JEPA (Bảo Toàn Khối Lượng 4.2ms)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 9: ĐO KIỂM A/B THỰC TẾ ==================== -->
+    <div id="ab-tab" class="tab-panel">
+      <div class="glass-card">
+        <div class="card-title">
+          <span>BẢNG ĐỐI SOÁT A/B BENCHMARK THỰC TẾ (3.612 SỰ KIỆN ĐÃ KIỂM ĐỊNH)</span>
+          <span style="font-size: 11px; color: var(--emerald);">100% CARGO TEST PASS</span>
+        </div>
+        <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 16px;">
+          So sánh trực tiếp giữa Giải Pháp Cũ (System A trên thị trường) và Giải Pháp Viettel Nâng Cấp (System B).
+        </p>
+
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>MÃ TEST</th>
+                <th>TÌNH HUỐNG THỰC TẾ</th>
+                <th>HỆ THỐNG CŨ (SYSTEM A)</th>
+                <th>HỆ THỐNG B (VIETTEL)</th>
+                <th>HIỆU QUẢ KINH TẾ / ROI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight: 700; color: var(--cyan);">AB-1</td>
+                <td>Khách quét thử trên kệ siêu thị</td>
+                <td style="color: #FF4D73;">25% báo giả oan (Khủng hoảng)</td>
+                <td style="color: var(--emerald); font-weight: 700;">0% báo giả oan</td>
+                <td>Giảm 94.3% phí gas blockchain</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 700; color: var(--cyan);">AB-2</td>
+                <td>Nông dân quét offline 8h vs Kẻ cướp online 9h</td>
+                <td style="color: #FF4D73;">Mất quyền sở hữu (0% bảo vệ)</td>
+                <td style="color: var(--emerald); font-weight: 700;">100% bảo vệ nông dân</td>
+                <td>Bảo vệ 100% quà tặng nông dân</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 700; color: var(--cyan);">AB-3</td>
+                <td>Tốc độ quét offline 0 mạng viễn thông</td>
+                <td style="color: #FF4D73;">Phải tải 48 MB database trước</td>
+                <td style="color: var(--emerald); font-weight: 700;">0 MB tải trước (36.1 µs)</td>
+                <td>Chạy mượt trên điện thoại 1 triệu đồng</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 700; color: var(--cyan);">AB-4</td>
+                <td>Phát hiện tem photocopy laser/offset</td>
+                <td style="color: #FF4D73;">0% phát hiện (bị lừa 100%)</td>
+                <td style="color: var(--emerald); font-weight: 700;">100% bắt quả tang (-20.5 dB)</td>
+                <td>Chặn đứng nạn photo 1 mã dán 1000 hộp</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 700; color: var(--cyan);">AB-5</td>
+                <td>Đại lý tráo hàng 1-đổi-1 (1000 vào == 1000 ra)</td>
+                <td style="color: #FF4D73;">ERP/Blockchain bó tay (0%)</td>
+                <td style="color: var(--emerald); font-weight: 700;">Bắt đúng 100% &amp; chỉ đích danh kho</td>
+                <td>Tiết kiệm 96% chi phí thanh tra thị trường</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 700; color: var(--cyan);">AB-6</td>
+                <td>Viettel Post COD bị tráo gạch / nước 450g</td>
+                <td style="color: #FF4D73;">Cân điện tử bị lừa (50% lọt)</td>
+                <td style="color: var(--emerald); font-weight: 700;">Khóa 100% nút hoàn tiền</td>
+                <td>Triệt tiêu 100% bồi thường COD cho bưu tá</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- iOS PWA Install Instructions Modal -->
+  <div id="ios-pwa-modal" class="modal-overlay" onclick="closeIosPwaModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeIosPwaModal()">✕</button>
+      <div style="font-size: 32px; margin-bottom: 8px;">📲</div>
+      <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 8px;">
+        HƯỚNG DẪN CÀI ĐẶT APP TRÊN IPHONE (SAFARI)
+      </h3>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+        Để sử dụng toàn màn hình không có thanh địa chỉ và chạy mượt 100% Offline:
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="journey-step-badge">1</span>
+          <span>Bấm nút <strong>Chia sẻ (Share) ⎋</strong> ở thanh dưới cùng Safari.</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="journey-step-badge">2</span>
+          <span>Cuộn xuống và chọn <strong>"Thêm vào Màn hình chính" (Add to Home Screen) ⊞</strong>.</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="journey-step-badge">3</span>
+          <span>Nhấn <strong>"Thêm" (Add)</strong> ở góc trên bên phải để hoàn tất cài đặt!</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" style="margin-top: 20px;" onclick="closeIosPwaModal()">
+        Đã Hiểu, Quay Lại Ứng Dụng
+      </button>
+    </div>
+  </div>
+
+  <!-- Bottom Sheet Proof Drawer -->
+  <div id="drawer-scrim" class="drawer-scrim" onclick="closeProofDrawer()"></div>
+  <div id="bottom-sheet" class="bottom-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <h3 style="font-size: 16px; font-weight: 800;">BẰNG CHỨNG MẬT MÃ &amp; SỔ CÁI BẢO CHỨNG</h3>
+      <button class="btn btn-secondary" style="width: auto; padding: 4px 12px;" onclick="closeProofDrawer()">✕ Đóng</button>
+    </div>
+
+    <div style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px;">
+      Bản ghi GS1 EPCIS 2.0 JSON-LD và biên lai ký số phần cứng (C2PA + Ed25519) sẵn sàng nộp tòa án hoặc quản lý thị trường.
+    </div>
+
+    <pre class="code-view" id="proof-json-view">{
+  "@context": ["https://ref.gs1.org/standards/epcis/2.0.0/epcis-context.jsonld"],
+  "id": "urn:uuid:7d213538-3543-4004-9225-bd5db773e308",
+  "type": "ObjectEvent",
+  "action": "OBSERVE",
+  "bizStep": "urn:epcglobal:cbv:bizstep:retail_selling",
+  "disposition": "urn:epcglobal:cbv:disp:active",
+  "epcList": ["urn:epc:id:sgtin:08934673.123456.BOX-0001"],
+  "eventTime": "2026-10-13T14:22:05.184+07:00",
+  "eventTimeZoneOffset": "+07:00",
+  "certification": {
+    "cryptographicScheme": "Ed25519-SHA512 (RFC 8032)",
+    "pqcUpgrade": "SQIsign-HD (109 Bytes)",
+    "hardwareAttestation": "ARM TrustZone Secure Enclave",
+    "signature": "3a8f9c1b4e2d7085a1f6...d94c",
+    "evmBitMapWord": "0x0000000000000000000000000000000000000000000000000000000000000001",
+    "viettelMoneyRewardStatus": "CLAIMED_500MB_5G_DATA"
+  }
+}</pre>
+  </div>
+
+  <script>
+    // ==========================================
+    // 1. SERVICE WORKER & PWA INSTALLATION
+    // ==========================================
+    let deferredPrompt = null;
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then((reg) => {
+          console.log('[PWA] Service Worker registered successfully:', reg.scope);
+        }).catch((err) => {
+          console.log('[PWA] Service Worker registration failed:', err);
+        });
+      });
+    }
+
+    // Check if running as installed standalone app
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    if (isStandalone) {
+      const banner = document.getElementById('pwa-install-banner');
+      if (banner) {
+        document.getElementById('pwa-sub-status').innerText = '✓ Đang chạy chế độ Native App (Màn hình chính) • Sẵn sàng 100% Offline';
+        document.getElementById('btn-pwa-install').innerText = '✓ Đã Cài Đặt';
+        document.getElementById('btn-pwa-install').style.background = '#10B981';
+      }
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const btn = document.getElementById('btn-pwa-install');
+      if (btn && !isStandalone) {
+        btn.innerText = '⬇️ Cài Đặt Ngay (Install PWA)';
+      }
+    });
+
+    function handlePwaInstallClick() {
+      if (isStandalone) {
+        alert('Ứng dụng đã được cài đặt và đang chạy ở chế độ Standalone Native!');
+        return;
+      }
+
+      // Check if iOS
+      const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      if (isIos) {
+        document.getElementById('ios-pwa-modal').classList.add('open');
+        return;
+      }
+
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('[PWA] User accepted the install prompt');
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        alert('Để cài đặt:\n• Trên Chrome/Edge: Nhấn vào biểu tượng Cài đặt trên thanh địa chỉ (Install App).\n• Trên Android: Nhấn Menu (3 chấm) ➔ Chọn "Thêm vào Màn hình chính".');
+      }
+    }
+
+    function closeIosPwaModal() {
+      document.getElementById('ios-pwa-modal').classList.remove('open');
+    }
+
+    // ==========================================
+    // 2. MOTION GRAPHIC BACKGROUND (PARTICLES & WAVES)
+    // ==========================================
+    const bgCanvas = document.getElementById('bg-canvas');
+    const bgCtx = bgCanvas.getContext('2d');
+    let width = bgCanvas.width = window.innerWidth;
+    let height = bgCanvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = bgCanvas.width = window.innerWidth;
+      height = bgCanvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    for (let i = 0; i < 45; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        radius: Math.random() * 2 + 1,
+        color: Math.random() > 0.4 ? 'rgba(0, 240, 255, 0.4)' : 'rgba(238, 0, 51, 0.35)'
+      });
+    }
+
+    function renderBgMotion() {
+      bgCtx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+
+        bgCtx.beginPath();
+        bgCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        bgCtx.fillStyle = p.color;
+        bgCtx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 140) {
+            bgCtx.beginPath();
+            bgCtx.moveTo(p.x, p.y);
+            bgCtx.lineTo(p2.x, p2.y);
+            bgCtx.strokeStyle = `rgba(100, 150, 255, ${0.15 * (1 - dist / 140)})`;
+            bgCtx.lineWidth = 0.8;
+            bgCtx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(renderBgMotion);
+    }
+    renderBgMotion();
+
+    // ==========================================
+    // 3. SLIDING TAB CONTROLLER
+    // ==========================================
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+
+      const activePanel = document.getElementById(tabId);
+      if (activePanel) activePanel.classList.add('active');
+
+      const allBtns = document.querySelectorAll('.nav-pill');
+      allBtns.forEach(btn => {
+        if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
+          btn.classList.add('active');
+        }
+      });
+
+      if (tabId === 'acoustic-tab' && !audioContext) {
+        initWebAudio();
+      }
+      if (tabId === 'acoustic-tab' || tabId === 'demo4-tab') {
+        drawRadarFrame();
+      }
+    }
+
+    function selectJourney(cjId) {
+      document.querySelectorAll('.journey-content-panel').forEach(p => p.style.display = 'none');
+      document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+
+      const target = document.getElementById(cjId);
+      if (target) target.style.display = 'block';
+
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+      }
+    }
+
+    // ==========================================
+    // 4. REAL CAMERA & SIMULATOR CONTROLLER
+    // ==========================================
+    let realCameraStream = null;
+    let isRealCamActive = false;
+    const videoElem = document.getElementById('camera-video');
+    const simCanvas = document.getElementById('viewfinder-sim-canvas');
+    const simCtx = simCanvas.getContext('2d');
+
+    function renderSimulatedViewfinder() {
+      if (isRealCamActive) return;
+      simCanvas.width = simCanvas.clientWidth || 340;
+      simCanvas.height = simCanvas.clientHeight || 380;
+      const w = simCanvas.width;
+      const h = simCanvas.height;
+
+      simCtx.fillStyle = '#060B16';
+      simCtx.fillRect(0, 0, w, h);
+
+      simCtx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
+      simCtx.lineWidth = 1.5;
+      simCtx.strokeRect(w * 0.2, h * 0.18, w * 0.6, h * 0.64);
+
+      const qrSize = Math.min(w * 0.35, 120);
+      const qx = (w - qrSize) / 2;
+      const qy = (h - qrSize) / 2;
+      simCtx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      simCtx.fillRect(qx, qy, qrSize, qrSize);
+
+      simCtx.fillStyle = '#060B16';
+      simCtx.fillRect(qx + 8, qy + 8, qrSize * 0.3, qrSize * 0.3);
+      simCtx.fillRect(qx + qrSize - 8 - qrSize * 0.3, qy + 8, qrSize * 0.3, qrSize * 0.3);
+      simCtx.fillRect(qx + 8, qy + qrSize - 8 - qrSize * 0.3, qrSize * 0.3, qrSize * 0.3);
+
+      simCtx.fillStyle = 'rgba(0, 240, 255, 0.8)';
+      simCtx.font = '11px sans-serif';
+      simCtx.textAlign = 'center';
+      simCtx.fillText('MÔ PHỎNG CAMERA CHUẨN GS1', w / 2, h * 0.88);
+    }
+    window.addEventListener('load', renderSimulatedViewfinder);
+
+    async function toggleRealCamera() {
+      const btn = document.getElementById('btn-toggle-cam');
+      if (!isRealCamActive) {
+        try {
+          realCameraStream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
+          });
+          videoElem.srcObject = realCameraStream;
+          videoElem.style.display = 'block';
+          simCanvas.style.display = 'none';
+          isRealCamActive = true;
+          btn.innerText = '⏹ Tắt Camera Thật';
+          btn.className = 'btn btn-secondary';
+        } catch (err) {
+          alert('Không thể mở camera phần cứng: ' + err.message + '\\nĐang tiếp tục với mô phỏng chuẩn.');
+        }
+      } else {
+        if (realCameraStream) {
+          realCameraStream.getTracks().forEach(t => t.stop());
+        }
+        videoElem.style.display = 'none';
+        simCanvas.style.display = 'block';
+        isRealCamActive = false;
+        btn.innerText = '📷 Bật Camera Thật Trên Điện Thoại';
+        btn.className = 'btn btn-primary';
+        renderSimulatedViewfinder();
+      }
+    }
+
+    function simulateLaserFlash() {
+      const fl = document.getElementById('flash-overlay');
+      fl.style.opacity = '0.9';
+      setTimeout(() => { fl.style.opacity = '0'; }, 55);
+    }
+
+    function triggerScanSimulation() {
+      simulateLaserFlash();
+      const banner = document.getElementById('scan-result-banner');
+      banner.className = 'result-banner success';
+      document.getElementById('result-title').innerText = 'Sữa Bột Vinamilk Dielac Alpha 850g';
+      document.getElementById('result-desc').innerText = 'GTIN: 08934673123456 • Serial: BOX-0001 • Phase 1A (Chưa mở)';
+    }
+
+    function executeFirstScanBurn() {
+      simulateLaserFlash();
+      burstConfetti();
+      const banner = document.getElementById('scan-result-banner');
+      banner.className = 'result-banner success';
+      document.getElementById('result-title').innerText = '🎉 Mở Hộp Thành Công!';
+      document.getElementById('result-desc').innerText = 'TẶNG NGAY +500MB DATA 5G VIETTEL vào thuê bao. Ô nhớ EVM BitMap đã ghi nhận kích hoạt lần đầu.';
+    }
+
+    // ==========================================
+    // 5. CONFETTI GENERATOR (PURE JS)
+    // ==========================================
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    let confettis = [];
+
+    function burstConfetti() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+      confettis = [];
+      const colors = ['#EE0033', '#10B981', '#00F0FF', '#FFD700', '#FF3366'];
+      for (let i = 0; i < 90; i++) {
+        confettis.push({
+          x: confettiCanvas.width / 2,
+          y: confettiCanvas.height * 0.4,
+          vx: (Math.random() - 0.5) * 14,
+          vy: (Math.random() - 0.8) * 15,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          size: Math.random() * 8 + 4,
+          rot: Math.random() * 360,
+          vrot: (Math.random() - 0.5) * 10,
+          alpha: 1
+        });
+      }
+      renderConfetti();
+    }
+
+    function renderConfetti() {
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      let active = false;
+      confettis.forEach(c => {
+        c.x += c.vx;
+        c.y += c.vy;
+        c.vy += 0.35;
+        c.rot += c.vrot;
+        c.alpha -= 0.012;
+        if (c.alpha > 0) {
+          active = true;
+          confettiCtx.save();
+          confettiCtx.globalAlpha = c.alpha;
+          confettiCtx.translate(c.x, c.y);
+          confettiCtx.rotate((c.rot * Math.PI) / 180);
+          confettiCtx.fillStyle = c.color;
+          confettiCtx.fillRect(-c.size / 2, -c.size / 2, c.size, c.size);
+          confettiCtx.restore();
+        }
+      });
+      if (active) requestAnimationFrame(renderConfetti);
+      else confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    }
+
+    // ==========================================
+    // 6. DEMO 2 (DOCX): ONLINE -> AIRPLANE MODE P2P
+    // ==========================================
+    function setPhoneCombatMode(mode) {
+      const carrier = document.getElementById('p2p-carrier');
+      const netIcon = document.getElementById('p2p-net-mode');
+      const badge = document.getElementById('p2p-badge');
+      const pSerial = document.getElementById('p2p-serial');
+      const pHash = document.getElementById('p2p-hash');
+      const pCamara = document.getElementById('p2p-camara');
+      const techLog = document.getElementById('tech-log-demo2');
+
+      if (mode === 'online') {
+        carrier.innerText = '📶 Viettel 5G (SIM Nội Địa)';
+        netIcon.innerText = '🌐 Online • Pin 98%';
+        badge.className = 'badge-green';
+        badge.innerText = 'Đã xác thực trên Blockchain (Online Verified • Hạ tầng Viettel 4G/5G)';
+        pSerial.innerText = 'LOT-VN-2026-09 / BOX-0001';
+        pHash.innerText = 'da61c3d6f011a3cc462dcedfdbd83280542f7d82f16487ec76fda2d4e0c0bec0';
+        pCamara.innerHTML = '<code>452-04-gNB8821 (Viettel 5G SA • 0% Fake-GPS)</code>';
+        techLog.innerHTML = '[BƯỚC 1 ONLINE] GET https://viettel.vn/01/09501101420014/10/LOT-VN-2026-09/21/BOX-0001<br/>➔ Axum Resolver phản hồi trong 30 µs (&lt;10ms SLA) + CAMARA Cell-ID 452-04-gNB8821<br/>➔ P2P CRDT Core ngầm tải &amp; đồng bộ Merkle Root + 1.000 mã hash vào Local Cache (0.13 MB RAM).';
+        alert('ĐÃ BẬT 5G VIETTEL: Quét hộp #1 online thành công. Đã đồng bộ 1.000 mã hash vào Local CRDT Cache!');
+      } else {
+        carrier.innerText = '✈️ Chế độ máy bay (0 vạch sóng)';
+        netIcon.innerText = '⚠️ Offline 100% • Pin 97%';
+        badge.className = 'badge-orange';
+        badge.innerText = 'ĐÃ XÁC THỰC OFFLINE P2P (CRDT Sync • Không cần Internet)';
+        pSerial.innerText = 'LOT-VN-2026-09 / BOX-0002';
+        pHash.innerText = '8f4c2e1b9a7065d4e3f2...c0bec1';
+        pCamara.innerHTML = '<code>P2P Offline Peer Cache (Ed25519 Verified)</code>';
+        techLog.innerHTML = '[BƯỚC 2 AIRPLANE MODE] QUÉT HỘP #2 (BOX-0002) HOÀN TOÀN KHÔNG CÓ MẠNG (0% INTERNET)<br/>➔ Lõi P2P Rust đọc Local CRDT Cache trong 30 µs<br/>➔ Khớp Merkle Leaf Root `48e16e22a...` và chữ ký số Ed25519<br/>➔ XÁC THỰC THÀNH CÔNG VỚI HUY HIỆU CAM!';
+        alert('CHẾ ĐỘ MÁY BAY KÍCH HOẠT: Quét hộp thuốc #2 thành công 100% OFFLINE nhờ chữ ký Ed25519 & CRDT Cache (30 µs)!');
+      }
+    }
+
+    // ==========================================
+    // 7. DEMO 3 (DOCX): SME 10.000 CODES & LOYALTY
+    // ==========================================
+    function simulateBatchMinting() {
+      const countElem = document.getElementById('sme-code-count');
+      countElem.innerText = 'Đang mint...';
+      setTimeout(() => {
+        countElem.innerText = '10.000 Mã GS1';
+        burstConfetti();
+        alert('HOÀN THÀNH KHỞI TẠO 10.000 MÃ GS1 TRONG 2.1 MS!\\n• Từ: /01/08935049501238/10/LOT-DUR-2026/21/ITEM-00001\\n• Đến: /01/08935049501238/10/LOT-DUR-2026/21/ITEM-10000\\n• Mod-10 Check Digit: Hợp lệ 100%\\n• Đã đồng bộ 10 trường dữ liệu Thông tư 02 BKHCN lên Cổng Quốc Gia!');
+      }, 350);
+    }
+
+    function simulateLoyaltyToggle() {
+      alert('ĐÃ KÍCH HOẠT CHIẾN DỊCH LOYALTY:\\n• Phần thưởng: Tặng ngay +500MB Data 5G Viettel cho người tiêu dùng đầu tiên quét mở tem.\\n• Tích hợp Viettel Money: Sẵn sàng quay số trúng thưởng.');
+    }
+
+    // ==========================================
+    // 8. DEMO 4 (DOCX): VIETTEL POST & RADAR
+    // ==========================================
+    function simulateCodGenuine() {
+      const b = document.getElementById('btn-cod-refund');
+      b.className = 'btn btn-emerald';
+      b.innerText = '✓ HÀNG CHUẨN: NÚT HOÀN TIỀN COD ĐANG MỞ';
+      alert('Bưu tá Viettel Post: Đơn hàng đúng mã vận đơn, cân nặng 450g, mật độ thể tích chuẩn 0.75 g/cm³. Cho phép nhận hoàn hàng.');
+    }
+
+    function simulateCodSwapBrick() {
+      const b = document.getElementById('btn-cod-refund');
+      b.className = 'btn btn-primary';
+      b.style.background = '#990000';
+      b.innerText = '⛔ ĐÃ KHÓA CỨNG NÚT HOÀN TIỀN COD (TRÁO GẠCH/NƯỚC)';
+      alert('CẢNH BÁO VIETTEL POST!\\nKhối lượng 450g nhưng thể tích bị lệch 61.2% (chứa gạch/nước thay vì điện thoại/mỹ phẩm).\\nNút hoàn tiền COD trên app bưu tá ĐÃ BỊ KHÓA CỨNG!');
+    }
+
+    function triggerAnomalyRadarAlert() {
+      const dot = document.getElementById('map-can-tho-dot');
+      const badge = document.getElementById('heatmap-alert-badge');
+      dot.setAttribute('fill', '#EE0033');
+      dot.setAttribute('r', '10');
+      badge.innerText = '🚨 1 BÁO ĐỘNG ĐỎ!';
+      alert('🚨 BÁO ĐỘNG HÀNG GIẢ (CLONE QR CODE)!\\n• Mã BOX-0001 vừa được quét tại Hà Nội lúc 09:00:00\\n• Cùng mã này lại bị quét tại Cần Thơ lúc 09:02:15\\n➔ Khoảng cách 1.800km trong 2 phút: BẤT KHẢ THI VẬT LÝ!\\n➔ Đã tự động tạo Biên bản vi phạm hành chính có chữ ký số Viettel-CA!');
+    }
+
+    // ==========================================
+    // 9. DEMO 1 (DOCX): CLOUD 18.4K RPS STRESS TEST
+    // ==========================================
+    let stressRunning = false;
+    function runLiveStressTest() {
+      const rpsDisplay = document.getElementById('rps-counter-live');
+      const btn = document.getElementById('btn-run-stress');
+      if (!stressRunning) {
+        stressRunning = true;
+        btn.innerText = '⏹ Đang chạy Stress Test 20 Workers...';
+        btn.className = 'btn btn-amber';
+        let val = 12000;
+        const iv = setInterval(() => {
+          val += Math.floor(Math.random() * 800) + 200;
+          if (val > 18450) {
+            val = 18420 + Math.floor(Math.random() * 80);
+            clearInterval(iv);
+            btn.innerText = '✓ ĐÃ HOÀN THÀNH STRESS TEST (18.4K RPS)';
+            btn.className = 'btn btn-emerald';
+            stressRunning = false;
+          }
+          rpsDisplay.innerText = val.toLocaleString() + ' RPS';
+        }, 80);
+      }
+    }
+
+    function validateRfc9264Linkset() {
+      const box = document.getElementById('rfc-validator-box');
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // ==========================================
+    // 10. COMBAT SCENARIOS HANDLERS
+    // ==========================================
+    let isOffline = false;
+
+    function toggleOfflineMode() {
+      isOffline = !isOffline;
+      const pill = document.getElementById('net-status-pill');
+      const txt = document.getElementById('net-status-txt');
+      if (isOffline) {
+        pill.className = 'status-pill offline';
+        txt.innerText = 'OFFLINE 100% (MÁY BAY)';
+        alert('ĐÃ BẬT CHẾ ĐỘ MÁY BAY: Thiết bị ngắt toàn bộ 4G/Wifi. Hệ thống sẵn sàng kiểm thử Offline-First Ed25519.');
+      } else {
+        pill.className = 'status-pill online';
+        txt.innerText = '4G/5G VIETTEL';
+      }
+    }
+
+    function simulateShelfScan1A() {
+      simulateLaserFlash();
+      const b = document.getElementById('scan-result-banner');
+      b.className = 'result-banner success';
+      document.getElementById('result-title').innerText = '✓ Phase 1A: Hàng Chính Hãng Trên Kệ Siêu Thị';
+      document.getElementById('result-desc').innerText = 'Mã serial BOX-0001 chưa bị đốt trên EVM. Khách hàng xem hạn dùng và xuất xứ an toàn.';
+      switchTab('camera-tab');
+    }
+
+    function simulateHomeUnseal1B() {
+      executeFirstScanBurn();
+      switchTab('camera-tab');
+    }
+
+    function simulateRescanTamper() {
+      simulateLaserFlash();
+      const b = document.getElementById('scan-result-banner');
+      b.className = 'result-banner danger';
+      document.getElementById('result-title').innerText = '⚠️ CẢNH BÁO TÁI SỬ DỤNG VỎ HỘP!';
+      document.getElementById('result-desc').innerText = 'Hộp này ĐÃ ĐƯỢC MỞ trước đó. Nghi vấn gian thương thu gom vỏ hộp cũ bơm hàng giả vào!';
+      switchTab('camera-tab');
+    }
+
+    function testOfflineEd25519() {
+      simulateLaserFlash();
+      const b = document.getElementById('scan-result-banner');
+      b.className = 'result-banner success';
+      document.getElementById('result-title').innerText = '🌾 Phân Bón Đầu Trâu NPK 20-20-15';
+      document.getElementById('result-desc').innerText = '✓ Xác thực chữ ký Ed25519 trong 36.1 µs hoàn toàn OFFLINE (0 vạch sóng, 0 MB tải trước). An toàn sử dụng!';
+      switchTab('camera-tab');
+    }
+
+    function testPhotocopyDetection() {
+      simulateLaserFlash();
+      const b = document.getElementById('scan-result-banner');
+      b.className = 'result-banner danger';
+      document.getElementById('result-title').innerText = '🚨 PHÁT HIỆN TEM PHOTOCOPY!';
+      document.getElementById('result-desc').innerText = 'Chỉ số sắc nét vi mô Λ = 0.181 (-20.58 dB). Hạt mực bị nhòe bởi máy in laser sao chép. Mã này đã bị làm giả!';
+      switchTab('camera-tab');
+    }
+
+    // Comparison slider
+    const compareBox = document.getElementById('compare-box');
+    const compareClip = document.getElementById('compare-clone-clip');
+    const compareBar = document.getElementById('compare-bar');
+    let isDraggingCompare = false;
+
+    function updateComparePos(clientX) {
+      if (!compareBox) return;
+      const rect = compareBox.getBoundingClientRect();
+      let x = clientX - rect.left;
+      if (x < 0) x = 0;
+      if (x > rect.width) x = rect.width;
+      const pct = (x / rect.width) * 100;
+      compareClip.style.clipPath = `inset(0 0 0 ${pct}%)`;
+      compareBar.style.left = `${pct}%`;
+    }
+
+    if (compareBox) {
+      compareBox.addEventListener('mousedown', () => isDraggingCompare = true);
+      window.addEventListener('mouseup', () => isDraggingCompare = false);
+      window.addEventListener('mousemove', e => { if (isDraggingCompare) updateComparePos(e.clientX); });
+      compareBox.addEventListener('touchstart', () => isDraggingCompare = true);
+      window.addEventListener('touchend', () => isDraggingCompare = false);
+      window.addEventListener('touchmove', e => { if (isDraggingCompare) updateComparePos(e.touches[0].clientX); });
+    }
+
+    // ==========================================
+    // 11. WEBAUDIO REAL ACOUSTIC CHIRP & LIVE FFT
+    // ==========================================
+    let audioContext = null;
+    let micStream = null;
+    let analyserNode = null;
+    let isMicActive = false;
+    const specCanvas = document.getElementById('spectrum-canvas');
+    const specCtx = specCanvas ? specCanvas.getContext('2d') : null;
+
+    function initWebAudio() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playAcousticChirp(fStart, fEnd) {
+      initWebAudio();
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(fStart, audioContext.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(fEnd, audioContext.currentTime + 0.45);
+
+      gain.gain.setValueAtTime(0.35, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.45);
+
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      osc.start();
+      osc.stop(audioContext.currentTime + 0.46);
+    }
+
+    async function toggleMicrophoneAnalyser() {
+      initWebAudio();
+      const btn = document.getElementById('btn-mic');
+      if (!isMicActive) {
+        try {
+          micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          const source = audioContext.createMediaStreamSource(micStream);
+          analyserNode = audioContext.createAnalyser();
+          analyserNode.fftSize = 256;
+          source.connect(analyserNode);
+          isMicActive = true;
+          btn.innerText = '⏹ Tắt Micro Phân Tích Phổ';
+          btn.className = 'btn btn-secondary';
+          renderLiveSpectrum();
+        } catch (e) {
+          alert('Không thể mở micro: ' + e.message);
+        }
+      } else {
+        if (micStream) micStream.getTracks().forEach(t => t.stop());
+        isMicActive = false;
+        btn.innerText = '🎙️ Bật Micro Điện Thoại Phân Tích Phổ Sóng Thật';
+        btn.className = 'btn btn-cyan';
+      }
+    }
+
+    function renderLiveSpectrum() {
+      if (!isMicActive || !analyserNode || !specCanvas) return;
+      specCanvas.width = specCanvas.clientWidth;
+      specCanvas.height = specCanvas.clientHeight;
+      const bufferLength = analyserNode.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyserNode.getByteFrequencyData(dataArray);
+
+      specCtx.fillStyle = '#03060E';
+      specCtx.fillRect(0, 0, specCanvas.width, specCanvas.height);
+
+      const barWidth = (specCanvas.width / bufferLength) * 1.8;
+      let x = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = (dataArray[i] / 255) * specCanvas.height;
+        specCtx.fillStyle = `rgb(${dataArray[i] + 50}, 0, ${255 - dataArray[i]})`;
+        specCtx.fillRect(x, specCanvas.height - barHeight, barWidth, barHeight);
+        x += barWidth + 1;
+      }
+      requestAnimationFrame(renderLiveSpectrum);
+    }
+
+    function simulateAcousticGenuine() {
+      playAcousticChirp(18000, 20000);
+      alert('✓ NƯỚC YẾN THẬT — Tỷ số Υ = 1.482\\nHệ số tắt dần Q = 28.4. Đúng độ nhớt tự nhiên của yến sào. Không bị pha cồn/nước đường!');
+    }
+
+    function simulateAcousticFakeSugar() {
+      playAcousticChirp(14000, 16000);
+      alert('🚨 PHÁT HIỆN RÚT RUỘT / BƠM NƯỚC ĐƯỜNG!\\nTỷ số eigenmode lệch mạnh: Υ = 1.894 (chuẩn 1.482). Chai đã bị rút bớt chất lỏng xịn và bơm nước lã/đường vào!');
+    }
+
+    // ==========================================
+    // 12. 5G ISAC RADAR SIMULATION CANVAS
+    // ==========================================
+    const radarCanvas = document.getElementById('radar-canvas');
+    const radarCtx = radarCanvas ? radarCanvas.getContext('2d') : null;
+    let radarAngle = 0;
+    let radarMode = 'loaded';
+
+    function setRadarMode(mode) {
+      radarMode = mode;
+      drawRadarFrame();
+    }
+
+    function drawRadarFrame() {
+      if (!radarCanvas || !radarCtx) return;
+      radarCanvas.width = radarCanvas.clientWidth || 300;
+      radarCanvas.height = radarCanvas.clientHeight || 180;
+      const w = radarCanvas.width;
+      const h = radarCanvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const r = Math.min(cx, cy) - 10;
+
+      radarCtx.fillStyle = '#030712';
+      radarCtx.fillRect(0, 0, w, h);
+
+      radarCtx.strokeStyle = 'rgba(0, 240, 255, 0.2)';
+      radarCtx.lineWidth = 1;
+      for (let i = 1; i <= 3; i++) {
+        radarCtx.beginPath();
+        radarCtx.arc(cx, cy, (r / 3) * i, 0, Math.PI * 2);
+        radarCtx.stroke();
+      }
+
+      radarAngle += 0.04;
+      const sx = cx + r * Math.cos(radarAngle);
+      const sy = cy + r * Math.sin(radarAngle);
+      radarCtx.strokeStyle = 'rgba(0, 240, 255, 0.8)';
+      radarCtx.lineWidth = 2;
+      radarCtx.beginPath();
+      radarCtx.moveTo(cx, cy);
+      radarCtx.lineTo(sx, sy);
+      radarCtx.stroke();
+
+      const blipDist = r * 0.65;
+      const bx = cx + blipDist * Math.cos(0.85);
+      const by = cy + blipDist * Math.sin(0.85);
+      radarCtx.beginPath();
+      radarCtx.arc(bx, by, 5, 0, Math.PI * 2);
+      radarCtx.fillStyle = radarMode === 'loaded' ? '#10B981' : '#EE0033';
+      radarCtx.fill();
+
+      radarCtx.font = '11px monospace';
+      radarCtx.fillStyle = '#F8FAFC';
+      radarCtx.fillText(
+        radarMode === 'loaded' ? 'XE TẢI VTP-88: 3.8 Hz (ĐỦ TẢI)' : 'XE TẢI VTP-88: 12.0 Hz (RỖNG / BỊ RÚT)',
+        cx - 90,
+        h - 15
+      );
+    }
+    setInterval(drawRadarFrame, 60);
+
+    function testJepaManifold() {
+      alert('Kiểm tra Mô hình Thế giới JEPA:\\n• Ứng suất mặt bao bì: Hợp lệ (Strain ε = 0.04 < 0.35)\\n• Năng lượng bảo toàn khối lượng Δm = 0.00 kg\\n• Thời gian tính NPU: 4.2 ms\\n• Trạng thái cơ học: ĐẠT TIÊU CHUẨN XUẤT XƯỞNG!');
+    }
+
+    // ==========================================
+    // 13. PROOF DRAWER SLIDING CONTROLLER
+    // ==========================================
+    function openProofDrawer() {
+      document.getElementById('drawer-scrim').classList.add('open');
+      document.getElementById('bottom-sheet').classList.add('open');
+    }
+
+    function closeProofDrawer() {
+      document.getElementById('drawer-scrim').classList.remove('open');
+      document.getElementById('bottom-sheet').classList.remove('open');
+    }
+  </script>
+</body>
+</html>
+"""
+
+with open('vercel-demo/index.html', 'w', encoding='utf-8') as f:
+    f.write(HTML_CONTENT)
+
+print("SUCCESS: vercel-demo/index.html generated with 100% PWA + Docx Demos + Customer Journeys!")
